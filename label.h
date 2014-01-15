@@ -13,11 +13,23 @@ char * fname[] = {
 	"NA", 		// 10 1+2+3 pPb HLT std closed
 	"NA", 		// 11 4+5+6 pPb HLT std Recurrence
 	"NA", 		// 12 7+8+9 pPb HLT std Recursive
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1/", 		// 13 pPb noeff HLT std closed
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_rereco/", 	// 14 pPb noeff rereco HLT noeff std closed
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_rerevers/", 	// 15 pPb noeff reverse HLT noeff std closed
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2/", 		// 16 pPb noeff HLT noeff std Recurrence
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_rereco/", 	// 17 pPb noeff rereco HLT noeff std Recurrence
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_rerevers/", 	// 18 pPb noeff reverse HLT noeff std Recurrence
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3/", 		// 19 pPb noeff HLT noeff std Recursive
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_rereco/", 	// 20 pPb noeff rereco HLT noeff std Recursive
+	"../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_rerevers/", 	// 21 pPb noeff reverse HLT noeff std Recursive
+	"NA", 		// 22 13+14+15 pPb HLT std closed
+	"NA", 		// 23 16+17+18 pPb HLT std Recurrence
+	"NA", 		// 24 19+20+21 pPb HLT std Recursive
 };
 
 
 char * ftxt[] = {
-	"", 			// 0
+	"txt/test/", 			// 0
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm1/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm1_rereco/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm1_reverse/",
@@ -30,4 +42,17 @@ char * ftxt[] = {
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm1_full/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm2_full/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm3_full/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_rereco/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_reverse/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_rereco/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_reverse/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_rereco/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_reverse/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_full/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_full/",
+	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_full/",
+
 };

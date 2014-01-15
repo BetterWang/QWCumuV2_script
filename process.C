@@ -20,32 +20,38 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 2;
+	int s1 = 13;
 
 	TChain * ch = new TChain();
-//	if ( s1 == 10 ) {
-//		for ( int i = 0; i < 20; i++ ) {
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[3], i));
-//		}
-//	} else if ( s1 == 11 ) {
-//		for ( int i = 0; i < 20; i++ ) {
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[4], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[5], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[6], i));
-//		}
-//	} else if ( s1 == 12 ) {
-//		for ( int i = 0; i < 20; i++ ) {
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[7], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[8], i));
-//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[9], i));
-//		}
-//	} else
-//	for ( int i = 0; i < 20; i++ ) {
-//		ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[s1], i));
-//	}
-	ch->Add("../test/pPb_HLT_rfp24_Noff_noacc_eff_v11_cm2_reverse/001/cumu_100.root/cumulant/ntResult");
+	if ( s1 == 10 ) {
+		for ( int i = 0; i < 20; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[3], i));
+		}
+	} else if ( s1 == 11 ) {
+		for ( int i = 0; i < 20; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[4], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[5], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[6], i));
+		}
+	} else if ( s1 == 12 ) {
+		for ( int i = 0; i < 20; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[7], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[8], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[9], i));
+		}
+	} else if ( s1 == 22 ) {
+		for ( int i = 0; i < 20; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[13], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[14], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[15], i));
+		}
+	} else
+	for ( int i = 0; i < 20; i++ ) {
+		ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[s1], i));
+	}
+//	ch->Add("../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1/000/cumu_100.root/cumulant/ntResult");
 	double Noff,Mult,Cent,C22,C24,C26,C28,iC22,iC24,iC26,iC28,wC22,wC24,wC26,wC28,C32,C34,C36,C38,iC32,iC34,iC36,iC38,wC32,wC34,wC36,wC38;
 	ch->SetBranchAddress("Noff", &Noff);
 	ch->SetBranchAddress("Mult", &Mult);
@@ -149,10 +155,10 @@
 		dW28[c] = 0;
 	}
 
+
 	int ievt = 0;
 	while ( ch->GetEntry(ievt) )
 	{
-		if ( ievt >= 10000 ) break;
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		hMult->Fill(Mult);
 		hNoff->Fill(Noff);
@@ -214,8 +220,8 @@
 		if ( dW28[c] == 0. ) dQ28[c] = 0.; else dQ28[c] /= dW28[c];
 
 		double C2 = dQ22[c];
-		double C4 = dQ24[c] - dQ22[c]*dQ22[c];
-		double C6 = dQ26[c] - 8*dQ24[c]*dQ22[c] + 12*dQ22[c]*dQ22[c]*dQ22[c];
+		double C4 = dQ24[c] - 2*dQ22[c]*dQ22[c];
+		double C6 = dQ26[c] - 9*dQ24[c]*dQ22[c] + 12*dQ22[c]*dQ22[c]*dQ22[c];
 		double C8 = dQ28[c] - 16*dQ26[c]*dQ22[c] - 18*dQ24[c]*dQ24[c] + 144*dQ24[c]*dQ22[c]*dQ22[c] - 144*dQ22[c]*dQ22[c]*dQ22[c]*dQ22[c];
 
 		double V2, V4, V6, V8;
@@ -276,4 +282,4 @@
 			hQ28i[c]->Write();
 		}
 	}
-}
+};
