@@ -21,6 +21,8 @@
 #include "../interface/QWConstV2.h"
 #include "label.h"
 	int s1 = 10;
+	int s2 = 20;
+	int s3 = 20;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -80,6 +82,9 @@
 	ch->SetBranchAddress("wC34", &wC34);
 	ch->SetBranchAddress("wC36", &wC36);
 	ch->SetBranchAddress("wC38", &wC38);
+
+	int Nevt[20];
+	for ( int i = 0; i < 20; i++ ) Nevt[i] = 0;
 
 	TH1::SetDefaultSumw2();
 
@@ -160,6 +165,10 @@
 	while ( ch->GetEntry(ievt) )
 	{
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
+		ievt++;
+		int c = int(Cent);
+		Nevt[c]++;
+		if ( s2 < s3 && Nevt[c] % s3 != s2 ) continue;
 		hMult->Fill(Mult);
 		hNoff->Fill(Noff);
 		hCent->Fill(Cent);
@@ -168,7 +177,6 @@
 		double Q6 = C26/wC26;
 		double Q8 = C28/wC28;
 
-		int c = int(Cent);
 
 		hQ22[c]->Fill( Q2 );
 		hQ24[c]->Fill( Q4 );
@@ -211,7 +219,6 @@
 		dW26[c] += wC26;
 		dW28[c] += wC28;
 
-		ievt++;
 	}
 	for ( int c = 0; c < 20; c++ ) {
 		if ( dW22[c] == 0. ) dQ22[c] = 0.; else dQ22[c] /= dW22[c];
@@ -243,7 +250,10 @@
 		hV26Cent->SetBinContent(c+1, V6);
 		hV28Cent->SetBinContent(c+1, V8);
 	}
-	TFile *fw = new TFile(Form("%s/output.root", ftxt[s1]), "recreate");
+	char *fwname;
+	if ( s2 < s3 ) fwname = Form("%s/output_%i_%i.root", ftxt[s1], s2, s3);
+	else fwname = Form("%s/output.root", ftxt[s1]);
+	TFile *fw = new TFile(fwname, "recreate");
 	{
 		hMult->Write();
 		hNoff->Write();
@@ -282,4 +292,5 @@
 			hQ28i[c]->Write();
 		}
 	}
+	fw->Close();
 };
