@@ -155,11 +155,13 @@
 	};
 	TGraphErrors * gr_HIN_13_002_pPbv24 = new TGraphErrors(12, pPbv24_x, pPbv24_y, 0, pPbv24_ye);
 	gr_HIN_13_002_pPbv24->SetMarkerStyle(kFullSquare);
-	gr_HIN_13_002_pPbv24->SetMarkerColor(kBlack);
-	gr_HIN_13_002_pPbv24->SetLineColor(kBlack);
+	gr_HIN_13_002_pPbv24->SetMarkerColor(kBlue);
+	gr_HIN_13_002_pPbv24->SetLineColor(kBlue);
+	gr_HIN_13_002_pPbv24->SetMarkerSize(2);
 
 	TGraphErrors * gr_HIN_13_002_pPbv22 = new TGraphErrors(18, pPbv22_x, pPbv22_y, 0, pPbv22_ye);
 	gr_HIN_13_002_pPbv22->SetMarkerStyle(kFullCircle);
-	gr_HIN_13_002_pPbv22->SetMarkerColor(kBlack);
-	gr_HIN_13_002_pPbv22->SetLineColor(kBlack);
+	gr_HIN_13_002_pPbv22->SetMarkerColor(kRed);
+	gr_HIN_13_002_pPbv22->SetLineColor(kRed);
+	gr_HIN_13_002_pPbv22->SetMarkerSize(2);
 }

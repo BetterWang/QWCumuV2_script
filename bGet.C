@@ -39,11 +39,29 @@
 	TH1D * hV26[20];
 	TH1D * hV28[20];
 
+	const Int_t CentNoffCut[] = {100000, 350, 320, 300, 260, 240, 220, 185, 150, 120, 100, 80, 60, 50, 40, 30, 20, 10, 0};
+	const Int_t nCentNoff = sizeof(CentNoffCut)/sizeof(Int_t);
 
+	double dNoff[20];
 
 	hMult = (TH1D*)f->Get("hMult");
 	hCent = (TH1D*)f->Get("hCent");
 	hNoff = (TH1D*)f->Get("hNoff");
+
+	int Noff = 400;
+	for ( int i = 0; i < nCentNoff-1; i++ ) {
+		int NN = 0;
+		double avgNoff = 0;
+		while ( Noff >= CentNoffCut[i+1] ) {
+			int nNN = hNoff->GetBinContent(Noff);
+			avgNoff += Noff*nNN;
+			NN += nNN;
+			Noff--;
+
+		}
+		if (NN > 0) dNoff[i] = avgNoff/NN;
+		else dNoff[i] = 0;
+	}
 
 	TH1D* hC22Cent = (TH1D*)f->Get("hC22Cent");
 	TH1D* hC24Cent = (TH1D*)f->Get("hC24Cent");
@@ -76,4 +94,5 @@
 		hQ26i[c] = (TH1D*) f->Get(Form("%s_%i", "hQ26i", c));
 		hQ28i[c] = (TH1D*) f->Get(Form("%s_%i", "hQ28i", c));
 	}
+
 }

@@ -24,12 +24,15 @@
 	int cent = 3;
 	int save = 1;
 
+
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
 
 	TFile * f = new TFile(Form("%s/output.root", ftxt[s1]));
 	gROOT->Macro("bGet.C");
+	gROOT->Macro("HIN-13-002.C");
+	gROOT->Macro("LYZ_pPb.C");
 
 	TCanvas * cQ2 = new TCanvas("cQ2", "cQ2", 600, 600);
 	cQ2->SetGrid();
@@ -135,6 +138,58 @@
 	hC28Cent->SetTitle(";Cent;C28");
 	hC28Cent->Draw();
 
+	TCanvas * cSum = MakeCanvas("cSum", "cSum");
+	TH2D * frame_cent = new TH2D("frame_cent", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, 0.00001, 0.12 );
+	InitHist(frame_cent, "N_{trk}^{offline}", "v_{2}");
+	frame_cent->Draw();
+	gr_HIN_13_002_pPbv24->Draw("Psame");
+	gr_HIN_13_002_pPbv22->Draw("Psame");
+//	grLYZnoff->Draw("Psame");
+
+	double pPb_v22[20];
+	double pPb_v24[20];
+	double pPb_v26[20];
+	double pPb_v28[20];
+	for ( int i = 0; i < 20; i++ ) {
+		pPb_v22[i] = hV22Cent->GetBinContent(i+1);
+		pPb_v24[i] = hV24Cent->GetBinContent(i+1);
+		pPb_v26[i] = hV26Cent->GetBinContent(i+1);
+		pPb_v28[i] = hV28Cent->GetBinContent(i+1);
+	}
+	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 10, dNoff, pPb_v22, 0, 0);
+	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 10, dNoff, pPb_v24, 0, 0);
+	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 10, dNoff, pPb_v26, 0, 0);
+	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 10, dNoff, pPb_v28, 0, 0);
+
+	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
+	gr_pPb_v24->SetMarkerStyle(kOpenSquare);
+	gr_pPb_v26->SetMarkerStyle(kOpenStar);
+	gr_pPb_v28->SetMarkerStyle(kOpenDiamond);
+
+	gr_pPb_v22->SetMarkerColor(kBlack);
+	gr_pPb_v24->SetMarkerColor(kBlack);
+	gr_pPb_v26->SetMarkerColor(kCyan);
+	gr_pPb_v28->SetMarkerColor(kRed);
+
+	gr_pPb_v22->SetMarkerSize(2);
+	gr_pPb_v24->SetMarkerSize(2);
+	gr_pPb_v26->SetMarkerSize(2);
+	gr_pPb_v28->SetMarkerSize(2);
+
+	gr_pPb_v22->Draw("Psame");
+	gr_pPb_v24->Draw("Psame");
+	gr_pPb_v26->Draw("Psame");
+	gr_pPb_v28->Draw("Psame");
+
+	TLegend * leg = new TLegend(0.2, 0.7, 0.4, 0.9);
+	leg->SetFillColor(kWhite);
+	leg->SetBorderSize(0);
+	leg->AddEntry(gr_pPb_v22, "v_{2}{2}", "p");
+	leg->AddEntry(gr_pPb_v24, "v_{2}{4}", "p");
+	leg->AddEntry(gr_pPb_v26, "v_{2}{6}", "p");
+	leg->AddEntry(gr_pPb_v28, "v_{2}{8}", "p");
+	leg->Draw();
+
 	if ( save ) {
 		cQ2->SaveAs(Form("cQ2_%i.png", cent));
 		cQ4->SaveAs(Form("cQ4_%i.png", cent));
@@ -160,6 +215,7 @@
 		cV4cent->SaveAs("cV4cent.png");
 		cV6cent->SaveAs("cV6cent.png");
 		cV8cent->SaveAs("cV8cent.png");
+		cSum->SaveAs("cSum.png");
 	}
 
 
