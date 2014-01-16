@@ -20,7 +20,7 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 13;
+	int s1 = 10;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -83,8 +83,8 @@
 
 	TH1::SetDefaultSumw2();
 
-	TH1D* hMult = new TH1D("hMult", "hMult", 400, 0, 400);
-	TH1D* hNoff = new TH1D("hNoff", "hNoff", 400, 0, 400);
+	TH1D* hMult = new TH1D("hMult", "hMult", 500, 0.5, 500.5);
+	TH1D* hNoff = new TH1D("hNoff", "hNoff", 500, 0.5, 500.5);
 	TH1D* hCent = new TH1D("hCent", "hCent", 20, 0, 20);
 
 	TH1D* hQ22 [20] ;
