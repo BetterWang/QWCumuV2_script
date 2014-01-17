@@ -141,8 +141,8 @@
 	
 		hC22 [c] = new TH1D(Form("%s_%i", "hC22" , c), Form("%s_%i", "hC22", c),  400, -0.2, 0.2);
 		hC24 [c] = new TH1D(Form("%s_%i", "hC24" , c), Form("%s_%i", "hC24", c),  400, -0.02, 0.02);
-		hC26 [c] = new TH1D(Form("%s_%i", "hC26" , c), Form("%s_%i", "hC26", c),  400, -0.002, 0.002);
-		hC28 [c] = new TH1D(Form("%s_%i", "hC28" , c), Form("%s_%i", "hC28", c),  400, -0.0002, 0.0002);
+		hC26 [c] = new TH1D(Form("%s_%i", "hC26" , c), Form("%s_%i", "hC26", c),  1200, -0.0005, 0.0115);
+		hC28 [c] = new TH1D(Form("%s_%i", "hC28" , c), Form("%s_%i", "hC28", c),  1200, -0.00115, 0.00005);
 	
 		hV22 [c] = new TH1D(Form("%s_%i", "hV22" , c), Form("%s_%i", "hV22", c),  400, -0.2, 0.2);
 		hV24 [c] = new TH1D(Form("%s_%i", "hV24" , c), Form("%s_%i", "hV24", c),  400, -0.2, 0.2);
