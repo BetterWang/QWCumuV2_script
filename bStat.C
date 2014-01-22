@@ -1,0 +1,122 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  plot.C
+ *
+ *    Description:  
+ *
+ *        Version:  1.0
+ *        Created:  01/13/2014 12:56:16
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  YOUR NAME (), 
+ *   Organization:  
+ *
+ * =====================================================================================
+ */
+
+
+{
+#include "label.h"
+
+	int s1 = 10;
+	int s3 = 50;
+
+#include "../../style.h"
+        SetStyle();
+	gStyle->SetOptTitle(0);
+
+	TH1D::SetDefaultSumw2(false);
+
+	TH1D * hC22[100][20];
+	TH1D * hC24[100][20];
+	TH1D * hC26[100][20];
+	TH1D * hC28[100][20];
+	TH1D * hC22Cent[100];
+	TH1D * hC24Cent[100];
+	TH1D * hC26Cent[100];
+	TH1D * hC28Cent[100];
+	for ( int i = 0; i <= s3; i++ ) {
+		TFile * f;
+		if ( i != s3 ) {
+			f = new TFile(Form("%s/output_%i_%i.root", ftxt[s1], i, s3));
+		} else {
+			f = new TFile(Form("%s/output.root", ftxt[s1]));
+		}
+		hC22Cent[i] = (TH1D*) f->Get("hC22Cent");
+		hC24Cent[i] = (TH1D*) f->Get("hC24Cent");
+		hC26Cent[i] = (TH1D*) f->Get("hC26Cent");
+		hC28Cent[i] = (TH1D*) f->Get("hC28Cent");
+		for ( int c = 0; c < 20; c++ ) {
+			hC22[i][c] = (TH1D*) f->Get(Form("hC22_%i", c));
+			hC24[i][c] = (TH1D*) f->Get(Form("hC22_%i", c));
+			hC26[i][c] = (TH1D*) f->Get(Form("hC22_%i", c));
+			hC28[i][c] = (TH1D*) f->Get(Form("hC22_%i", c));
+		}
+	}
+
+//	double dC22[50];
+//	double dC24[50];
+//	double dC26[50];
+//	double dC28[50];
+
+	TH1D * hC22Stat[20];
+	TH1D * hC24Stat[20];
+	TH1D * hC26Stat[20];
+	TH1D * hC28Stat[20];
+
+	TH1D * hC22StatM[20];
+	TH1D * hC24StatM[20];
+	TH1D * hC26StatM[20];
+	TH1D * hC28StatM[20];
+
+	TF1 * fC22M[20];
+	TF1 * fC24M[20];
+	TF1 * fC26M[20];
+	TF1 * fC28M[20];
+
+	for ( int c = 0; c < 20; c++ ) {
+		hC22Stat[c] = new TH1D(Form("hC22Stat_%i", c), Form("hC22Stat_%i", c), 100, 0, 0.02);
+		hC24Stat[c] = new TH1D(Form("hC24Stat_%i", c), Form("hC24Stat_%i", c), 100, -20e-6, 10e-6);
+		hC26Stat[c] = new TH1D(Form("hC26Stat_%i", c), Form("hC26Stat_%i", c), 100, -0.1e-6, 0.3e-6);
+		hC28Stat[c] = new TH1D(Form("hC28Stat_%i", c), Form("hC28Stat_%i", c), 100, -15e-9, 5e-9);
+
+		hC22StatM[c] = new TH1D(Form("hC22StatM_%i", c), Form("hC22StatM_%i", c), 100, -0.01, 0.01);
+		hC24StatM[c] = new TH1D(Form("hC24StatM_%i", c), Form("hC24StatM_%i", c), 100, -20e-6, 20e-6);
+		hC26StatM[c] = new TH1D(Form("hC26StatM_%i", c), Form("hC26StatM_%i", c), 100, -1e-6, 1e-6);
+		hC28StatM[c] = new TH1D(Form("hC28StatM_%i", c), Form("hC28StatM_%i", c), 100, -15e-9, 15e-9);
+
+		fC22M[c] = new TF1(Form("fC22M_%i", c), "gaus", -0.01, 0.01);
+		fC24M[c] = new TF1(Form("fC24M_%i", c), "gaus", -20e-6, 20e-6);
+		fC26M[c] = new TF1(Form("fC26M_%i", c), "gaus", -1e-6, 1e-6);
+		fC28M[c] = new TF1(Form("fC28M_%i", c), "gaus", -15e-9, 15e-9);
+	}
+
+	for ( int i = 0; i < s3; i++ ) {
+		for ( int c = 0; c < 20; c++ ) {
+			hC22Stat[c]->Fill(hC22Cent[i]->GetBinContent(c+1));
+			hC24Stat[c]->Fill(hC24Cent[i]->GetBinContent(c+1));
+			hC26Stat[c]->Fill(hC26Cent[i]->GetBinContent(c+1));
+			hC28Stat[c]->Fill(hC28Cent[i]->GetBinContent(c+1));
+
+			hC22StatM[c]->Fill(hC22Cent[i]->GetBinContent(c+1)-hC22Cent[s3]->GetBinContent(c+1));
+			hC24StatM[c]->Fill(hC24Cent[i]->GetBinContent(c+1)-hC24Cent[s3]->GetBinContent(c+1));
+			hC26StatM[c]->Fill(hC26Cent[i]->GetBinContent(c+1)-hC26Cent[s3]->GetBinContent(c+1));
+			hC28StatM[c]->Fill(hC28Cent[i]->GetBinContent(c+1)-hC28Cent[s3]->GetBinContent(c+1));
+		}
+	}
+
+	TFile * fwrite = new TFile(Form("%s/fit.root", ftxt[s1]), "recreate");
+	for ( int c = 0; c < 20; c++ ) {
+		hC22Stat[c]->Write();
+		hC24Stat[c]->Write();
+		hC26Stat[c]->Write();
+		hC28Stat[c]->Write();
+
+		hC22StatM[c]->Write();
+		hC24StatM[c]->Write();
+		hC26StatM[c]->Write();
+		hC28StatM[c]->Write();
+	}
+}

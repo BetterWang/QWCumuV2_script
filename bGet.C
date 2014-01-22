@@ -48,7 +48,7 @@
 	hCent = (TH1D*)f->Get("hCent");
 	hNoff = (TH1D*)f->Get("hNoff");
 
-	int Noff = 400;
+	int Noff = 500;
 	for ( int i = 0; i < nCentNoff-1; i++ ) {
 		int NN = 0;
 		double avgNoff = 0;
