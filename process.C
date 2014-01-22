@@ -20,9 +20,9 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 10;
-	int s2 = 20;
-	int s3 = 20;
+	int s1 = 22;
+	int s2 = 50;
+	int s3 = 50;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
