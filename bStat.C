@@ -71,6 +71,11 @@
 	TH1D * hC26StatM[20];
 	TH1D * hC28StatM[20];
 
+	TH1D * hC22StatE;
+	TH1D * hC24StatE;
+	TH1D * hC26StatE;
+	TH1D * hC28StatE;
+
 	TF1 * fC22M[20];
 	TF1 * fC24M[20];
 	TF1 * fC26M[20];
@@ -107,7 +112,52 @@
 		}
 	}
 
+	TH1D * hC22CentE = hC22Cent[s3]->Clone("hC22CentE");
+	TH1D * hC24CentE = hC24Cent[s3]->Clone("hC24CentE");
+	TH1D * hC26CentE = hC26Cent[s3]->Clone("hC26CentE");
+	TH1D * hC28CentE = hC28Cent[s3]->Clone("hC28CentE");
+
+	TH1D * hC22NSigma = hC22Cent[s3]->Clone("hC22NSigma");
+	TH1D * hC24NSigma = hC24Cent[s3]->Clone("hC24NSigma");
+	TH1D * hC26NSigma = hC26Cent[s3]->Clone("hC26NSigma");
+	TH1D * hC28NSigma = hC28Cent[s3]->Clone("hC28NSigma");
+
+	for ( int c = 0; c < 20; c++ ) {
+		double sum2 = 0;
+		double sum4 = 0;
+		double sum6 = 0;
+		double sum8 = 0;
+		double error;
+		for ( int i = 0; i < s3; i++ ) {
+			sum2 += hC22Cent[i]->GetBinContent(c+1)*hC22Cent[i]->GetBinContent(c+1);
+			sum4 += hC24Cent[i]->GetBinContent(c+1)*hC24Cent[i]->GetBinContent(c+1);
+			sum6 += hC26Cent[i]->GetBinContent(c+1)*hC26Cent[i]->GetBinContent(c+1);
+			sum8 += hC28Cent[i]->GetBinContent(c+1)*hC28Cent[i]->GetBinContent(c+1);
+		}
+		error = sqrt(sum2 - hC22Cent[s3]->GetBinContent(c+1)*hC22Cent[s3]->GetBinContent(c+1))/(50.);
+		hC22CentE->SetBinError(c+1, error);
+		if ( error != 0 ) hC22NSigma->SetBinContent(c+1, hC22Cent[s3]->GetBinContent(c+1)/error);
+		error = sqrt(sum4 - hC24Cent[s3]->GetBinContent(c+1)*hC24Cent[s3]->GetBinContent(c+1))/(50.);
+		hC24CentE->SetBinError(c+1, error);
+		if ( error != 0 ) hC24NSigma->SetBinContent(c+1, hC24Cent[s3]->GetBinContent(c+1)/error);
+		error = sqrt(sum6 - hC26Cent[s3]->GetBinContent(c+1)*hC26Cent[s3]->GetBinContent(c+1))/(50.);
+		hC26CentE->SetBinError(c+1, error);
+		if ( error != 0 ) hC26NSigma->SetBinContent(c+1, hC26Cent[s3]->GetBinContent(c+1)/error);
+		error = sqrt(sum8 - hC28Cent[s3]->GetBinContent(c+1)*hC28Cent[s3]->GetBinContent(c+1))/(50.);
+		hC28CentE->SetBinError(c+1, error);
+		if ( error != 0 ) hC28NSigma->SetBinContent(c+1, hC28Cent[s3]->GetBinContent(c+1)/error);
+	}
+
 	TFile * fwrite = new TFile(Form("%s/fit.root", ftxt[s1]), "recreate");
+	hC22CentE->Write();
+	hC24CentE->Write();
+	hC26CentE->Write();
+	hC28CentE->Write();
+
+	hC22NSigma->Write();
+	hC24NSigma->Write();
+	hC26NSigma->Write();
+	hC28NSigma->Write();
 	for ( int c = 0; c < 20; c++ ) {
 		hC22Stat[c]->Write();
 		hC24Stat[c]->Write();
