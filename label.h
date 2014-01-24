@@ -25,6 +25,10 @@ char * fname[] = {
 	"NA", 		// 22 13+14+15 pPb HLT std closed
 	"NA", 		// 23 16+17+18 pPb HLT std Recurrence
 	"NA", 		// 24 19+20+21 pPb HLT std Recursive
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1/", 		// 25 pPb MB std closed
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_rereco/", 		// 26 pPb MB std closed
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_reverse/", 	// 27 pPb MB std closed
+	"", 		// 28 25+26+27 pPb MB std closed
 };
 
 
@@ -54,5 +58,9 @@ char * ftxt[] = {
 	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1_full/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm2_full/",
 	"txt/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm3_full/",
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1/",
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_rereco/",
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_reverse/",
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_full/",
 
 };
