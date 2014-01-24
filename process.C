@@ -20,9 +20,10 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 28;
-//	int s2 = 50;
-//	int s3 = 50;
+#include "noff.h"
+	int s1 = 10;
+//	int s2 = 20;
+//	int s3 = 20;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -89,14 +90,28 @@
 	ch->SetBranchAddress("wC36", &wC36);
 	ch->SetBranchAddress("wC38", &wC38);
 
-	int Nevt[20];
-	for ( int i = 0; i < 20; i++ ) Nevt[i] = 0;
+	int Nevt4[20];
+	int Nevt6[20];
+	int Nevt8[20];
+	for ( int i = 0; i < 20; i++ ) {
+		Nevt4[i] = 0;
+		Nevt6[i] = 0;
+		Nevt8[i] = 0;
+	}
 
 	TH1::SetDefaultSumw2();
 
-	TH1D* hMult = new TH1D("hMult", "hMult", 500, 0.5, 500.5);
-	TH1D* hNoff = new TH1D("hNoff", "hNoff", 500, 0.5, 500.5);
-	TH1D* hCent = new TH1D("hCent", "hCent", 20, 0, 20);
+	TH1D* hMult4 = new TH1D("hMult4", "hMult4", 500, 0.5, 500.5);
+	TH1D* hMult6 = new TH1D("hMult6", "hMult6", 500, 0.5, 500.5);
+	TH1D* hMult8 = new TH1D("hMult8", "hMult8", 500, 0.5, 500.5);
+
+	TH1D* hNoff4 = new TH1D("hNoff4", "hNoff4", 500, 0.5, 500.5);
+	TH1D* hNoff6 = new TH1D("hNoff6", "hNoff6", 500, 0.5, 500.5);
+	TH1D* hNoff8 = new TH1D("hNoff8", "hNoff8", 500, 0.5, 500.5);
+
+	TH1D* hCent4 = new TH1D("hCent4", "hCent4", 20, 0, 20);
+	TH1D* hCent6 = new TH1D("hCent6", "hCent6", 20, 0, 20);
+	TH1D* hCent8 = new TH1D("hCent8", "hCent8", 20, 0, 20);
 
 	TH1D* hQ22 [20] ;
 	TH1D* hQ22i[20] ;
@@ -172,37 +187,32 @@
 	{
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		ievt++;
-		int c = int(Cent);
-		Nevt[c]++;
-		if ( s2 < s3 && Nevt[c] % s3 != s2 ) continue;
-		hMult->Fill(Mult);
-		hNoff->Fill(Noff);
-		hCent->Fill(Cent);
+		int c4 = int(Cent);
+		int c6 = getNoff6(Noff);
+		int c8 = getNoff8(Noff);
+		Nevt4[c4]++;
+		Nevt6[c6]++;
+		Nevt8[c8]++;
+		bool b4 = false;
+		bool b6 = false;
+		bool b8 = false;
+		if ( s2 >= s3 ) {
+			b4 = true;
+			b6 = true;
+			b8 = true;
+		} else {
+			if ( Nevt4[c4] % s3 == s2 ) b4 = true;
+			if ( Nevt6[c6] % s3 == s2 ) b6 = true;
+			if ( Nevt8[c8] % s3 == s2 ) b8 = true;
+		}
 		double Q2 = C22/wC22;
 		double Q4 = C24/wC24;
 		double Q6 = C26/wC26;
 		double Q8 = C28/wC28;
-
-
-		hQ22[c]->Fill( Q2 );
-		hQ24[c]->Fill( Q4 );
-		hQ26[c]->Fill( Q6 );
-		hQ28[c]->Fill( Q8 );
-
-		hQ22i[c]->Fill( iC22/wC22 );
-		hQ24i[c]->Fill( iC24/wC24 );
-		hQ26i[c]->Fill( iC26/wC26 );
-		hQ28i[c]->Fill( iC28/wC28 );
-
 		double C2 = Q2;
 		double C4 = Q4 - Q2*Q2;
 		double C6 = Q6 - 9*Q4*Q2 + 12*Q2*Q2*Q2;
 		double C8 = Q8 - 16*Q6*Q2 - 18*Q4*Q4 + 144*Q4*Q2*Q2*Q2 - 144*Q2*Q2*Q2*Q2;
-
-		hC22[c]->Fill( C2 );
-		hC24[c]->Fill( C4 );
-		hC26[c]->Fill( C6 );
-		hC28[c]->Fill( C8 );
 
 		double V2, V4, V6, V8;
 		if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
@@ -210,20 +220,49 @@
 		if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
 		if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
 
-		hV22[c]->Fill( V2 );
-		hV24[c]->Fill( V4 );
-		hV26[c]->Fill( V6 );
-		hV28[c]->Fill( V8 );
+		if ( b4 ) hMult4->Fill(Mult);
+		if ( b6 ) hMult6->Fill(Mult);
+		if ( b8 ) hMult8->Fill(Mult);
 
-		dQ22[c] += C22;
-		dQ24[c] += C24;
-		dQ26[c] += C26;
-		dQ28[c] += C28;
+		if ( b4 ) hNoff4->Fill(Noff);
+		if ( b6 ) hNoff6->Fill(Noff);
+		if ( b8 ) hNoff8->Fill(Noff);
 
-		dW22[c] += wC22;
-		dW24[c] += wC24;
-		dW26[c] += wC26;
-		dW28[c] += wC28;
+		if ( b4 ) hCent4->Fill(c4);
+		if ( b6 ) hCent6->Fill(c6);
+		if ( b8 ) hCent8->Fill(c8);
+
+		if ( b4 ) hQ22[c4]->Fill( Q2 );
+		if ( b4 ) hQ24[c4]->Fill( Q4 );
+		if ( b6 ) hQ26[c6]->Fill( Q6 );
+		if ( b8 ) hQ28[c8]->Fill( Q8 );
+
+		if ( b4 ) hQ22i[c4]->Fill( iC22/wC22 );
+		if ( b4 ) hQ24i[c4]->Fill( iC24/wC24 );
+		if ( b6 ) hQ26i[c6]->Fill( iC26/wC26 );
+		if ( b8 ) hQ28i[c8]->Fill( iC28/wC28 );
+
+
+		if ( b4 ) hC22[c4]->Fill( C2 );
+		if ( b4 ) hC24[c4]->Fill( C4 );
+		if ( b6 ) hC26[c6]->Fill( C6 );
+		if ( b8 ) hC28[c8]->Fill( C8 );
+
+
+		if ( b4 ) hV22[c4]->Fill( V2 );
+		if ( b4 ) hV24[c4]->Fill( V4 );
+		if ( b6 ) hV26[c6]->Fill( V6 );
+		if ( b8 ) hV28[c8]->Fill( V8 );
+
+		if ( b4 ) dQ22[c4] += C22;
+		if ( b4 ) dQ24[c4] += C24;
+		if ( b6 ) dQ26[c6] += C26;
+		if ( b8 ) dQ28[c8] += C28;
+
+		if ( b4 ) dW22[c4] += wC22;
+		if ( b4 ) dW24[c4] += wC24;
+		if ( b6 ) dW26[c6] += wC26;
+		if ( b8 ) dW28[c8] += wC28;
 
 	}
 	for ( int c = 0; c < 20; c++ ) {
@@ -261,9 +300,15 @@
 	else fwname = Form("%s/output.root", ftxt[s1]);
 	TFile *fw = new TFile(fwname, "recreate");
 	{
-		hMult->Write();
-		hNoff->Write();
-		hCent->Write();
+		hMult4->Write();
+		hMult6->Write();
+		hMult8->Write();
+		hNoff4->Write();
+		hNoff6->Write();
+		hNoff8->Write();
+		hCent4->Write();
+		hCent6->Write();
+		hCent8->Write();
 
 		hC22Cent->Write();
 		hC24Cent->Write();
