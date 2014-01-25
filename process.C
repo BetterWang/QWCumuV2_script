@@ -20,9 +20,9 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 28;
-//	int s2 = 50;
-//	int s3 = 50;
+	int s1 = 10;
+	int s2 = 20;
+	int s3 = 20;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -124,6 +124,11 @@
 	TH1D* hV24Cent = new TH1D("hV24Cent", "hV24Cent", 20, 0, 20);
 	TH1D* hV26Cent = new TH1D("hV26Cent", "hV26Cent", 20, 0, 20);
 	TH1D* hV28Cent = new TH1D("hV28Cent", "hV28Cent", 20, 0, 20);
+
+	TH1D* hW22Cent = new TH1D("hW22Cent", "hW22Cent", 20, 0, 20);
+	TH1D* hW24Cent = new TH1D("hW24Cent", "hW24Cent", 20, 0, 20);
+	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 20, 0, 20);
+	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 20, 0, 20);
 
 	double dQ22[20];
 	double dQ24[20];
@@ -231,6 +236,10 @@
 		if ( dW24[c] == 0. ) dQ24[c] = 0.; else dQ24[c] /= dW24[c];
 		if ( dW26[c] == 0. ) dQ26[c] = 0.; else dQ26[c] /= dW26[c];
 		if ( dW28[c] == 0. ) dQ28[c] = 0.; else dQ28[c] /= dW28[c];
+		hW22Cent->SetBinContent(c+1, dW22[c]);
+		hW24Cent->SetBinContent(c+1, dW24[c]);
+		hW26Cent->SetBinContent(c+1, dW26[c]);
+		hW28Cent->SetBinContent(c+1, dW28[c]);
 
 		double C2 = dQ22[c];
 		double C4 = dQ24[c] - 2*dQ22[c]*dQ22[c];
@@ -274,6 +283,11 @@
 		hV24Cent->Write();
 		hV26Cent->Write();
 		hV28Cent->Write();
+
+		hW22Cent->Write();
+		hW24Cent->Write();
+		hW26Cent->Write();
+		hW28Cent->Write();
 
 		for ( int c = 0; c < 20; c++ ) {
 
