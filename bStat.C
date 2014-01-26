@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 10;
+	int s1 = 28;
 	int s3 = 20;
 
 #include "../../style.h"
@@ -44,24 +44,16 @@
 	TH1D * hV28Cent[100];
 
 
-	TH1D * hMult4;
-	TH1D * hMult6;
-	TH1D * hMult8;
-	TH1D * hNoff4;
-	TH1D * hNoff6;
-	TH1D * hNoff8;
+	TH1D * hMult;
+	TH1D * hNoff;
 	for ( int i = 0; i <= s3; i++ ) {
 		TFile * f;
 		if ( i != s3 ) {
 			f = new TFile(Form("%s/output_%i_%i.root", ftxt[s1], i, s3));
 		} else {
 			f = new TFile(Form("%s/output.root", ftxt[s1]));
-			hMult4 = (TH1D*)f->Get("hMult4");
-			hMult6 = (TH1D*)f->Get("hMult6");
-			hMult8 = (TH1D*)f->Get("hMult8");
-			hNoff4 = (TH1D*)f->Get("hNoff4");
-			hNoff6 = (TH1D*)f->Get("hNoff6");
-			hNoff8 = (TH1D*)f->Get("hNoff8");
+			hMult = (TH1D*)f->Get("hMult");
+			hNoff = (TH1D*)f->Get("hNoff");
 		}
 		hC22Cent[i] = (TH1D*) f->Get("hC22Cent");
 		hC24Cent[i] = (TH1D*) f->Get("hC24Cent");
@@ -184,12 +176,8 @@
 
 
 	TFile * fwrite = new TFile(Form("%s/fit.root", ftxt[s1]), "recreate");
-	hMult4->Write();
-	hMult6->Write();
-	hMult8->Write();
-	hNoff4->Write();
-	hNoff6->Write();
-	hNoff8->Write();
+	hMult->Write();
+	hNoff->Write();
 
 	hC22CentE->Write();
 	hC24CentE->Write();
