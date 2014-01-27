@@ -21,7 +21,7 @@
 #include "label.h"
 
 	int s1 = 28;
-	int s3 = 20;
+	int s3 = 50;
 
 #include "../../style.h"
         SetStyle();
@@ -43,6 +43,11 @@
 	TH1D * hV26Cent[100];
 	TH1D * hV28Cent[100];
 
+	TH1D * hW22Cent;
+	TH1D * hW24Cent;
+	TH1D * hW26Cent;
+	TH1D * hW28Cent;
+
 
 	TH1D * hMult;
 	TH1D * hNoff;
@@ -54,6 +59,10 @@
 			f = new TFile(Form("%s/output.root", ftxt[s1]));
 			hMult = (TH1D*)f->Get("hMult");
 			hNoff = (TH1D*)f->Get("hNoff");
+			hW22Cent = (TH1D*) f->Get("hW22Cent");
+			hW24Cent = (TH1D*) f->Get("hW24Cent");
+			hW26Cent = (TH1D*) f->Get("hW26Cent");
+			hW28Cent = (TH1D*) f->Get("hW28Cent");
 		}
 		hC22Cent[i] = (TH1D*) f->Get("hC22Cent");
 		hC24Cent[i] = (TH1D*) f->Get("hC24Cent");
@@ -152,22 +161,22 @@
 			sum6 += hC26Cent[i]->GetBinContent(c+1)*hC26Cent[i]->GetBinContent(c+1);
 			sum8 += hC28Cent[i]->GetBinContent(c+1)*hC28Cent[i]->GetBinContent(c+1);
 		}
-		error = sqrt(sum2 - hC22Cent[s3]->GetBinContent(c+1)*hC22Cent[s3]->GetBinContent(c+1))/(s3);
+		error = sqrt(sum2/s3 - hC22Cent[s3]->GetBinContent(c+1)*hC22Cent[s3]->GetBinContent(c+1))/sqrt(s3);
 		hC22CentE->SetBinError(c+1, error);
 		hV22CentE->SetBinError(c+1, fabs(hV22CentE->GetBinContent(c+1)/hC22CentE->GetBinContent(c+1) * error / 2.));
 		if ( error != 0 ) hC22NSigma->SetBinContent(c+1, hC22Cent[s3]->GetBinContent(c+1)/error);
 
-		error = sqrt(sum4 - hC24Cent[s3]->GetBinContent(c+1)*hC24Cent[s3]->GetBinContent(c+1))/(s3);
+		error = sqrt(sum4/s3 - hC24Cent[s3]->GetBinContent(c+1)*hC24Cent[s3]->GetBinContent(c+1))/sqrt(s3);
 		hC24CentE->SetBinError(c+1, error);
 		hV24CentE->SetBinError(c+1, fabs(hV24CentE->GetBinContent(c+1)/hC24CentE->GetBinContent(c+1) * error / 4.));
 		if ( error != 0 ) hC24NSigma->SetBinContent(c+1, hC24Cent[s3]->GetBinContent(c+1)/error);
 
-		error = sqrt(sum6 - hC26Cent[s3]->GetBinContent(c+1)*hC26Cent[s3]->GetBinContent(c+1))/(s3);
+		error = sqrt(sum6/s3 - hC26Cent[s3]->GetBinContent(c+1)*hC26Cent[s3]->GetBinContent(c+1))/sqrt(s3);
 		hC26CentE->SetBinError(c+1, error);
 		hV26CentE->SetBinError(c+1, fabs(hV26CentE->GetBinContent(c+1)/hC26CentE->GetBinContent(c+1) * error / 6.));
 		if ( error != 0 ) hC26NSigma->SetBinContent(c+1, hC26Cent[s3]->GetBinContent(c+1)/error);
 
-		error = sqrt(sum8 - hC28Cent[s3]->GetBinContent(c+1)*hC28Cent[s3]->GetBinContent(c+1))/(s3);
+		error = sqrt(sum8/s3 - hC28Cent[s3]->GetBinContent(c+1)*hC28Cent[s3]->GetBinContent(c+1))/sqrt(s3);
 		hC28CentE->SetBinError(c+1, error);
 		hV28CentE->SetBinError(c+1, fabs(hV28CentE->GetBinContent(c+1)/hC28CentE->GetBinContent(c+1) * error / 8.));
 		if ( error != 0 ) hC28NSigma->SetBinContent(c+1, hC28Cent[s3]->GetBinContent(c+1)/error);
@@ -175,9 +184,14 @@
 	}
 
 
-	TFile * fwrite = new TFile(Form("%s/fit.root", ftxt[s1]), "recreate");
+	TFile * fwrite = new TFile(Form("%s/fit_%i.root", ftxt[s1], s3), "recreate");
 	hMult->Write();
 	hNoff->Write();
+
+	hW22Cent->Write();
+	hW24Cent->Write();
+	hW26Cent->Write();
+	hW28Cent->Write();
 
 	hC22CentE->Write();
 	hC24CentE->Write();
