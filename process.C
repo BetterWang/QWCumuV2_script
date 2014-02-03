@@ -20,9 +20,9 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 10;
-	int s2 = 20;
-	int s3 = 20;
+	int s1 = 33;
+//	int s2 = 20;
+//	int s3 = 20;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -54,6 +54,12 @@
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[27], i));
+		}
+	} else if ( s1 == 32 ) {
+		for ( int i = 0; i < 20; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[29], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[30], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[31], i));
 		}
 	} else
 	for ( int i = 0; i < 20; i++ ) {
