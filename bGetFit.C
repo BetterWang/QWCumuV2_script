@@ -24,10 +24,13 @@
 	TH1D * hNoffMB;
 //                                             0,   1,   2,  3\,   4,  5\,  6\,  7\,  8\,   9, 10, 11, 12, 13, 14, 15, 16, 17,
 	const Int_t CentNoffCut[] = {100000, 350, 320, 300, 260, 240, 220, 185, 150, 120, 100, 80, 60, 50, 40, 30, 20, 10, 0};
-//                                 {6}         0,  {1,   2,} 3\,   4,  5\,  6\,  7\,  8\,   9,{10, 11}{12, 13,}14, 15, 16, 17,
+//                      pPb        {6}         0,  {1,   2,} 3\,   4,  5\,  6\,  7\,  8\,   9,{10, 11}{12, 13,}14, 15, 16, 17,
 //                                             0,        1,  2\,   3,  4\,  5\,  6\,  7\,   8,      9,     10, 14, 15, 16, 17,
 //                                 {8}         0,  {1,   2,  3\,} {4,  5\,} 6\,  7\,  8\,   9,{10, 11}{12, 13,}14, 15, 16, 17,
 //                                             0,            1\,       2\,  3\,  4\,  5\,   6,      7,      8, 14, 15, 16, 17,
+//                      PbPb       {6}         0,   1,   2,  3\,   4,  5\,  6\,  7\,  8\,   9, 10,{11, 12}{13, 14,}15, 16, 17,
+//                                             0,   1,   2,  3\,   4,  5\,  6\,  7\,  8\,   9, 10,     11,     12, 15, 16, 17,
+//                                 {8}         0,   1,   2,  3\,   4,  5\,  6\,  7\,  8\,   9, 10, 11,/12, 13, 14, 15, 16, 17,
 	const Int_t nCentNoff = sizeof(CentNoffCut)/sizeof(Int_t);
 	const Int_t nCentNoff6 = sizeof(MergedNoff6)/sizeof(Int_t);
 	const Int_t nCentNoff8 = sizeof(MergedNoff8)/sizeof(Int_t);
@@ -159,7 +162,26 @@
 	/////////////////
 	// Combine bins 6
 
-	if ( bRebin6 ) {
+	if ( bPbPb && bRebin6 ) {
+		for ( int i = 0; i < 11; i++ ) {
+			pPb_c26rebin[i] = pPb_c26[i];
+			pPb_c26rebine[i] = pPb_c26e[i];
+			dNoff6[i] = dNoff[i];
+		}
+		pPb_c26rebin[11] = (pPb_c26[11] * pPb_w26[11] + pPb_c26[12] * pPb_w26[12]) / (pPb_w26[11]+pPb_w26[12]);
+		pPb_c26rebine[11] = sqrt(pPb_c26e[11]*pPb_c26e[11]*pPb_w26[11]*pPb_w26[11] + pPb_c26e[12]*pPb_c26e[12]*pPb_w26[12]*pPb_w26[12])/(pPb_w26[11]+pPb_w26[12]);
+		dNoff6[11] = (dNoff[11]*dNevt[11] + dNoff[12]*dNevt[12])/(dNevt[11]+dNevt[12]);
+
+		pPb_c26rebin[12] = (pPb_c26[13] * pPb_w26[13] + pPb_c26[14] * pPb_w26[14]) / (pPb_w26[13]+pPb_w26[14]);
+		pPb_c26rebine[12] = sqrt(pPb_c26e[13]*pPb_c26e[13]*pPb_w26[13]*pPb_w26[13] + pPb_c26e[14]*pPb_c26e[14]*pPb_w26[14]*pPb_w26[14])/(pPb_w26[13]+pPb_w26[14]);
+		dNoff6[12] = (dNoff[13]*dNevt[13] + dNoff[14]*dNevt[14])/(dNevt[13]+dNevt[14]);
+
+		for ( int c = 0; c < 20; c++ ) {
+			pPb_c26[c] = pPb_c26rebin[c];
+			pPb_c26e[c] = pPb_c26rebine[c];
+		}
+	}
+	if ( !bPbPb && bRebin6 ) {
 		pPb_c26rebin[0] = pPb_c26[0];
 		pPb_c26rebine[0] = pPb_c26e[0];
 		dNoff6[0] = dNoff[0];
@@ -215,7 +237,19 @@
 	/////////////////
 	// Combine bins 8
 	
-	if ( bRebin8 ) {
+	if ( bPbPb && bRebin8 ) {
+		for ( int i = 0; i < 12; i++ ) {
+			pPb_c28rebin[i] = pPb_c28[i];
+			pPb_c28rebine[i] = pPb_c28e[i];
+			dNoff8[i] = dNoff[i];
+		}
+
+		for ( int c = 0; c < 20; c++ ) {
+			pPb_c28[c] = pPb_c28rebin[c];
+			pPb_c28e[c] = pPb_c28rebine[c];
+		}
+	}
+	if ( !bPbPb && bRebin8 ) {
 		pPb_c28rebin[0] = pPb_c28[0];
 		pPb_c28rebine[0] = pPb_c28e[0];
 		dNoff8[0] = dNoff[0];

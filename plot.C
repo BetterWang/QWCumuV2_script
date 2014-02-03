@@ -42,8 +42,10 @@
 
 	int blimit6 = 17;
 	int blimit8 = 17;
-	if ( bRebin6 ) blimit6 = 11;
-	if ( bRebin8 ) blimit8 = 9;
+	if ( !bPbPb && bRebin6 ) blimit6 = 11;
+	if ( bPbPb && bRebin6 ) blimit6 = 13;
+	if ( !bPbPb && bRebin8 ) blimit8 = 9;
+	if ( bPbPb && bRebin8 ) blimit8 = 12;
 	TGraphErrors * grNSigma2 = new TGraphErrors(17, dNoff, dNSigma2, 0, 0);
 	TGraphErrors * grNSigma4 = new TGraphErrors(17, dNoff, dNSigma4, 0, 0);
 	TGraphErrors * grNSigma6 = new TGraphErrors(blimit6, dNoff6, dNSigma6, 0, 0);
@@ -105,7 +107,7 @@
 
 	gr_HIN_13_002_v24->Draw("Psame");
 	gr_HIN_13_002_v22->Draw("Psame");
-	grLYZnoff->Draw("Psame");
+//	grLYZnoff->Draw("Psame");
 
 	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 18, dNoff, pPb_v22, 0, pPb_v22e);
 	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 18, dNoff, pPb_v24, 0, pPb_v24e);
@@ -132,16 +134,16 @@
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
 
-	TLegend * leg = new TLegend(0.18, 0.65, 0.5, 0.9);
+	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
 	leg->SetBorderSize(0);
 //	leg->AddEntry(gr_pPb_v22, "v_{2}{2}", "p");
-	leg->AddEntry(gr_HIN_13_002_v22, "v_{2}{2PC} published", "p");
-	leg->AddEntry(gr_HIN_13_002_v24, "v_{2}{4} published", "p");
+//	leg->AddEntry(gr_HIN_13_002_v22, "v_{2}{2PC} published", "p");
+//	leg->AddEntry(gr_HIN_13_002_v24, "v_{2}{4} published", "p");
 	leg->AddEntry(gr_pPb_v24, "v_{2}{4}", "p");
 	leg->AddEntry(gr_pPb_v26, "v_{2}{6}", "p");
 	leg->AddEntry(gr_pPb_v28, "v_{2}{8}", "p");
-	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
+//	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
 	leg->Draw();
 
 	if ( save ) {
