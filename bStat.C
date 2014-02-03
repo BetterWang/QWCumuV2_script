@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 28;
+	int s1 = 33;
 	int s3 = 50;
 
 #include "../../style.h"

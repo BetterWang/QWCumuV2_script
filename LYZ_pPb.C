@@ -45,10 +45,10 @@
 	grLYZpt->SetMarkerStyle(kFullCircle);
 	grLYZpt->SetMarkerColor(kGreen);
 	grLYZpt->SetLineColor(kBlue);
-	grLYZpt->SetMarkerSize(2);
+	grLYZpt->SetMarkerSize(1.5);
 
 	grLYZnoff->SetMarkerStyle(kFullCircle);
 	grLYZnoff->SetMarkerColor(kGreen);
 	grLYZnoff->SetLineColor(kBlue);
-	grLYZnoff->SetMarkerSize(2);
+	grLYZnoff->SetMarkerSize(2.5);
 }
