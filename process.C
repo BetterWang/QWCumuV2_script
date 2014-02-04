@@ -20,9 +20,9 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 33;
-//	int s2 = 20;
-//	int s3 = 20;
+	int s1 = 10;
+	int s2 = 50;
+	int s3 = 50;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -95,58 +95,58 @@
 	ch->SetBranchAddress("wC36", &wC36);
 	ch->SetBranchAddress("wC38", &wC38);
 
-	int Nevt[20];
-	for ( int i = 0; i < 20; i++ ) Nevt[i] = 0;
+	int Nevt[500];
+	for ( int i = 0; i < 500; i++ ) Nevt[i] = 0;
 
 	TH1::SetDefaultSumw2();
 
 	TH1D* hMult = new TH1D("hMult", "hMult", 500, 0.5, 500.5);
 	TH1D* hNoff = new TH1D("hNoff", "hNoff", 500, 0.5, 500.5);
-	TH1D* hCent = new TH1D("hCent", "hCent", 20, 0, 20);
+	TH1D* hCent = new TH1D("hCent", "hCent", 500, 0, 500);
 
-	TH1D* hQ22 [20] ;
-	TH1D* hQ22i[20] ;
-	TH1D* hQ24 [20] ;
-	TH1D* hQ24i[20] ;
-	TH1D* hQ26 [20] ;
-	TH1D* hQ26i[20] ;
-	TH1D* hQ28 [20] ;
-	TH1D* hQ28i[20] ;
-	TH1D* hC22 [20] ;
-	TH1D* hC24 [20] ;
-	TH1D* hC26 [20] ;
-	TH1D* hC28 [20] ;
-	TH1D* hV22 [20] ;
-	TH1D* hV24 [20] ;
-	TH1D* hV26 [20] ;
-	TH1D* hV28 [20] ;
+	TH1D* hQ22 [500] ;
+	TH1D* hQ22i[500] ;
+	TH1D* hQ24 [500] ;
+	TH1D* hQ24i[500] ;
+	TH1D* hQ26 [500] ;
+	TH1D* hQ26i[500] ;
+	TH1D* hQ28 [500] ;
+	TH1D* hQ28i[500] ;
+	TH1D* hC22 [500] ;
+	TH1D* hC24 [500] ;
+	TH1D* hC26 [500] ;
+	TH1D* hC28 [500] ;
+	TH1D* hV22 [500] ;
+	TH1D* hV24 [500] ;
+	TH1D* hV26 [500] ;
+	TH1D* hV28 [500] ;
 
-	TH1D* hC22Cent = new TH1D("hC22Cent", "hC22Cent", 20, 0, 20);
-	TH1D* hC24Cent = new TH1D("hC24Cent", "hC24Cent", 20, 0, 20);
-	TH1D* hC26Cent = new TH1D("hC26Cent", "hC26Cent", 20, 0, 20);
-	TH1D* hC28Cent = new TH1D("hC28Cent", "hC28Cent", 20, 0, 20);
+	TH1D* hC22Cent = new TH1D("hC22Cent", "hC22Cent", 500, 0, 500);
+	TH1D* hC24Cent = new TH1D("hC24Cent", "hC24Cent", 500, 0, 500);
+	TH1D* hC26Cent = new TH1D("hC26Cent", "hC26Cent", 500, 0, 500);
+	TH1D* hC28Cent = new TH1D("hC28Cent", "hC28Cent", 500, 0, 500);
 
-	TH1D* hV22Cent = new TH1D("hV22Cent", "hV22Cent", 20, 0, 20);
-	TH1D* hV24Cent = new TH1D("hV24Cent", "hV24Cent", 20, 0, 20);
-	TH1D* hV26Cent = new TH1D("hV26Cent", "hV26Cent", 20, 0, 20);
-	TH1D* hV28Cent = new TH1D("hV28Cent", "hV28Cent", 20, 0, 20);
+	TH1D* hV22Cent = new TH1D("hV22Cent", "hV22Cent", 500, 0, 500);
+	TH1D* hV24Cent = new TH1D("hV24Cent", "hV24Cent", 500, 0, 500);
+	TH1D* hV26Cent = new TH1D("hV26Cent", "hV26Cent", 500, 0, 500);
+	TH1D* hV28Cent = new TH1D("hV28Cent", "hV28Cent", 500, 0, 500);
 
-	TH1D* hW22Cent = new TH1D("hW22Cent", "hW22Cent", 20, 0, 20);
-	TH1D* hW24Cent = new TH1D("hW24Cent", "hW24Cent", 20, 0, 20);
-	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 20, 0, 20);
-	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 20, 0, 20);
+	TH1D* hW22Cent = new TH1D("hW22Cent", "hW22Cent", 500, 0, 500);
+	TH1D* hW24Cent = new TH1D("hW24Cent", "hW24Cent", 500, 0, 500);
+	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 500, 0, 500);
+	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0, 500);
 
-	double dQ22[20];
-	double dQ24[20];
-	double dQ26[20];
-	double dQ28[20];
+	double dQ22[500];
+	double dQ24[500];
+	double dQ26[500];
+	double dQ28[500];
 
-	double dW22[20];
-	double dW24[20];
-	double dW26[20];
-	double dW28[20];
+	double dW22[500];
+	double dW24[500];
+	double dW26[500];
+	double dW28[500];
 
-	for ( int c = 0; c < 20; c++ ) {
+	for ( int c = 0; c < 500; c++ ) {
 		hQ22 [c] = new TH1D(Form("%s_%i", "hQ22" , c), Form("%s_%i", "hQ22", c),  400, -0.2, 0.2);
 		hQ22i[c] = new TH1D(Form("%s_%i", "hQ22i", c), Form("%s_%i","hQ22i", c), 400, -0.2, 0.2);
 		hQ24 [c] = new TH1D(Form("%s_%i", "hQ24" , c), Form("%s_%i", "hQ24", c),  400, -0.02, 0.02);
@@ -183,7 +183,8 @@
 	{
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		ievt++;
-		int c = int(Cent);
+		int c = Noff;
+		if ( c >= 500 ) continue;
 		Nevt[c]++;
 		if ( s2 < s3 && Nevt[c] % s3 != s2 ) continue;
 		hMult->Fill(Mult);
@@ -237,7 +238,7 @@
 		dW28[c] += wC28;
 
 	}
-	for ( int c = 0; c < 20; c++ ) {
+	for ( int c = 0; c < 500; c++ ) {
 		if ( dW22[c] == 0. ) dQ22[c] = 0.; else dQ22[c] /= dW22[c];
 		if ( dW24[c] == 0. ) dQ24[c] = 0.; else dQ24[c] /= dW24[c];
 		if ( dW26[c] == 0. ) dQ26[c] = 0.; else dQ26[c] /= dW26[c];
@@ -272,8 +273,8 @@
 		hV28Cent->SetBinContent(c+1, V8);
 	}
 	char *fwname;
-	if ( s2 < s3 ) fwname = Form("%s/output_%i_%i.root", ftxt[s1], s2, s3);
-	else fwname = Form("%s/output.root", ftxt[s1]);
+	if ( s2 < s3 ) fwname = Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3);
+	else fwname = Form("%s/output_mult.root", ftxt[s1]);
 	TFile *fw = new TFile(fwname, "recreate");
 	{
 		hMult->Write();
@@ -295,7 +296,7 @@
 		hW26Cent->Write();
 		hW28Cent->Write();
 
-		for ( int c = 0; c < 20; c++ ) {
+		for ( int c = 0; c < 500; c++ ) {
 
 			hC22[c]->Write();
 			hC24[c]->Write();
