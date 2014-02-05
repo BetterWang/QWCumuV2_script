@@ -102,7 +102,7 @@
 
 	TH1D* hMult = new TH1D("hMult", "hMult", 500, 0.5, 500.5);
 	TH1D* hNoff = new TH1D("hNoff", "hNoff", 500, 0.5, 500.5);
-	TH1D* hCent = new TH1D("hCent", "hCent", 500, 0, 500);
+	TH1D* hCent = new TH1D("hCent", "hCent", 500, 0.5, 500.5);
 
 	TH1D* hQ22 [500] ;
 	TH1D* hQ22i[500] ;
@@ -121,21 +121,25 @@
 	TH1D* hV26 [500] ;
 	TH1D* hV28 [500] ;
 
-	TH1D* hC22Cent = new TH1D("hC22Cent", "hC22Cent", 500, 0, 500);
-	TH1D* hC24Cent = new TH1D("hC24Cent", "hC24Cent", 500, 0, 500);
-	TH1D* hC26Cent = new TH1D("hC26Cent", "hC26Cent", 500, 0, 500);
-	TH1D* hC28Cent = new TH1D("hC28Cent", "hC28Cent", 500, 0, 500);
+	TH1D* hC22Cent = new TH1D("hC22Cent", "hC22Cent", 500, 0.5, 500.5);
+	TH1D* hC24Cent = new TH1D("hC24Cent", "hC24Cent", 500, 0.5, 500.5);
+	TH1D* hC26Cent = new TH1D("hC26Cent", "hC26Cent", 500, 0.5, 500.5);
+	TH1D* hC28Cent = new TH1D("hC28Cent", "hC28Cent", 500, 0.5, 500.5);
 
-	TH1D* hV22Cent = new TH1D("hV22Cent", "hV22Cent", 500, 0, 500);
-	TH1D* hV24Cent = new TH1D("hV24Cent", "hV24Cent", 500, 0, 500);
-	TH1D* hV26Cent = new TH1D("hV26Cent", "hV26Cent", 500, 0, 500);
-	TH1D* hV28Cent = new TH1D("hV28Cent", "hV28Cent", 500, 0, 500);
+	TH1D* hV22Cent = new TH1D("hV22Cent", "hV22Cent", 500, 0.5, 500.5);
+	TH1D* hV24Cent = new TH1D("hV24Cent", "hV24Cent", 500, 0.5, 500.5);
+	TH1D* hV26Cent = new TH1D("hV26Cent", "hV26Cent", 500, 0.5, 500.5);
+	TH1D* hV28Cent = new TH1D("hV28Cent", "hV28Cent", 500, 0.5, 500.5);
 
-	TH1D* hW22Cent = new TH1D("hW22Cent", "hW22Cent", 500, 0, 500);
-	TH1D* hW24Cent = new TH1D("hW24Cent", "hW24Cent", 500, 0, 500);
-	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 500, 0, 500);
-	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0, 500);
+	TH1D* hW22Cent = new TH1D("hW22Cent", "hW22Cent", 500, 0.5, 500.5);
+	TH1D* hW24Cent = new TH1D("hW24Cent", "hW24Cent", 500, 0.5, 500.5);
+	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 500, 0.5, 500.5);
+	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0.5, 500.5);
 
+	TProfile* hM22Cent = new TProfile("hM22Cent", "hM22Cent", 500, 0.5, 500.5);
+	TProfile* hM24Cent = new TProfile("hM24Cent", "hM24Cent", 500, 0.5, 500.5);
+	TProfile* hM26Cent = new TProfile("hM26Cent", "hM26Cent", 500, 0.5, 500.5);
+	TProfile* hM28Cent = new TProfile("hM28Cent", "hM28Cent", 500, 0.5, 500.5);
 	double dQ22[500];
 	double dQ24[500];
 	double dQ26[500];
@@ -184,12 +188,16 @@
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		ievt++;
 		int c = Noff;
-		if ( c >= 500 ) continue;
+		if ( c >= 500 || c<=0 ) continue;
 		Nevt[c]++;
 		if ( s2 < s3 && Nevt[c] % s3 != s2 ) continue;
 		hMult->Fill(Mult);
 		hNoff->Fill(Noff);
 		hCent->Fill(Cent);
+		hM22Cent->Fill(c, Mult);
+		hM24Cent->Fill(c, Mult);
+		hM26Cent->Fill(c, Mult);
+		hM28Cent->Fill(c, Mult);
 		double Q2 = C22/wC22;
 		double Q4 = C24/wC24;
 		double Q6 = C26/wC26;
@@ -243,10 +251,10 @@
 		if ( dW24[c] == 0. ) dQ24[c] = 0.; else dQ24[c] /= dW24[c];
 		if ( dW26[c] == 0. ) dQ26[c] = 0.; else dQ26[c] /= dW26[c];
 		if ( dW28[c] == 0. ) dQ28[c] = 0.; else dQ28[c] /= dW28[c];
-		hW22Cent->SetBinContent(c+1, dW22[c]);
-		hW24Cent->SetBinContent(c+1, dW24[c]);
-		hW26Cent->SetBinContent(c+1, dW26[c]);
-		hW28Cent->SetBinContent(c+1, dW28[c]);
+		hW22Cent->SetBinContent(c, dW22[c]);
+		hW24Cent->SetBinContent(c, dW24[c]);
+		hW26Cent->SetBinContent(c, dW26[c]);
+		hW28Cent->SetBinContent(c, dW28[c]);
 
 		double C2 = dQ22[c];
 		double C4 = dQ24[c] - 2*dQ22[c]*dQ22[c];
@@ -262,15 +270,15 @@
 		cout << " c = " << c << "\tdQ22 = " << dQ22[c] << "\tdQ24 = " << dQ24[c] << "\tdQ26 = " << dQ26[c] << "\tdQ28 = " << dQ28[c] << endl;
 		cout << " c = " << c << "\tdC22 = " << C2 << "\tdC24 = " << C4 << "\tdQ26 = " << C6 << "\tdQ28 = " << C8 << endl;
 		cout << " c = " << c << "\tdV22 = " << V2 << "\tdV24 = " << V4 << "\tdV26 = " << V6 << "\tdV28 = " << V8 << endl;
-		hC22Cent->SetBinContent(c+1, C2);
-		hC24Cent->SetBinContent(c+1, C4);
-		hC26Cent->SetBinContent(c+1, C6);
-		hC28Cent->SetBinContent(c+1, C8);
+		hC22Cent->SetBinContent(c, C2);
+		hC24Cent->SetBinContent(c, C4);
+		hC26Cent->SetBinContent(c, C6);
+		hC28Cent->SetBinContent(c, C8);
 
-		hV22Cent->SetBinContent(c+1, V2);
-		hV24Cent->SetBinContent(c+1, V4);
-		hV26Cent->SetBinContent(c+1, V6);
-		hV28Cent->SetBinContent(c+1, V8);
+		hV22Cent->SetBinContent(c, V2);
+		hV24Cent->SetBinContent(c, V4);
+		hV26Cent->SetBinContent(c, V6);
+		hV28Cent->SetBinContent(c, V8);
 	}
 	char *fwname;
 	if ( s2 < s3 ) fwname = Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3);
@@ -296,6 +304,10 @@
 		hW26Cent->Write();
 		hW28Cent->Write();
 
+		hM22Cent->Write();
+		hM24Cent->Write();
+		hM26Cent->Write();
+		hM28Cent->Write();
 		for ( int c = 0; c < 500; c++ ) {
 
 			hC22[c]->Write();
