@@ -136,10 +136,7 @@
 	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 500, 0.5, 500.5);
 	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0.5, 500.5);
 
-	TProfile* hM22Cent = new TProfile("hM22Cent", "hM22Cent", 500, 0.5, 500.5);
-	TProfile* hM24Cent = new TProfile("hM24Cent", "hM24Cent", 500, 0.5, 500.5);
-	TProfile* hM26Cent = new TProfile("hM26Cent", "hM26Cent", 500, 0.5, 500.5);
-	TProfile* hM28Cent = new TProfile("hM28Cent", "hM28Cent", 500, 0.5, 500.5);
+	TProfile* hMultCent = new TProfile("hMultCent", "hMultCent", 500, 0.5, 500.5);
 	double dQ22[500];
 	double dQ24[500];
 	double dQ26[500];
@@ -194,10 +191,7 @@
 		hMult->Fill(Mult);
 		hNoff->Fill(Noff);
 		hCent->Fill(Cent);
-		hM22Cent->Fill(c, Mult);
-		hM24Cent->Fill(c, Mult);
-		hM26Cent->Fill(c, Mult);
-		hM28Cent->Fill(c, Mult);
+		hMultCent->Fill(c, Mult);
 		double Q2 = C22/wC22;
 		double Q4 = C24/wC24;
 		double Q6 = C26/wC26;
@@ -304,10 +298,7 @@
 		hW26Cent->Write();
 		hW28Cent->Write();
 
-		hM22Cent->Write();
-		hM24Cent->Write();
-		hM26Cent->Write();
-		hM28Cent->Write();
+		hMultCent->Write();
 		for ( int c = 0; c < 500; c++ ) {
 
 			hC22[c]->Write();
