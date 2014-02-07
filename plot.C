@@ -20,12 +20,13 @@
 {
 #include "label.h"
 
-	int s1 = 33;
-	int s2 = 33;
+	int s1 = 10;
+	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
 
 	int bPbPb = 1;
+	if ( s1 == 10 ) bPbPb = 0;
 
 	int bRebin6 = 0;
 	int bRebin8 = 0;
@@ -147,11 +148,11 @@
 //	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
 	leg->Draw();
 //
-//	if ( save ) {
-//		cNsigma->SaveAs(Form("cNsigma_%i.png", s3));
-//		cSum->SaveAs(Form("cSum_%i.png", s3));
-//		cNsigma->SaveAs(Form("cNsigma_%i.eps", s3));
-//		cSum->SaveAs(Form("cSum_%i.eps", s3));
-//	}
+	if ( save ) {
+		cNsigma->SaveAs(Form("cNsigma_%i_%i.png", s1, s3));
+		cNsigma->SaveAs(Form("cNsigma_%i_%i.eps", s1, s3));
+		cSum->SaveAs(Form("cSum_%i_%i.png", s1, s3));
+		cSum->SaveAs(Form("cSum_%i_%i.eps", s1, s3));
+	}
 
 }

@@ -22,8 +22,8 @@
 #include "noff.h"
 
 	int s1 = 33;
-//	int s2 = 0;
-//	int s3 = 20;
+	int s2 = 20;
+	int s3 = 20;
 
 	int NCent = 18;
 //	Int_t * pCent = CentNoffCut;
