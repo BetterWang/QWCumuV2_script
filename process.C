@@ -20,9 +20,9 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 10;
-	int s2 = 50;
-	int s3 = 50;
+	int s1 = 33;
+//	int s2 = 20;
+//	int s3 = 20;
 
 	TChain * ch = new TChain();
 	if ( s1 == 10 ) {
@@ -104,23 +104,6 @@
 	TH1D* hNoff = new TH1D("hNoff", "hNoff", 500, 0.5, 500.5);
 	TH1D* hCent = new TH1D("hCent", "hCent", 500, 0.5, 500.5);
 
-	TH1D* hQ22 [500] ;
-	TH1D* hQ22i[500] ;
-	TH1D* hQ24 [500] ;
-	TH1D* hQ24i[500] ;
-	TH1D* hQ26 [500] ;
-	TH1D* hQ26i[500] ;
-	TH1D* hQ28 [500] ;
-	TH1D* hQ28i[500] ;
-	TH1D* hC22 [500] ;
-	TH1D* hC24 [500] ;
-	TH1D* hC26 [500] ;
-	TH1D* hC28 [500] ;
-	TH1D* hV22 [500] ;
-	TH1D* hV24 [500] ;
-	TH1D* hV26 [500] ;
-	TH1D* hV28 [500] ;
-
 	TH1D* hC22Cent = new TH1D("hC22Cent", "hC22Cent", 500, 0.5, 500.5);
 	TH1D* hC24Cent = new TH1D("hC24Cent", "hC24Cent", 500, 0.5, 500.5);
 	TH1D* hC26Cent = new TH1D("hC26Cent", "hC26Cent", 500, 0.5, 500.5);
@@ -148,24 +131,6 @@
 	double dW28[500];
 
 	for ( int c = 0; c < 500; c++ ) {
-		hQ22 [c] = new TH1D(Form("%s_%i", "hQ22" , c), Form("%s_%i", "hQ22", c),  400, -0.2, 0.2);
-		hQ22i[c] = new TH1D(Form("%s_%i", "hQ22i", c), Form("%s_%i","hQ22i", c), 400, -0.2, 0.2);
-		hQ24 [c] = new TH1D(Form("%s_%i", "hQ24" , c), Form("%s_%i", "hQ24", c),  400, -0.02, 0.02);
-		hQ24i[c] = new TH1D(Form("%s_%i", "hQ24i", c), Form("%s_%i","hQ24i", c), 400, -0.02, 0.02);
-		hQ26 [c] = new TH1D(Form("%s_%i", "hQ26" , c), Form("%s_%i", "hQ26", c),  400, -0.002, 0.002);
-		hQ26i[c] = new TH1D(Form("%s_%i", "hQ26i", c), Form("%s_%i","hQ26i", c), 400, -0.002, 0.002);
-		hQ28 [c] = new TH1D(Form("%s_%i", "hQ28" , c), Form("%s_%i", "hQ28", c),  400, -0.0002, 0.0002);
-		hQ28i[c] = new TH1D(Form("%s_%i", "hQ28i", c), Form("%s_%i","hQ28i", c), 400, -0.0002, 0.0002);
-	
-		hC22 [c] = new TH1D(Form("%s_%i", "hC22" , c), Form("%s_%i", "hC22", c),  400, -0.2, 0.2);
-		hC24 [c] = new TH1D(Form("%s_%i", "hC24" , c), Form("%s_%i", "hC24", c),  400, -0.02, 0.02);
-		hC26 [c] = new TH1D(Form("%s_%i", "hC26" , c), Form("%s_%i", "hC26", c),  1200, -0.0005, 0.0115);
-		hC28 [c] = new TH1D(Form("%s_%i", "hC28" , c), Form("%s_%i", "hC28", c),  1200, -0.00115, 0.00005);
-	
-		hV22 [c] = new TH1D(Form("%s_%i", "hV22" , c), Form("%s_%i", "hV22", c),  400, -0.2, 0.2);
-		hV24 [c] = new TH1D(Form("%s_%i", "hV24" , c), Form("%s_%i", "hV24", c),  400, -0.2, 0.2);
-		hV26 [c] = new TH1D(Form("%s_%i", "hV26" , c), Form("%s_%i", "hV26", c),  400, -0.2, 0.2);
-		hV28 [c] = new TH1D(Form("%s_%i", "hV28" , c), Form("%s_%i", "hV28", c),  400, -0.2, 0.2);
 
 		dQ22[c] = 0;
 		dQ24[c] = 0;
@@ -192,42 +157,6 @@
 		hNoff->Fill(Noff);
 		hCent->Fill(Cent);
 		hMultCent->Fill(c, Mult);
-		double Q2 = C22/wC22;
-		double Q4 = C24/wC24;
-		double Q6 = C26/wC26;
-		double Q8 = C28/wC28;
-
-
-		hQ22[c]->Fill( Q2 );
-		hQ24[c]->Fill( Q4 );
-		hQ26[c]->Fill( Q6 );
-		hQ28[c]->Fill( Q8 );
-
-		hQ22i[c]->Fill( iC22/wC22 );
-		hQ24i[c]->Fill( iC24/wC24 );
-		hQ26i[c]->Fill( iC26/wC26 );
-		hQ28i[c]->Fill( iC28/wC28 );
-
-		double C2 = Q2;
-		double C4 = Q4 - Q2*Q2;
-		double C6 = Q6 - 9*Q4*Q2 + 12*Q2*Q2*Q2;
-		double C8 = Q8 - 16*Q6*Q2 - 18*Q4*Q4 + 144*Q4*Q2*Q2*Q2 - 144*Q2*Q2*Q2*Q2;
-
-		hC22[c]->Fill( C2 );
-		hC24[c]->Fill( C4 );
-		hC26[c]->Fill( C6 );
-		hC28[c]->Fill( C8 );
-
-		double V2, V4, V6, V8;
-		if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
-		if ( C4 > 0 ) V4 = -pow(C4, 1./4); else V4 = pow(-C4, 1./4);
-		if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
-		if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
-
-		hV22[c]->Fill( V2 );
-		hV24[c]->Fill( V4 );
-		hV26[c]->Fill( V6 );
-		hV28[c]->Fill( V8 );
 
 		dQ22[c] += C22;
 		dQ24[c] += C24;
@@ -299,28 +228,6 @@
 		hW28Cent->Write();
 
 		hMultCent->Write();
-		for ( int c = 0; c < 500; c++ ) {
-
-			hC22[c]->Write();
-			hC24[c]->Write();
-			hC26[c]->Write();
-			hC28[c]->Write();
-	
-			hV22[c]->Write();
-			hV24[c]->Write();
-			hV26[c]->Write();
-			hV28[c]->Write();
-	
-			hQ22[c]->Write();
-			hQ24[c]->Write();
-			hQ26[c]->Write();
-			hQ28[c]->Write();
-	
-			hQ22i[c]->Write();
-			hQ24i[c]->Write();
-			hQ26i[c]->Write();
-			hQ28i[c]->Write();
-		}
 	}
 	fw->Close();
 };
