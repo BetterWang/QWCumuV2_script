@@ -22,23 +22,22 @@
 
 	int s1 = 33;
 	int s2 = 33;
-	int s3 = 50;
+	int s3 = 20;
 	int save = 1;
 
 	int bPbPb = 1;
 
-	int bRebin6 = 1;
-	int bRebin8 = 1;
+	int bRebin6 = 0;
+	int bRebin8 = 0;
 
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
 
-	TFile * fHM = new TFile(Form("%s/fit_%i.root", ftxt[s1], s3));
-	TFile * fMB = new TFile(Form("%s/fit_%i.root", ftxt[s2], s3));
-	gROOT->Macro("bGetFit.C");
 	gROOT->Macro("HIN-13-002.C");
 	gROOT->Macro("LYZ_pPb.C");
+
+	gROOT->Macro("bGetFit.C");
 
 	int blimit6 = 17;
 	int blimit8 = 17;
@@ -46,6 +45,8 @@
 	if ( bPbPb && bRebin6 ) blimit6 = 13;
 	if ( !bPbPb && bRebin8 ) blimit8 = 9;
 	if ( bPbPb && bRebin8 ) blimit8 = 12;
+
+
 	TGraphErrors * grNSigma2 = new TGraphErrors(17, dNoff, dNSigma2, 0, 0);
 	TGraphErrors * grNSigma4 = new TGraphErrors(17, dNoff, dNSigma4, 0, 0);
 	TGraphErrors * grNSigma6 = new TGraphErrors(blimit6, dNoff6, dNSigma6, 0, 0);
@@ -109,10 +110,10 @@
 	gr_HIN_13_002_v22->Draw("Psame");
 //	grLYZnoff->Draw("Psame");
 
-	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 18, dNoff, pPb_v22, 0, pPb_v22e);
-	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 18, dNoff, pPb_v24, 0, pPb_v24e);
-	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 18, dNoff6, pPb_v26, 0, pPb_v26e);
-	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 18, dNoff8, pPb_v28, 0, pPb_v28e);
+	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 17, dNoff, dV22, 0, eV22);
+	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 17, dNoff, dV24, 0, eV24);
+	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 17, dNoff6, dV26, 0, eV26);
+	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 17, dNoff8, dV28, 0, eV28);
 
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
@@ -131,8 +132,8 @@
 
 //	gr_pPb_v22->Draw("Psame");
 	gr_pPb_v24->Draw("Psame");
-	gr_pPb_v26->Draw("Psame");
-	gr_pPb_v28->Draw("Psame");
+//	gr_pPb_v26->Draw("Psame");
+//	gr_pPb_v28->Draw("Psame");
 
 	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
@@ -145,12 +146,12 @@
 	leg->AddEntry(gr_pPb_v28, "v_{2}{8}", "p");
 //	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
 	leg->Draw();
-
-	if ( save ) {
-		cNsigma->SaveAs(Form("cNsigma_%i.png", s3));
-		cSum->SaveAs(Form("cSum_%i.png", s3));
-		cNsigma->SaveAs(Form("cNsigma_%i.eps", s3));
-		cSum->SaveAs(Form("cSum_%i.eps", s3));
-	}
+//
+//	if ( save ) {
+//		cNsigma->SaveAs(Form("cNsigma_%i.png", s3));
+//		cSum->SaveAs(Form("cSum_%i.png", s3));
+//		cNsigma->SaveAs(Form("cNsigma_%i.eps", s3));
+//		cSum->SaveAs(Form("cSum_%i.eps", s3));
+//	}
 
 }
