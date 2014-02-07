@@ -1,0 +1,6 @@
+Working steps:
+1) run QWCumuV2 analyzer to generate ntuple
+2) process.C -- generate histograms, trials
+3) bStat.C -- generate histograms with error bars
+4) plot.C -- ploting
+5) bGetFit.C -- called by plot.C to generate C2? with error bars, rebin, nsigma
