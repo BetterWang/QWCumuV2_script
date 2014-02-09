@@ -120,6 +120,10 @@
 	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0.5, 500.5);
 
 	TProfile* hMultCent = new TProfile("hMultCent", "hMultCent", 500, 0.5, 500.5);
+	TH1D* hWeightCent2 = new TProfile("hWeightCent2", "hWeightCent2", 500, 0.5, 500.5);
+	TH1D* hWeightCent4 = new TProfile("hWeightCent4", "hWeightCent4", 500, 0.5, 500.5);
+	TH1D* hWeightCent6 = new TProfile("hWeightCent6", "hWeightCent6", 500, 0.5, 500.5);
+	TH1D* hWeightCent8 = new TProfile("hWeightCent8", "hWeightCent8", 500, 0.5, 500.5);
 	double dQ22[500];
 	double dQ24[500];
 	double dQ26[500];
@@ -157,6 +161,10 @@
 		hNoff->Fill(Noff);
 		hCent->Fill(Cent);
 		hMultCent->Fill(c, Mult);
+		hWeightCent2->Fill(c, Mult*(Mult-1));
+		hWeightCent4->Fill(c, Mult*(Mult-1)*(Mult-2)*(Mult-3));
+		hWeightCent6->Fill(c, Mult*(Mult-1)*(Mult-2)*(Mult-3)*(Mult-4)*(Mult-5));
+		hWeightCent8->Fill(c, Mult*(Mult-1)*(Mult-2)*(Mult-3)*(Mult-4)*(Mult-5)*(Mult-6)*(Mult-7));
 
 		dQ22[c] += C22;
 		dQ24[c] += C24;
@@ -228,6 +236,10 @@
 		hW28Cent->Write();
 
 		hMultCent->Write();
+		hWeightCent2->Write();
+		hWeightCent4->Write();
+		hWeightCent6->Write();
+		hWeightCent8->Write();
 	}
 	fw->Close();
 };
