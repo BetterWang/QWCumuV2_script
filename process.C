@@ -119,6 +119,11 @@
 	TH1D* hW26Cent = new TH1D("hW26Cent", "hW26Cent", 500, 0.5, 500.5);
 	TH1D* hW28Cent = new TH1D("hW28Cent", "hW28Cent", 500, 0.5, 500.5);
 
+	TH1D* hQ22Cent = new TH1D("hQ22Cent", "hQ22Cent", 500, 0.5, 500.5);
+	TH1D* hQ24Cent = new TH1D("hQ24Cent", "hQ24Cent", 500, 0.5, 500.5);
+	TH1D* hQ26Cent = new TH1D("hQ26Cent", "hQ26Cent", 500, 0.5, 500.5);
+	TH1D* hQ28Cent = new TH1D("hQ28Cent", "hQ28Cent", 500, 0.5, 500.5);
+
 	TProfile* hMultCent = new TProfile("hMultCent", "hMultCent", 500, 0.5, 500.5);
 	TH1D* hWeightCent2 = new TProfile("hWeightCent2", "hWeightCent2", 500, 0.5, 500.5);
 	TH1D* hWeightCent4 = new TProfile("hWeightCent4", "hWeightCent4", 500, 0.5, 500.5);
@@ -178,6 +183,10 @@
 
 	}
 	for ( int c = 0; c < 500; c++ ) {
+		hQ22Cent->SetBinContent(c, dQ22[c]);
+		hQ24Cent->SetBinContent(c, dQ24[c]);
+		hQ26Cent->SetBinContent(c, dQ26[c]);
+		hQ28Cent->SetBinContent(c, dQ28[c]);
 		if ( dW22[c] == 0. ) dQ22[c] = 0.; else dQ22[c] /= dW22[c];
 		if ( dW24[c] == 0. ) dQ24[c] = 0.; else dQ24[c] /= dW24[c];
 		if ( dW26[c] == 0. ) dQ26[c] = 0.; else dQ26[c] /= dW26[c];
@@ -229,6 +238,11 @@
 		hV24Cent->Write();
 		hV26Cent->Write();
 		hV28Cent->Write();
+
+		hQ22Cent->Write();
+		hQ24Cent->Write();
+		hQ26Cent->Write();
+		hQ28Cent->Write();
 
 		hW22Cent->Write();
 		hW24Cent->Write();
