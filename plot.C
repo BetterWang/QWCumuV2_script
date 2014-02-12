@@ -20,13 +20,14 @@
 {
 #include "label.h"
 
-	int s1 = 10;
+	int s1 = 33;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
 
 	int bPbPb = 1;
 	if ( s1 == 10 ) bPbPb = 0;
+	if ( s1 == 33 ) s2 = 33;
 
 	int bRebin6 = 0;
 	int bRebin8 = 0;

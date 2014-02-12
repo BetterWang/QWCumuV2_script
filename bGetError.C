@@ -18,7 +18,7 @@
 
 {
 #include "label.h"
-	int s1 = 33;
+	int s1 = 10;
 	int s3 = 20;
 
 	TFile * f[100];
@@ -58,10 +58,10 @@
 	double dC28[20][100];
 	for ( int c = 0; c < 20; c++ ) {
 		for ( int i = 0; i <= s3; i++ ) {
-			dC22[c][i] = hC22CentS[i]->GetBinContent(c+1) / hC22CentW[i]->GetBinContent(c+1);
-			dC24[c][i] = hC24CentS[i]->GetBinContent(c+1) / hC24CentW[i]->GetBinContent(c+1);
-			dC26[c][i] = hC26CentS[i]->GetBinContent(c+1) / hC26CentW[i]->GetBinContent(c+1);
-			dC28[c][i] = hC28CentS[i]->GetBinContent(c+1) / hC28CentW[i]->GetBinContent(c+1);
+			dC22[c][i] = hC22CentS[i]->GetBinContent(c+1) ;
+			dC24[c][i] = hC24CentS[i]->GetBinContent(c+1) ;
+			dC26[c][i] = hC26CentS[i]->GetBinContent(c+1) ;
+			dC28[c][i] = hC28CentS[i]->GetBinContent(c+1) ;
 		}
 	}
 
