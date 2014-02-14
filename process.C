@@ -20,7 +20,7 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 33;
+	int s1 = 34;
 //	int s2 = 20;
 //	int s3 = 20;
 
