@@ -21,7 +21,7 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 10;
+	int s1 = 33;
 //	int s2 = 20;
 //	int s3 = 20;
 
@@ -75,19 +75,42 @@
 	double dC24[500];
 	double dC26[500];
 	double dC28[500];
+
 	double dQ22[500];
 	double dQ24[500];
 	double dQ26[500];
 	double dQ28[500];
+
 	double dW22[500];
 	double dW24[500];
 	double dW26[500];
 	double dW28[500];
+
 	double dMult[500];
 	double dWeight2[500];
 	double dWeight4[500];
 	double dWeight6[500];
 	double dWeight8[500];
+
+	double dC22x[100];
+	double dC24x[100];
+	double dC26x[100];
+	double dC28x[100];
+
+	double dQ22x[100];
+	double dQ24x[100];
+	double dQ26x[100];
+	double dQ28x[100];
+
+	double dW22x[100];
+	double dW24x[100];
+	double dW26x[100];
+	double dW28x[100];
+
+	double dMultx[100];
+	double dNoffx[100];
+	double dNevtx[100];
+
 	TH1D * hC22CentS = new TH1D("hC22CentS", "hC22CentS", 20, 0, 20);
 	TH1D * hC24CentS = new TH1D("hC24CentS", "hC24CentS", 20, 0, 20);
 	TH1D * hC26CentS = new TH1D("hC26CentS", "hC26CentS", 20, 0, 20);
@@ -120,6 +143,69 @@
 		dWeight8[c] = hWeightCent8->GetBinContent(c);
 	}
 	TH1D * hNoffCent = new TH1D("hNoffCent", "hNoffCent", 20, 0, 20);
+
+	for ( int c = 0; c < 100; c++ ) {
+		dQ22x[c] = 0;
+		dQ24x[c] = 0;
+		dQ26x[c] = 0;
+		dQ28x[c] = 0;
+
+		dW22x[c] = 0;
+		dW24x[c] = 0;
+		dW26x[c] = 0;
+		dW28x[c] = 0;
+
+		dC22x[c] = 0;
+		dC24x[c] = 0;
+		dC26x[c] = 0;
+		dC28x[c] = 0;
+
+		dMultx[c] = 0;
+		dNoffx[c] = 0;
+		dNevtx[c] = 0;
+	}
+
+	for ( int c = 0; c < 500; c++ ) {
+		dQ22x[c/5] += dQ22[c];
+		dQ24x[c/5] += dQ24[c];
+		dQ26x[c/5] += dQ26[c];
+		dQ28x[c/5] += dQ28[c];
+
+		dW22x[c/5] += dW22[c];
+		dW24x[c/5] += dW24[c];
+		dW26x[c/5] += dW26[c];
+		dW28x[c/5] += dW28[c];
+
+		dMultx[c/5] += dMult[c];
+	}
+
+	for ( int c = 0; c < 100; c++ ) {
+		if (dW22x[c]==0.) dQ22x[c] = 0.; else dQ22x[c] /= dW22x[c];
+		if (dW24x[c]==0.) dQ24x[c] = 0.; else dQ24x[c] /= dW24x[c];
+		if (dW26x[c]==0.) dQ26x[c] = 0.; else dQ26x[c] /= dW26x[c];
+		if (dW28x[c]==0.) dQ28x[c] = 0.; else dQ28x[c] /= dW28x[c];
+
+		double C2 = dQ22x[c];
+		double C4 = dQ24x[c] - 2*dQ22x[c]*dQ22x[c];
+		double C6 = dQ26x[c] - 9*dQ24x[c]*dQ22x[c] + 12*dQ22x[c]*dQ22x[c]*dQ22x[c];
+		double C8 = dQ28x[c] - 16*dQ26x[c]*dQ22x[c] - 18*dQ24x[c]*dQ24x[c] + 144*dQ24x[c]*dQ22x[c]*dQ22x[c] - 144*dQ22x[c]*dQ22x[c]*dQ22x[c]*dQ22x[c];
+
+		dC22x[c] = C2;
+		dC24x[c] = C4;
+		dC26x[c] = C6;
+		dC28x[c] = C8;
+	}
+
+	for ( int i = 0; i < NCent; i++ ) {
+		double noff = 0;
+		double nevt = 0;
+		for ( int n = CentNoffCut[i]-1; n >= CentNoffCut[i+1]; n-- ) {
+			if ( n >= 500 ) continue;
+			noff += hNoff->GetBinContent(n)*n;
+			nevt += hNoff->GetBinContent(n);
+		}
+		hNoffCent->SetBinContent(i+1, noff/nevt);
+	}
 	for ( int i = 0; i < NCent; i++ ) {
 		double sum2 = 0;
 		double sum4 = 0;
@@ -129,20 +215,19 @@
 		double weight4 = 0;
 		double weight6 = 0;
 		double weight8 = 0;
-		double noff = 0;
-		double nevt = 0;
-		for ( int n = CentNoffCut[i]-1; n >= CentNoffCut[i+1]; n-- ) {
-			if ( n >= 500 ) continue;
+		int cstart = CentNoffCut[i+1] / 5;
+		int cend = CentNoffCut[i] / 5;
+		if ( cend > 100 ) cend = 100;
+		for ( int c = cstart; c < cend; c++ ) {
+			double w2 = dMultx[c];
+			double w4 = dMultx[c];
+			double w6 = dMultx[c];
+			double w8 = dMultx[c];
 
-			double w2 = dMult[n];
-			double w4 = dMult[n];
-			double w6 = dMult[n];
-			double w8 = dMult[n];
-
-			double C2 = dC22[n];
-			double C4 = dC24[n];
-			double C6 = dC26[n];
-			double C8 = dC28[n];
+			double C2 = dC22x[c];
+			double C4 = dC24x[c];
+			double C6 = dC26x[c];
+			double C8 = dC28x[c];
 
 			double V2, V4, V6, V8;
 			if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
@@ -159,9 +244,6 @@
 			weight4 += w4;
 			weight6 += w6;
 			weight8 += w8;
-
-			noff += hNoff->GetBinContent(n)*n;
-			nevt += hNoff->GetBinContent(n);
 		}
 		
 		double V2;
@@ -192,8 +274,6 @@
 		hC24CentW->SetBinContent(i+1, weight4);
 		hC26CentW->SetBinContent(i+1, weight6);
 		hC28CentW->SetBinContent(i+1, weight8);
-
-		hNoffCent->SetBinContent(i+1, noff/nevt);
 	}
 
 
