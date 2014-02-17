@@ -21,12 +21,12 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 33;
+	int s1 = 36;
 //	int s2 = 20;
 //	int s3 = 20;
 
-	int NCent = 18;
-//	Int_t * pCent = CentNoffCut;
+	Int_t * pCent = CentNoffCutHJ;
+	int NCent = 12;
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
@@ -111,6 +111,11 @@
 	double dNoffx[100];
 	double dNevtx[100];
 
+	double dWeight2x[100];
+	double dWeight4x[100];
+	double dWeight6x[100];
+	double dWeight8x[100];
+
 	TH1D * hC22CentS = new TH1D("hC22CentS", "hC22CentS", 20, 0, 20);
 	TH1D * hC24CentS = new TH1D("hC24CentS", "hC24CentS", 20, 0, 20);
 	TH1D * hC26CentS = new TH1D("hC26CentS", "hC26CentS", 20, 0, 20);
@@ -143,6 +148,7 @@
 		dWeight8[c] = hWeightCent8->GetBinContent(c);
 	}
 	TH1D * hNoffCent = new TH1D("hNoffCent", "hNoffCent", 20, 0, 20);
+	TH1D * hNevtCent = new TH1D("hNevtCent", "hNevtCent", 20, 0, 20);
 
 	for ( int c = 0; c < 100; c++ ) {
 		dQ22x[c] = 0;
@@ -163,6 +169,11 @@
 		dMultx[c] = 0;
 		dNoffx[c] = 0;
 		dNevtx[c] = 0;
+
+		dWeight2x[c] = 0;
+		dWeight4x[c] = 0;
+		dWeight6x[c] = 0;
+		dWeight8x[c] = 0;
 	}
 
 	for ( int c = 0; c < 500; c++ ) {
@@ -177,6 +188,11 @@
 		dW28x[c/5] += dW28[c];
 
 		dMultx[c/5] += dMult[c];
+
+		dWeight2x[c/5] = dWeight2[c];
+		dWeight4x[c/5] = dWeight4[c];
+		dWeight6x[c/5] = dWeight6[c];
+		dWeight8x[c/5] = dWeight8[c];
 	}
 
 	for ( int c = 0; c < 100; c++ ) {
@@ -199,12 +215,13 @@
 	for ( int i = 0; i < NCent; i++ ) {
 		double noff = 0;
 		double nevt = 0;
-		for ( int n = CentNoffCut[i]-1; n >= CentNoffCut[i+1]; n-- ) {
+		for ( int n = pCent[i]-1; n >= pCent[i+1]; n-- ) {
 			if ( n >= 500 ) continue;
 			noff += hNoff->GetBinContent(n)*n;
 			nevt += hNoff->GetBinContent(n);
 		}
 		hNoffCent->SetBinContent(i+1, noff/nevt);
+		hNevtCent->SetBinContent(i+1, nevt);
 	}
 	for ( int i = 0; i < NCent; i++ ) {
 		double sum2 = 0;
@@ -301,4 +318,5 @@
 	hC28CentW->Write();
 
 	hNoffCent->Write();
+	hNevtCent->Write();
 }

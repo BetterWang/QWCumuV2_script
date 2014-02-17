@@ -150,6 +150,10 @@
 	leg->AddEntry(gr_pPb_v28, "v_{2}{8}", "p");
 //	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
 	leg->Draw();
+
+	TLine * linev2 = new TLine(0, 0.049, 300, 0.049);
+	linev2->SetLineColor(kRed);
+	linev2->Draw();
 //
 	if ( save ) {
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.png", s1, s3));
