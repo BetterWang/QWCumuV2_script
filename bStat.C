@@ -21,12 +21,12 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 33;
+	int s1 = 36;
 //	int s2 = 20;
 //	int s3 = 20;
 
-	int NCent = 18;
-//	Int_t * pCent = CentNoffCut;
+	Int_t * pCent = CentNoffCutHJ;
+	int NCent = 12;
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
@@ -111,6 +111,11 @@
 	double dNoffx[100];
 	double dNevtx[100];
 
+	double dWeight2x[100];
+	double dWeight4x[100];
+	double dWeight6x[100];
+	double dWeight8x[100];
+
 	TH1D * hC22CentS = new TH1D("hC22CentS", "hC22CentS", 20, 0, 20);
 	TH1D * hC24CentS = new TH1D("hC24CentS", "hC24CentS", 20, 0, 20);
 	TH1D * hC26CentS = new TH1D("hC26CentS", "hC26CentS", 20, 0, 20);
@@ -143,6 +148,7 @@
 		dWeight8[c] = hWeightCent8->GetBinContent(c);
 	}
 	TH1D * hNoffCent = new TH1D("hNoffCent", "hNoffCent", 20, 0, 20);
+	TH1D * hNevtCent = new TH1D("hNevtCent", "hNevtCent", 20, 0, 20);
 
 	for ( int c = 0; c < 100; c++ ) {
 		dQ22x[c] = 0;
@@ -163,6 +169,11 @@
 		dMultx[c] = 0;
 		dNoffx[c] = 0;
 		dNevtx[c] = 0;
+
+		dWeight2x[c] = 0;
+		dWeight4x[c] = 0;
+		dWeight6x[c] = 0;
+		dWeight8x[c] = 0;
 	}
 
 	for ( int c = 0; c < 500; c++ ) {
@@ -177,6 +188,11 @@
 		dW28x[c/5] += dW28[c];
 
 		dMultx[c/5] += dMult[c];
+
+		dWeight2x[c/5] = dWeight2[c];
+		dWeight4x[c/5] = dWeight4[c];
+		dWeight6x[c/5] = dWeight6[c];
+		dWeight8x[c/5] = dWeight8[c];
 	}
 
 	for ( int c = 0; c < 100; c++ ) {
@@ -199,12 +215,13 @@
 	for ( int i = 0; i < NCent; i++ ) {
 		double noff = 0;
 		double nevt = 0;
-		for ( int n = CentNoffCut[i]-1; n >= CentNoffCut[i+1]; n-- ) {
+		for ( int n = pCent[i]-1; n >= pCent[i+1]; n-- ) {
 			if ( n >= 500 ) continue;
 			noff += hNoff->GetBinContent(n)*n;
 			nevt += hNoff->GetBinContent(n);
 		}
 		hNoffCent->SetBinContent(i+1, noff/nevt);
+		hNevtCent->SetBinContent(i+1, nevt);
 	}
 	for ( int i = 0; i < NCent; i++ ) {
 		double sum2 = 0;
@@ -219,10 +236,10 @@
 		int cend = CentNoffCut[i] / 5;
 		if ( cend > 100 ) cend = 100;
 		for ( int c = cstart; c < cend; c++ ) {
-			double w2 = dMultx[c];
-			double w4 = dMultx[c];
-			double w6 = dMultx[c];
-			double w8 = dMultx[c];
+			double w2 = dWeight2x[c];
+			double w4 = dWeight4x[c];
+			double w6 = dWeight6x[c];
+			double w8 = dWeight8x[c];
 
 			double C2 = dC22x[c];
 			double C4 = dC24x[c];
@@ -230,15 +247,15 @@
 			double C8 = dC28x[c];
 
 			double V2, V4, V6, V8;
-			if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
-			if ( C4 > 0 ) V4 = -pow(C4, 1./4); else V4 = pow(-C4, 1./4);
-			if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
-			if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
+//			if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
+//			if ( C4 > 0 ) V4 = -pow(C4, 1./4); else V4 = pow(-C4, 1./4);
+//			if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
+//			if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
 
-			sum2 += V2*w2;
-			sum4 += V4*w4;
-			sum6 += V6*w6;
-			sum8 += V8*w8;
+			sum2 += C2*w2;
+			sum4 += C4*w4;
+			sum6 += C6*w6;
+			sum8 += C8*w8;
 
 			weight2 += w2;
 			weight4 += w4;
@@ -246,24 +263,29 @@
 			weight8 += w8;
 		}
 		
-		double V2;
-		double V4;
-		double V6;
-		double V8;
-		if ( w2 != 0 ) V2 = sum2 / weight2;
-		if ( w4 != 0 ) V4 = sum4 / weight4;
-		if ( w6 != 0 ) V6 = sum6 / weight6;
-		if ( w8 != 0 ) V8 = sum8 / weight8;
+//		double V2;
+//		double V4;
+//		double V6;
+//		double V8;
+//		if ( w2 != 0 ) V2 = sum2 / weight2;
+//		if ( w4 != 0 ) V4 = sum4 / weight4;
+//		if ( w6 != 0 ) V6 = sum6 / weight6;
+//		if ( w8 != 0 ) V8 = sum8 / weight8;
+//
+//		double C2 = pow(V2, 2);
+//		double C4 = -pow(V4, 4);
+//		double C6 = 4*pow(V6, 6);
+//		double C8 = -33*pow(V8, 8);
+//
+//		if ( V2 < 0 ) C2 = -C2;
+//		if ( V4 < 0 ) C4 = -C4;
+//		if ( V6 < 0 ) C6 = -C6;
+//		if ( V8 < 0 ) C8 = -C8;
 
-		double C2 = pow(V2, 2);
-		double C4 = -pow(V4, 4);
-		double C6 = 4*pow(V6, 6);
-		double C8 = -33*pow(V8, 8);
-
-		if ( V2 < 0 ) C2 = -C2;
-		if ( V4 < 0 ) C4 = -C4;
-		if ( V6 < 0 ) C6 = -C6;
-		if ( V8 < 0 ) C8 = -C8;
+		double C2 = sum2 / weight2;
+		double C4 = sum4 / weight4;
+		double C6 = sum6 / weight6;
+		double C8 = sum8 / weight8;
 
 		hC22CentS->SetBinContent(i+1, C2 );
 		hC24CentS->SetBinContent(i+1, C4 );
@@ -301,4 +323,5 @@
 	hC28CentW->Write();
 
 	hNoffCent->Write();
+	hNevtCent->Write();
 }
