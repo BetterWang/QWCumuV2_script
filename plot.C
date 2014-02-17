@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 33;
+	int s1 = 36;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -28,6 +28,8 @@
 	int bPbPb = 1;
 	if ( s1 == 10 ) bPbPb = 0;
 	if ( s1 == 33 ) s2 = 33;
+	if ( s1 == 34 ) {s2 = 34; bPbPb = 0;}
+	if ( s1 == 36 ) {s2 = 36; bPbPb = 0;}
 
 	int bRebin6 = 0;
 	int bRebin8 = 0;
@@ -134,8 +136,8 @@
 
 //	gr_pPb_v22->Draw("Psame");
 	gr_pPb_v24->Draw("Psame");
-//	gr_pPb_v26->Draw("Psame");
-//	gr_pPb_v28->Draw("Psame");
+	gr_pPb_v26->Draw("Psame");
+	gr_pPb_v28->Draw("Psame");
 
 	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
