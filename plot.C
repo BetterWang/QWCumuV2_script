@@ -30,6 +30,8 @@
 	if ( s1 == 33 ) s2 = 33;
 	if ( s1 == 34 ) {s2 = 34; bPbPb = 0;}
 	if ( s1 == 36 ) {s2 = 36; bPbPb = 0;}
+	if ( s1 == 37 ) {s2 = 37; bPbPb = 0;}
+	if ( s1 == 38 ) {s2 = 38; bPbPb = 0;}
 
 	int bRebin6 = 0;
 	int bRebin8 = 0;
@@ -119,25 +121,42 @@
 	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 17, dNoff6, dV26, 0, eV26);
 	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 17, dNoff8, dV28, 0, eV28);
 
+	TGraphErrors * gr_pPb_c22 = new TGraphErrors( 17, dNoff, dC22, 0, eC22);
+	TGraphErrors * gr_pPb_c24 = new TGraphErrors( 17, dNoff, dC24, 0, eC24);
+	TGraphErrors * gr_pPb_c26 = new TGraphErrors( 17, dNoff6, dC26, 0, eC26);
+	TGraphErrors * gr_pPb_c28 = new TGraphErrors( 17, dNoff8, dC28, 0, eC28);
+
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
 	gr_pPb_v26->SetMarkerStyle(kFullStar);
 	gr_pPb_v28->SetMarkerStyle(kFullDiamond);
+	gr_pPb_c22->SetMarkerStyle(kOpenTriangleUp);
+	gr_pPb_c24->SetMarkerStyle(kFullSquare);
+	gr_pPb_c26->SetMarkerStyle(kFullStar);
+	gr_pPb_c28->SetMarkerStyle(kFullDiamond);
 
 	gr_pPb_v22->SetMarkerColor(kBlack);
 	gr_pPb_v24->SetMarkerColor(kBlack);
 	gr_pPb_v26->SetMarkerColor(kBlue);
 	gr_pPb_v28->SetMarkerColor(kRed);
+	gr_pPb_c22->SetMarkerColor(kBlack);
+	gr_pPb_c24->SetMarkerColor(kBlack);
+	gr_pPb_c26->SetMarkerColor(kBlue);
+	gr_pPb_c28->SetMarkerColor(kRed);
 
 	gr_pPb_v22->SetMarkerSize(2);
 	gr_pPb_v24->SetMarkerSize(2);
 	gr_pPb_v26->SetMarkerSize(2.5);
 	gr_pPb_v28->SetMarkerSize(2.5);
+	gr_pPb_c22->SetMarkerSize(2);
+	gr_pPb_c24->SetMarkerSize(2);
+	gr_pPb_c26->SetMarkerSize(2.5);
+	gr_pPb_c28->SetMarkerSize(2.5);
 
 //	gr_pPb_v22->Draw("Psame");
 	gr_pPb_v24->Draw("Psame");
-	gr_pPb_v26->Draw("Psame");
-	gr_pPb_v28->Draw("Psame");
+//	gr_pPb_v26->Draw("Psame");
+//	gr_pPb_v28->Draw("Psame");
 
 	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
@@ -153,13 +172,48 @@
 
 	TLine * linev2 = new TLine(0, 0.049, 300, 0.049);
 	linev2->SetLineColor(kRed);
-	linev2->Draw();
-//
+//	linev2->Draw();
+
+	TCanvas * cSumC2 = MakeCanvas("cSumC2", "cSumC2");
+	TCanvas * cSumC4 = MakeCanvas("cSumC4", "cSumC4");
+	TCanvas * cSumC6 = MakeCanvas("cSumC6", "cSumC6");
+	TCanvas * cSumC8 = MakeCanvas("cSumC8", "cSumC8");
+
+	TH2D * frame_centC2 = new TH2D("frame_centC2", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, 1e-5, 5.e-3 );
+	TH2D * frame_centC4 = new TH2D("frame_centC4", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, -9e-6, -1e-8 );
+	TH2D * frame_centC6 = new TH2D("frame_centC6", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, 1e-10, 1.5e-7 );
+	TH2D * frame_centC8 = new TH2D("frame_centC8", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, -3.6e-9, -1.e-12 );
+	InitHist(frame_centC2, "N_{trk}^{offline}", "c_{2}{2}");
+	InitHist(frame_centC4, "N_{trk}^{offline}", "c_{2}{4}");
+	InitHist(frame_centC6, "N_{trk}^{offline}", "c_{2}{6}");
+	InitHist(frame_centC8, "N_{trk}^{offline}", "c_{2}{8}");
+
+	cSumC2->cd();
+	frame_centC2->Draw();
+	gr_pPb_c22->Draw("Psame");
+
+	cSumC4->cd();
+	frame_centC4->Draw();
+	gr_pPb_c24->Draw("Psame");
+
+	cSumC6->cd();
+	frame_centC6->Draw();
+	gr_pPb_c26->Draw("Psame");
+
+	cSumC8->cd();
+	frame_centC8->Draw();
+	gr_pPb_c28->Draw("Psame");
+
 	if ( save ) {
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.png", s1, s3));
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.eps", s1, s3));
 		cSum->SaveAs(Form("cSum_%i_%i.png", s1, s3));
 		cSum->SaveAs(Form("cSum_%i_%i.eps", s1, s3));
+
+		cSumC2->SaveAs(Form("cSumC2_%i_%i.eps", s1, s3));
+		cSumC4->SaveAs(Form("cSumC4_%i_%i.eps", s1, s3));
+		cSumC6->SaveAs(Form("cSumC6_%i_%i.eps", s1, s3));
+		cSumC8->SaveAs(Form("cSumC8_%i_%i.eps", s1, s3));
 	}
 
 }

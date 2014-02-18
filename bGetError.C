@@ -56,12 +56,35 @@
 	double dC24[20][100];
 	double dC26[20][100];
 	double dC28[20][100];
+
 	for ( int c = 0; c < 20; c++ ) {
 		for ( int i = 0; i <= s3; i++ ) {
 			dC22[c][i] = hC22CentS[i]->GetBinContent(c+1) ;
 			dC24[c][i] = hC24CentS[i]->GetBinContent(c+1) ;
 			dC26[c][i] = hC26CentS[i]->GetBinContent(c+1) ;
 			dC28[c][i] = hC28CentS[i]->GetBinContent(c+1) ;
+		}
+	}
+
+	double trx[100];
+	for ( int i = 0; i <= s3; i++ ) {
+		trx[i] = i;
+	}
+	TH1D * hC22trial[20];
+	TH1D * hC24trial[20];
+	TH1D * hC26trial[20];
+	TH1D * hC28trial[20];
+	for ( int c = 0; c < 20; c++ ) {
+		hC22trial[c] = new TH1D(Form("hC22trial_%i", c), Form("hC22trial_%i", c), 100, 0., 100);
+		hC24trial[c] = new TH1D(Form("hC24trial_%i", c), Form("hC24trial_%i", c), 100, 0., 100);
+		hC26trial[c] = new TH1D(Form("hC26trial_%i", c), Form("hC26trial_%i", c), 100, 0., 100);
+		hC28trial[c] = new TH1D(Form("hC28trial_%i", c), Form("hC28trial_%i", c), 100, 0., 100);
+
+		for ( int i = 0; i <= s3; i++ ) {
+			hC22trial[c]->SetBinContent(i+1, dC22[c][i]);
+			hC24trial[c]->SetBinContent(i+1, dC24[c][i]);
+			hC26trial[c]->SetBinContent(i+1, dC26[c][i]);
+			hC28trial[c]->SetBinContent(i+1, dC28[c][i]);
 		}
 	}
 
@@ -173,4 +196,10 @@
 	hV28f->Write();
 
 	hNoffCent->Write();
+	for ( int c = 0; c < 20; c++ ) {
+		hC22trial[c]->Write();
+		hC24trial[c]->Write();
+		hC26trial[c]->Write();
+		hC28trial[c]->Write();
+	}
 }

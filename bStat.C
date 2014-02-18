@@ -26,7 +26,7 @@
 //	int s3 = 20;
 
 	Int_t * pCent = CentNoffCutHJ;
-	int NCent = 12;
+	int NCent = 13;
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
@@ -232,8 +232,8 @@
 		double weight4 = 0;
 		double weight6 = 0;
 		double weight8 = 0;
-		int cstart = CentNoffCut[i+1] / 5;
-		int cend = CentNoffCut[i] / 5;
+		int cstart = pCent[i+1] / 5;
+		int cend = pCent[i] / 5;
 		if ( cend > 100 ) cend = 100;
 		for ( int c = cstart; c < cend; c++ ) {
 			double w2 = dWeight2x[c];
@@ -246,7 +246,7 @@
 			double C6 = dC26x[c];
 			double C8 = dC28x[c];
 
-			double V2, V4, V6, V8;
+//			double V2, V4, V6, V8;
 //			if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
 //			if ( C4 > 0 ) V4 = -pow(C4, 1./4); else V4 = pow(-C4, 1./4);
 //			if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);

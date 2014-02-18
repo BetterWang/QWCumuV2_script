@@ -7,5 +7,5 @@ bproc.sh
 *.png
 *.eps
 *.sh
-test.C
+test*.C
 *.root
