@@ -20,7 +20,7 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 38;
+	int s1 = 36;
 //	int s2 = 20;
 //	int s3 = 20;
 
@@ -158,6 +158,10 @@
 	{
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		ievt++;
+		if (TMath::IsNaN(C22) || TMath::IsNaN(C24) || TMath::IsNaN(C24) || TMath::IsNaN(C24)) {
+			cout << "=> ievt = " << ievt << endl;
+			continue;
+		}
 		int c = Noff;
 		if ( c >= 500 || c<=0 ) continue;
 		Nevt[c]++;
@@ -207,9 +211,9 @@
 		if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
 		if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
 
-		cout << " c = " << c << "\tdQ22 = " << dQ22[c] << "\tdQ24 = " << dQ24[c] << "\tdQ26 = " << dQ26[c] << "\tdQ28 = " << dQ28[c] << endl;
-		cout << " c = " << c << "\tdC22 = " << C2 << "\tdC24 = " << C4 << "\tdQ26 = " << C6 << "\tdQ28 = " << C8 << endl;
-		cout << " c = " << c << "\tdV22 = " << V2 << "\tdV24 = " << V4 << "\tdV26 = " << V6 << "\tdV28 = " << V8 << endl;
+//		cout << " c = " << c << "\tdQ22 = " << dQ22[c] << "\tdQ24 = " << dQ24[c] << "\tdQ26 = " << dQ26[c] << "\tdQ28 = " << dQ28[c] << endl;
+//		cout << " c = " << c << "\tdC22 = " << C2 << "\tdC24 = " << C4 << "\tdQ26 = " << C6 << "\tdQ28 = " << C8 << endl;
+//		cout << " c = " << c << "\tdV22 = " << V2 << "\tdV24 = " << V4 << "\tdV26 = " << V6 << "\tdV28 = " << V8 << endl;
 		hC22Cent->SetBinContent(c, C2);
 		hC24Cent->SetBinContent(c, C4);
 		hC26Cent->SetBinContent(c, C6);
