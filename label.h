@@ -39,6 +39,7 @@ char * fname[] = {
 	"../test/pPb_Hijing_MB_v2_05_f01/", 				// 36 pPb HIJING MB v2=0.05, fv2=0.01 std closed
 	"../test/pPb_Hijing_MB_v2_05_f01_mod2/", 			// 37 pPb HIJING MB v2=0.05, fv2=0.01 with non-flow std closed
 	"../test/pPb_Hijing_MB_v2_05_f00/", 				// 38 pPb HIJING MB v2=0.05, fv2=0.00 std closed
+	"../test/pPb_Hijing_MB_v2_05_f01_ep2/", 			// 39+36 pPb HIJING MB v2=0.05, fv2=0.01 std closed
 };
 
 
@@ -82,4 +83,5 @@ char * ftxt[] = {
 	"txt/pPb_Hijing_MB_v2_05_f01/",				// 36
 	"txt/pPb_Hijing_MB_v2_05_f01_mod2/",			// 37
 	"txt/pPb_Hijing_MB_v2_05_f00/",				// 38
+	"txt/pPb_Hijing_MB_v2_05_f01_ep2/",			// 39
 };
