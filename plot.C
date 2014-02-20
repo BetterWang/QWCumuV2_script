@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 36;
+	int s1 = 39;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -32,9 +32,8 @@
 	if ( s1 == 36 ) {s2 = 36; bPbPb = 0;}
 	if ( s1 == 37 ) {s2 = 37; bPbPb = 0;}
 	if ( s1 == 38 ) {s2 = 38; bPbPb = 0;}
+	if ( s1 == 39 ) {s2 = 39; bPbPb = 0;}
 
-	int bRebin6 = 0;
-	int bRebin8 = 0;
 
 #include "../../style.h"
         SetStyle();
@@ -47,14 +46,18 @@
 
 	int blimit6 = 17;
 	int blimit8 = 17;
-	if ( !bPbPb && bRebin6 ) blimit6 = 11;
-	if ( bPbPb && bRebin6 ) blimit6 = 13;
-	if ( !bPbPb && bRebin8 ) blimit8 = 9;
-	if ( bPbPb && bRebin8 ) blimit8 = 12;
+	if ( !bPbPb ) {
+		blimit6 = 11;
+		blimit8 = 9;
+	}
+	if ( bPbPb ) {
+		blimit6 = 13;
+		blimit8 = 12;
+	}
 
 
-	TGraphErrors * grNSigma2 = new TGraphErrors(17, dNoff, dNSigma2, 0, 0);
-	TGraphErrors * grNSigma4 = new TGraphErrors(17, dNoff, dNSigma4, 0, 0);
+	TGraphErrors * grNSigma2 = new TGraphErrors(17, dNoff4, dNSigma2, 0, 0);
+	TGraphErrors * grNSigma4 = new TGraphErrors(17, dNoff4, dNSigma4, 0, 0);
 	TGraphErrors * grNSigma6 = new TGraphErrors(blimit6, dNoff6, dNSigma6, 0, 0);
 	TGraphErrors * grNSigma8 = new TGraphErrors(blimit8, dNoff8, dNSigma8, 0, 0);
 
@@ -62,10 +65,10 @@
 	cNsigma->SetGrid();
 	grNSigma2->SetMarkerColor(kBlack);
 	grNSigma4->SetMarkerColor(kBlack);
-	grNSigma6->SetMarkerColor(kBlack);
+	grNSigma6->SetMarkerColor(kBlue);
 	grNSigma8->SetMarkerColor(kRed);
 	grNSigma2->SetMarkerStyle(kOpenTriangleUp);
-	grNSigma4->SetMarkerStyle(kOpenSquare);
+	grNSigma4->SetMarkerStyle(kFullSquare);
 	grNSigma6->SetMarkerStyle(kFullStar);
 	grNSigma8->SetMarkerStyle(kFullDiamond);
 
@@ -116,13 +119,13 @@
 	gr_HIN_13_002_v22->Draw("Psame");
 //	grLYZnoff->Draw("Psame");
 
-	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 17, dNoff, dV22, 0, eV22);
-	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 17, dNoff, dV24, 0, eV24);
+	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 17, dNoff4, dV22, 0, eV22);
+	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 17, dNoff4, dV24, 0, eV24);
 	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 17, dNoff6, dV26, 0, eV26);
 	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 17, dNoff8, dV28, 0, eV28);
 
-	TGraphErrors * gr_pPb_c22 = new TGraphErrors( 17, dNoff, dC22, 0, eC22);
-	TGraphErrors * gr_pPb_c24 = new TGraphErrors( 17, dNoff, dC24, 0, eC24);
+	TGraphErrors * gr_pPb_c22 = new TGraphErrors( 17, dNoff4, dC22, 0, eC22);
+	TGraphErrors * gr_pPb_c24 = new TGraphErrors( 17, dNoff4, dC24, 0, eC24);
 	TGraphErrors * gr_pPb_c26 = new TGraphErrors( 17, dNoff6, dC26, 0, eC26);
 	TGraphErrors * gr_pPb_c28 = new TGraphErrors( 17, dNoff8, dC28, 0, eC28);
 
@@ -155,8 +158,8 @@
 
 //	gr_pPb_v22->Draw("Psame");
 	gr_pPb_v24->Draw("Psame");
-//	gr_pPb_v26->Draw("Psame");
-//	gr_pPb_v28->Draw("Psame");
+	gr_pPb_v26->Draw("Psame");
+	gr_pPb_v28->Draw("Psame");
 
 	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
@@ -172,7 +175,7 @@
 
 	TLine * linev2 = new TLine(0, 0.049, 300, 0.049);
 	linev2->SetLineColor(kRed);
-//	linev2->Draw();
+	linev2->Draw();
 
 	TCanvas * cSumC2 = MakeCanvas("cSumC2", "cSumC2");
 	TCanvas * cSumC4 = MakeCanvas("cSumC4", "cSumC4");

@@ -18,7 +18,7 @@
 
 {
 #include "label.h"
-	int s1 = 36;
+	int s1 = 39;
 	int s3 = 20;
 
 	TFile * f[100];
@@ -181,7 +181,9 @@
 		hV28f->SetBinError(c+1, eV28[c]);
 	}
 
-	TH1D * hNoffCent = (TH1D*) f[s3]->Get("hNoffCent");
+	TH1D * hNoffCent4 = (TH1D*) f[s3]->Get("hNoffCent4");
+	TH1D * hNoffCent6 = (TH1D*) f[s3]->Get("hNoffCent6");
+	TH1D * hNoffCent8 = (TH1D*) f[s3]->Get("hNoffCent8");
 
 	TFile *fw = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3), "recreate");
 
@@ -195,7 +197,9 @@
 	hV26f->Write();
 	hV28f->Write();
 
-	hNoffCent->Write();
+	hNoffCent4->Write();
+	hNoffCent6->Write();
+	hNoffCent8->Write();
 	for ( int c = 0; c < 20; c++ ) {
 		hC22trial[c]->Write();
 		hC24trial[c]->Write();
