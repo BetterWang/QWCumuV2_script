@@ -20,7 +20,7 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 39;
+	int s1 = 43;
 //	int s2 = 20;
 //	int s3 = 20;
 
@@ -65,6 +65,12 @@
 		for ( int i = 0; i < 80; i++ ) {
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[39], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[36], i));
+		}
+	} else if ( s1 == 43 ) {
+		for ( int i = 0; i < 80; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[40], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[41], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[42], i));
 		}
 	} else
 

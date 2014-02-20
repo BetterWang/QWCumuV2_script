@@ -40,6 +40,10 @@ char * fname[] = {
 	"../test/pPb_Hijing_MB_v2_05_f01_mod2/", 			// 37 pPb HIJING MB v2=0.05, fv2=0.01 with non-flow std closed
 	"../test/pPb_Hijing_MB_v2_05_f00/", 				// 38 pPb HIJING MB v2=0.05, fv2=0.00 std closed
 	"../test/pPb_Hijing_MB_v2_05_f01_ep2/", 			// 39+36 pPb HIJING MB v2=0.05, fv2=0.01 std closed
+	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1/", 		// 40 pPb MB std closed
+	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_rereco/", 	// 41 pPb MB std closed
+	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/", 	// 42 pPb MB std closed
+	"NA", 								// 43 40+41+42 pPb MB std closed
 };
 
 
@@ -84,4 +88,8 @@ char * ftxt[] = {
 	"txt/pPb_Hijing_MB_v2_05_f01_mod2/",			// 37
 	"txt/pPb_Hijing_MB_v2_05_f00/",				// 38
 	"txt/pPb_Hijing_MB_v2_05_f01_ep2/",			// 39
+	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1/",		// 40
+	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_rereco/",	// 41
+	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/",	// 42
+	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_full/",	// 43
 };
