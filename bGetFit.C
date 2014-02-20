@@ -21,6 +21,44 @@
 	TFile * fHM = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3));
 	TFile * fMB = new TFile(Form("%s/Cerror_%i.root", ftxt[s2], s3));
 
+	TH1D * hNoffCentHM4 = (TH1D*) fHM->Get("hNoffCent4");
+	TH1D * hNoffCentHM6 = (TH1D*) fHM->Get("hNoffCent6");
+	TH1D * hNoffCentHM8 = (TH1D*) fHM->Get("hNoffCent8");
+	TH1D * hNoffCentMB4 = (TH1D*) fMB->Get("hNoffCent4");
+	TH1D * hNoffCentMB6 = (TH1D*) fMB->Get("hNoffCent6");
+	TH1D * hNoffCentMB8 = (TH1D*) fMB->Get("hNoffCent8");
+
+	double dNoff4[20];
+	double dNoff6[20];
+	double dNoff8[20];
+	int nCent4 = 0;
+	int nCent6 = 0;
+	int nCent8 = 0;
+
+	while ( hNoffCentHM4->GetBinContent(nCent4+1) > 120 ) {
+		dNoff4[nCent4] = hNoffCentHM4->GetBinContent(nCent4+1);
+		nCent4++;
+	}
+	while ( hNoffCentHM6->GetBinContent(nCent6+1) > 120 ) {
+		dNoff6[nCent6] = hNoffCentHM6->GetBinContent(nCent6+1);
+		nCent6++;
+	}
+	while ( hNoffCentHM8->GetBinContent(nCent8+1) > 120 ) {
+		dNoff8[nCent8] = hNoffCentHM8->GetBinContent(nCent8+1);
+		nCent8++;
+	}
+
+	for ( int c = nCent4; c < 17; c++ ) {
+		dNoff4[c] = hNoffCentMB4->GetBinContent(c+1);
+	}
+	for ( int c = nCent6; c < 17; c++ ) {
+		dNoff6[c] = hNoffCentMB6->GetBinContent(c+1);
+	}
+	for ( int c = nCent8; c < 17; c++ ) {
+		dNoff8[c] = hNoffCentMB8->GetBinContent(c+1);
+	}
+
+
 	double dC22[20];
 	double dC24[20];
 	double dC26[20];
@@ -41,9 +79,6 @@
 	double eV26[20];
 	double eV28[20];
 
-	double dNoff[20];
-	double dNoff6[20];
-	double dNoff8[20];
 	for ( int c = 0; c < 20; c++ ) {
 		dC22[c] = 0;
 		dC24[c] = 0;
@@ -64,10 +99,6 @@
 		eV24[c] = 0;
 		eV26[c] = 0;
 		eV28[c] = 0;
-
-		dNoff[c] = 0;
-		dNoff6[c] = 0;
-		dNoff8[c] = 0;
 	}
 	TH1D * hC22fHM = (TH1D*) fHM->Get("hC22f");
 	TH1D * hC24fHM = (TH1D*) fHM->Get("hC24f");
@@ -79,26 +110,34 @@
 	TH1D * hC26fMB = (TH1D*) fMB->Get("hC26f");
 	TH1D * hC28fMB = (TH1D*) fMB->Get("hC28f");
 
-	for ( int c = 0; c < 9; c++ ) {
+	for ( int c = 0; c < nCent4; c++ ) {
 		dC22[c] = hC22fHM->GetBinContent(c+1);
 		dC24[c] = hC24fHM->GetBinContent(c+1);
-		dC26[c] = hC26fHM->GetBinContent(c+1);
-		dC28[c] = hC28fHM->GetBinContent(c+1);
 
 		eC22[c] = hC22fHM->GetBinError(c+1);
 		eC24[c] = hC24fHM->GetBinError(c+1);
+	}
+	for ( int c = 0; c < nCent6; c++ ) {
+		dC26[c] = hC26fHM->GetBinContent(c+1);
 		eC26[c] = hC26fHM->GetBinError(c+1);
+	}
+	for ( int c = 0; c < nCent8; c++ ) {
+		dC28[c] = hC28fHM->GetBinContent(c+1);
 		eC28[c] = hC28fHM->GetBinError(c+1);
 	}
-	for ( int c = 9; c < 17; c++ ) {
+	for ( int c = nCent4; c < 17; c++ ) {
 		dC22[c] = hC22fMB->GetBinContent(c+1);
 		dC24[c] = hC24fMB->GetBinContent(c+1);
-		dC26[c] = hC26fMB->GetBinContent(c+1);
-		dC28[c] = hC28fMB->GetBinContent(c+1);
 
 		eC22[c] = hC22fMB->GetBinError(c+1);
 		eC24[c] = hC24fMB->GetBinError(c+1);
+	}
+	for ( int c = nCent6; c < 17; c++ ) {
+		dC26[c] = hC26fMB->GetBinContent(c+1);
 		eC26[c] = hC26fMB->GetBinError(c+1);
+	}
+	for ( int c = nCent8; c < 17; c++ ) {
+		dC28[c] = hC28fMB->GetBinContent(c+1);
 		eC28[c] = hC28fMB->GetBinError(c+1);
 	}
 	double dNSigma2[20];
@@ -112,20 +151,6 @@
 		if ( eC28[c] != 0. ) dNSigma8[c] = dC28[c] / eC28[c]; else dNSigma8[c] = 0;
 	}
 
-
-	TH1D * hNoffCentHM = (TH1D*) fHM->Get("hNoffCent");
-	TH1D * hNoffCentMB = (TH1D*) fMB->Get("hNoffCent");
-
-	for ( int c = 0; c < 9; c++ ) {
-		dNoff[c] = hNoffCentHM->GetBinContent(c+1);
-		dNoff6[c] = hNoffCentHM->GetBinContent(c+1);
-		dNoff8[c] = hNoffCentHM->GetBinContent(c+1);
-	}
-	for ( int c = 9; c < 17; c++ ) {
-		dNoff[c]  = hNoffCentMB->GetBinContent(c+1);
-		dNoff6[c] = hNoffCentMB->GetBinContent(c+1);
-		dNoff8[c] = hNoffCentMB->GetBinContent(c+1);
-	}
 
 	///////////// Rebin ////////////////////
 	
