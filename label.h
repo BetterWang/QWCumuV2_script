@@ -34,7 +34,7 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm2_reverse/", 	// 31 pPb MB std closed
 	"NA", 								// 32 29+30+31 pPb MB std closed
 	"../PbPb/PbPb_MB_rfp24_Noff_noadd_eff_cm1/", 			// 33 PbPb MB ppreco std closed
-	"../test/pPb_Hijing_MB/", 					// 34 pPb HIJING MB v2=0 std closed
+	"../test/pPb_Hijing_MB/", 					// 34 pPb HIJING MB v2=0 non-flow std closed
 	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_old_cm1/", 		// 35 PbPb MB ppreco old std closed
 	"../test/pPb_Hijing_MB_v2_05_f01/", 				// 36 pPb HIJING MB v2=0.05, fv2=0.01 std closed
 	"../test/pPb_Hijing_MB_v2_05_f01_mod2/", 			// 37 pPb HIJING MB v2=0.05, fv2=0.01 with non-flow std closed
@@ -44,6 +44,7 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_rereco/", 	// 41 pPb MB std closed
 	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/", 	// 42 pPb MB std closed
 	"NA", 								// 43 40+41+42 pPb MB std closed
+	"../test/pPb_Hijing_MB_v2_00_f00/", 				// 44 pPb HIJING MB v2=0 std closed
 };
 
 
@@ -92,4 +93,5 @@ char * ftxt[] = {
 	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_rereco/",	// 41
 	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/",	// 42
 	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_full/",	// 43
+	"txt/pPb_Hijing_MB_v2_00_f00/",				// 44
 };
