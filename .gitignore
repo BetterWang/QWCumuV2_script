@@ -6,6 +6,7 @@ png/
 bproc.sh
 *.png
 *.eps
+*.pdf
 *.sh
 test*.C
 *.root

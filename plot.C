@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 44;
+	int s1 = 33;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -53,7 +53,6 @@
 		lim8L = -1e-7;
 		lim8U = -1e-10;
 	}
-
 	if ( s1==39) {
 		lim2L = 1e-5;
 		lim2U = 5e-3;
@@ -63,6 +62,16 @@
 		lim6U = 2e-7;
 		lim8L = -4e-9;
 		lim8U = -1e-10;
+	}
+	if ( s1==44) {
+		lim2L = -5e-4;
+		lim2U = 5e-4;
+		lim4L = -1e-6;
+		lim4U =  1e-6;
+		lim6L = -2e-8;
+		lim6U =  2e-8;
+		lim8L = -5e-10;
+		lim8U =  5e-10;
 	}
 
 
@@ -78,18 +87,22 @@
 	int blimit4 = 14;
 	int blimit6 = 11;
 	int blimit8 = 9;
-	int blimit04 = 0;
-	int blimit06 = 0;
-	int blimit08 = 0;
+	int blimit04 = 1;
+	int blimit06 = 1;
+	int blimit08 = 1;
 	if ( bPbPb ) {
 		blimit4 = 16;
 		blimit6 = 14;
 		blimit8 = 13;
 	}
 	if ( s1 == 39 || s1 == 34 || s1 == 44 ) {
-		blimit4 = 13;
-		blimit6 = 13;
-		blimit8 = 13;
+		blimit4 = 12;
+		blimit6 = 12;
+		blimit8 = 12;
+
+		blimit04 = 6;
+		blimit06 = 6;
+		blimit08 = 6;
 	}
 
 
@@ -160,13 +173,13 @@
 
 	TGraphErrors * gr_pPb_v22 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV22+blimit04, 0, eV22+blimit04);
 	TGraphErrors * gr_pPb_v24 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV24+blimit04, 0, eV24+blimit04);
-	TGraphErrors * gr_pPb_v26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit04, dV26+blimit06, 0, eV26+blimit06);
-	TGraphErrors * gr_pPb_v28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit04, dV28+blimit08, 0, eV28+blimit08);
+	TGraphErrors * gr_pPb_v26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit06, dV26+blimit06, 0, eV26+blimit06);
+	TGraphErrors * gr_pPb_v28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit08, dV28+blimit08, 0, eV28+blimit08);
 
 	TGraphErrors * gr_pPb_c22 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dC22+blimit04, 0, eC22+blimit04);
 	TGraphErrors * gr_pPb_c24 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dC24+blimit04, 0, eC24+blimit04);
-	TGraphErrors * gr_pPb_c26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit04, dC26+blimit06, 0, eC26+blimit06);
-	TGraphErrors * gr_pPb_c28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit04, dC28+blimit08, 0, eC28+blimit08);
+	TGraphErrors * gr_pPb_c26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit06, dC26+blimit06, 0, eC26+blimit06);
+	TGraphErrors * gr_pPb_c28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit08, dC28+blimit08, 0, eC28+blimit08);
 
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
@@ -177,7 +190,7 @@
 	gr_pPb_c26->SetMarkerStyle(kFullStar);
 	gr_pPb_c28->SetMarkerStyle(kFullDiamond);
 
-	gr_pPb_v22->SetMarkerColor(kBlack);
+	gr_pPb_v22->SetMarkerColor(kGreen);
 	gr_pPb_v24->SetMarkerColor(kBlack);
 	gr_pPb_v26->SetMarkerColor(kBlue);
 	gr_pPb_v28->SetMarkerColor(kRed);
@@ -246,16 +259,77 @@
 	frame_centC8->Draw();
 	gr_pPb_c28->Draw("Psame");
 
+	gROOT->Macro("OLLITRAULT.C");
+	TF1 * fHIN_13_002_v24 = new TF1("fHIN_13_002_v24", "pol6", 0, 350);
+	gr_HIN_13_002_v24->Fit(fHIN_13_002_v24, "N");
+	TF1 * fHIN_13_002_v22 = new TF1("fHIN_13_002_v22", "pol6", 0, 350);
+	gr_HIN_13_002_v22->Fit(fHIN_13_002_v22, "N");
+
+//	TF1 * fpPb_v24 = new TF1("fpPb_v24", "pol6", 0, 350);
+	TF1 * fpPb_v26 = new TF1("fpPb_v26", "pol6", 0, 350);
+	TF1 * fpPb_v28 = new TF1("fpPb_v28", "pol6", 0, 350);
+//	gr_pPb_v24->Fit(fpPb_v24, "N");
+	gr_pPb_v26->Fit(fpPb_v26, "N");
+	gr_pPb_v28->Fit(fpPb_v28, "N");
+
+	TCanvas * cRatio = MakeCanvas("cRatio", "cRatio");
+	TH2D * frame_ratio = new TH2D("frame_ratio", "frame_ratio", 1, 0, 1, 1, 0.6, 1.5);
+	InitHist(frame_ratio, "v_{2}{4}/v{2}_{2}", "");
+	frame_ratio->Draw();
+	ffit64->Draw("same");
+	ffit86->Draw("same");
+
+	double dRatio86x[20];
+	double dRatio64x[20];
+	double dRatio86[20];
+	double dRatio64[20];
+	for ( int i = 0; i < 20; i++ ) {
+		dRatio86x[i] = 0;
+		dRatio64x[i] = 0;
+		dRatio86[i] = 0;
+		dRatio64[i] = 0;
+	}
+
+	for ( int i = blimit06; i < blimit6; i++ ) {
+		dRatio64x[i] = fHIN_13_002_v24->Eval(dNoff6[i]) / fHIN_13_002_v22->Eval(dNoff6[i]);
+		dRatio64[i] = fpPb_v26->Eval(dNoff6[i]) / fHIN_13_002_v24->Eval(dNoff6[i]);
+	}
+	for ( int i = blimit08; i < blimit8; i++ ) {
+		dRatio86x[i] = fHIN_13_002_v24->Eval(dNoff8[i]) / fHIN_13_002_v22->Eval(dNoff8[i]);
+		dRatio86[i] = fpPb_v28->Eval(dNoff8[i]) / fpPb_v26->Eval(dNoff8[i]);
+	}
+	TGraphErrors * gr_Ratio64 = new TGraphErrors(blimit6-blimit06, dRatio64x+blimit06, dRatio64+blimit06, 0, 0);
+	TGraphErrors * gr_Ratio86 = new TGraphErrors(blimit8-blimit06, dRatio86x+blimit08, dRatio86+blimit08, 0, 0);
+	gr_Ratio64->SetMarkerColor(kRed);
+	gr_Ratio86->SetMarkerColor(kGreen);
+	gr_Ratio64->SetMarkerStyle(kOpenSquare);
+	gr_Ratio86->SetMarkerStyle(kOpenCircle);
+
+	gr_Ratio64->Draw("psame");
+	gr_Ratio86->Draw("psame");
+
+	TLegend * legR = new TLegend(0.18, 0.65, 0.55, 0.9);
+	legR->SetFillColor(kWhite);
+	legR->SetBorderSize(0);
+	legR->AddEntry(ffit64, "v_{2}{6}/v_{2}{4} OLLITRAULT", "l");
+	legR->AddEntry(ffit86, "v_{2}{8}/v_{2}{6} OLLITRAULT", "l");
+	legR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4}", "p");
+	legR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6}", "p");
+	legR->Draw();
+
+
 	if ( save ) {
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.png", s1, s3));
-		cNsigma->SaveAs(Form("cNsigma_%i_%i.eps", s1, s3));
+		cNsigma->SaveAs(Form("cNsigma_%i_%i.pdf", s1, s3));
 		cSum->SaveAs(Form("cSum_%i_%i.png", s1, s3));
-		cSum->SaveAs(Form("cSum_%i_%i.eps", s1, s3));
+		cSum->SaveAs(Form("cSum_%i_%i.pdf", s1, s3));
 
-		cSumC2->SaveAs(Form("cSumC2_%i_%i.eps", s1, s3));
-		cSumC4->SaveAs(Form("cSumC4_%i_%i.eps", s1, s3));
-		cSumC6->SaveAs(Form("cSumC6_%i_%i.eps", s1, s3));
-		cSumC8->SaveAs(Form("cSumC8_%i_%i.eps", s1, s3));
+		cSumC2->SaveAs(Form("cSumC2_%i_%i.pdf", s1, s3));
+		cSumC4->SaveAs(Form("cSumC4_%i_%i.pdf", s1, s3));
+		cSumC6->SaveAs(Form("cSumC6_%i_%i.pdf", s1, s3));
+		cSumC8->SaveAs(Form("cSumC8_%i_%i.pdf", s1, s3));
+
+		cRatio->SaveAs(Form("cRatio_%i_%i.pdf", s1, s3));
 	}
 
 }
