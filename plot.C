@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 39;
+	int s1 = 44;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -33,6 +33,37 @@
 	if ( s1 == 37 ) {s2 = 37; bPbPb = 0;}
 	if ( s1 == 38 ) {s2 = 38; bPbPb = 0;}
 	if ( s1 == 39 ) {s2 = 39; bPbPb = 0;}
+	if ( s1 == 44 ) {s2 = 44; bPbPb = 0;}
+
+	double lim2L = 1e-5;
+	double lim2U = 2.e-2;
+	double lim4L = -12e-6;
+	double lim4U = -1e-8;
+	double lim6L = 1e-10;
+	double lim6U = 2.0e-7;
+	double lim8L = -7.6e-9;
+	double lim8U = -1.e-12;
+	if ( bPbPb ) {
+		lim2L = 1e-5;
+		lim2U = 2e-2;
+		lim4L = -6e-5;
+		lim4U = -1e-8;
+		lim6L = 1e-8;
+		lim6U = 2e-6;
+		lim8L = -1e-7;
+		lim8U = -1e-10;
+	}
+
+	if ( s1==39) {
+		lim2L = 1e-5;
+		lim2U = 5e-3;
+		lim4L = -9e-6;
+		lim4U = -1e-8;
+		lim6L = 1e-8;
+		lim6U = 2e-7;
+		lim8L = -4e-9;
+		lim8U = -1e-10;
+	}
 
 
 #include "../../style.h"
@@ -44,22 +75,28 @@
 
 	gROOT->Macro("bGetFit.C");
 
-	int blimit6 = 17;
-	int blimit8 = 17;
-	if ( !bPbPb ) {
-		blimit6 = 11;
-		blimit8 = 9;
-	}
+	int blimit4 = 14;
+	int blimit6 = 11;
+	int blimit8 = 9;
+	int blimit04 = 0;
+	int blimit06 = 0;
+	int blimit08 = 0;
 	if ( bPbPb ) {
+		blimit4 = 16;
+		blimit6 = 14;
+		blimit8 = 13;
+	}
+	if ( s1 == 39 || s1 == 34 || s1 == 44 ) {
+		blimit4 = 13;
 		blimit6 = 13;
-		blimit8 = 12;
+		blimit8 = 13;
 	}
 
 
-	TGraphErrors * grNSigma2 = new TGraphErrors(17, dNoff4, dNSigma2, 0, 0);
-	TGraphErrors * grNSigma4 = new TGraphErrors(17, dNoff4, dNSigma4, 0, 0);
-	TGraphErrors * grNSigma6 = new TGraphErrors(blimit6, dNoff6, dNSigma6, 0, 0);
-	TGraphErrors * grNSigma8 = new TGraphErrors(blimit8, dNoff8, dNSigma8, 0, 0);
+	TGraphErrors * grNSigma2 = new TGraphErrors(blimit4-blimit04, dNoff4+blimit04, dNSigma2+blimit04, 0, 0);
+	TGraphErrors * grNSigma4 = new TGraphErrors(blimit4-blimit04, dNoff4+blimit04, dNSigma4+blimit04, 0, 0);
+	TGraphErrors * grNSigma6 = new TGraphErrors(blimit6-blimit06, dNoff6+blimit06, dNSigma6+blimit06, 0, 0);
+	TGraphErrors * grNSigma8 = new TGraphErrors(blimit8-blimit08, dNoff8+blimit08, dNSigma8+blimit08, 0, 0);
 
 	TCanvas * cNsigma = MakeCanvas("cNsigma", "cNsigma");
 	cNsigma->SetGrid();
@@ -76,7 +113,7 @@
 	grNSigma6->SetMarkerSize(2.5);
 	grNSigma8->SetMarkerSize(2.5);
 
-	TH2D * frame_nsigma = new TH2D("frame_nsigma", ";N_{trk}^{offline};NSigma", 1, -5, 350, 1, -10, 10 );
+	TH2D * frame_nsigma = new TH2D("frame_nsigma", ";N_{trk}^{offline};NSigma", 1, -5, 350, 1, -20, 20);
 	InitHist(frame_nsigma, "N_{trk}^{offline}", "NSigma");
 	frame_nsigma->Draw();
 //	grNSigma2->Draw("Psame");
@@ -90,7 +127,9 @@
 	l1->Draw();
 	l2->Draw();
 
-	TLegend * legC = new TLegend(0.0, 0.8, 0.2, 0.99);
+	TLegend * legC;
+	if ( bPbPb ) legC = new TLegend(0.7, 0.6, 0.9, 0.79);
+	else legC = new TLegend(0.75, 0.7, 0.92, 0.89);
 	legC->SetFillColor(kWhite);
 	legC->SetBorderSize(0);
 //	legC->AddEntry(grNSigma2, "c_{2}{2}", "p");
@@ -119,15 +158,15 @@
 	gr_HIN_13_002_v22->Draw("Psame");
 //	grLYZnoff->Draw("Psame");
 
-	TGraphErrors * gr_pPb_v22 = new TGraphErrors( 17, dNoff4, dV22, 0, eV22);
-	TGraphErrors * gr_pPb_v24 = new TGraphErrors( 17, dNoff4, dV24, 0, eV24);
-	TGraphErrors * gr_pPb_v26 = new TGraphErrors( 17, dNoff6, dV26, 0, eV26);
-	TGraphErrors * gr_pPb_v28 = new TGraphErrors( 17, dNoff8, dV28, 0, eV28);
+	TGraphErrors * gr_pPb_v22 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV22+blimit04, 0, eV22+blimit04);
+	TGraphErrors * gr_pPb_v24 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV24+blimit04, 0, eV24+blimit04);
+	TGraphErrors * gr_pPb_v26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit04, dV26+blimit06, 0, eV26+blimit06);
+	TGraphErrors * gr_pPb_v28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit04, dV28+blimit08, 0, eV28+blimit08);
 
-	TGraphErrors * gr_pPb_c22 = new TGraphErrors( 17, dNoff4, dC22, 0, eC22);
-	TGraphErrors * gr_pPb_c24 = new TGraphErrors( 17, dNoff4, dC24, 0, eC24);
-	TGraphErrors * gr_pPb_c26 = new TGraphErrors( 17, dNoff6, dC26, 0, eC26);
-	TGraphErrors * gr_pPb_c28 = new TGraphErrors( 17, dNoff8, dC28, 0, eC28);
+	TGraphErrors * gr_pPb_c22 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dC22+blimit04, 0, eC22+blimit04);
+	TGraphErrors * gr_pPb_c24 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dC24+blimit04, 0, eC24+blimit04);
+	TGraphErrors * gr_pPb_c26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit04, dC26+blimit06, 0, eC26+blimit06);
+	TGraphErrors * gr_pPb_c28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit04, dC28+blimit08, 0, eC28+blimit08);
 
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
@@ -175,17 +214,17 @@
 
 	TLine * linev2 = new TLine(0, 0.049, 300, 0.049);
 	linev2->SetLineColor(kRed);
-	linev2->Draw();
+	if ( s1 == 39 ) linev2->Draw();
 
 	TCanvas * cSumC2 = MakeCanvas("cSumC2", "cSumC2");
 	TCanvas * cSumC4 = MakeCanvas("cSumC4", "cSumC4");
 	TCanvas * cSumC6 = MakeCanvas("cSumC6", "cSumC6");
 	TCanvas * cSumC8 = MakeCanvas("cSumC8", "cSumC8");
 
-	TH2D * frame_centC2 = new TH2D("frame_centC2", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, 1e-5, 5.e-3 );
-	TH2D * frame_centC4 = new TH2D("frame_centC4", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, -9e-6, -1e-8 );
-	TH2D * frame_centC6 = new TH2D("frame_centC6", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, 1e-10, 1.5e-7 );
-	TH2D * frame_centC8 = new TH2D("frame_centC8", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, -3.6e-9, -1.e-12 );
+	TH2D * frame_centC2 = new TH2D("frame_centC2", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim2L, lim2U);
+	TH2D * frame_centC4 = new TH2D("frame_centC4", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim4L, lim4U);
+	TH2D * frame_centC6 = new TH2D("frame_centC6", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim6L, lim6U);
+	TH2D * frame_centC8 = new TH2D("frame_centC8", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim8L, lim8U);
 	InitHist(frame_centC2, "N_{trk}^{offline}", "c_{2}{2}");
 	InitHist(frame_centC4, "N_{trk}^{offline}", "c_{2}{4}");
 	InitHist(frame_centC6, "N_{trk}^{offline}", "c_{2}{6}");

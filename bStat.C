@@ -21,19 +21,51 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 39;
+	int s1 = 44;
 //	int s2 = 20;
 //	int s3 = 20;
 
-	Int_t * pCent4 = CentNoffCut;
-	Int_t * pCent6 = CentNoffCut;
-	Int_t * pCent8 = CentNoffCut;
-//	Int_t * pCent6 = MergedNoff6;
-//	Int_t * pCent8 = MergedNoff8;
+	Int_t * pCent4;
+	Int_t * pCent6;
+	Int_t * pCent8;
+
 	int NCent4 = 18;
 	int NCent6 = 18;
 	int NCent8 = 18;
-//	int NCent6 = 13;
+	if ( s1 == 33 ) {
+		pCent4 = CentNoffCutPbPb;
+		pCent6 = CentNoffCutPbPb;
+		pCent8 = CentNoffCutPbPb;
+	}
+	if ( s1 == 10 || s1 == 28 ) {
+//		pCent4 = CentNoffCut;
+//		pCent6 = MergedNoff6;
+//		pCent8 = MergedNoff8;
+
+//		NCent4 = 18;
+//		NCent6 = 12;
+//		NCent8 = 9;
+
+		pCent4 = CentNoffCutTest4;
+		pCent6 = CentNoffCutTest6;
+		pCent8 = CentNoffCutTest8;
+
+		NCent4 = 17;
+		NCent6 = 11;
+		NCent8 = 9;
+	}
+	if ( s1 == 34 || s1 == 39 || s1 == 44) {
+		pCent4 = CentNoffCutHJ;
+		pCent6 = CentNoffCutHJ;
+		pCent8 = CentNoffCutHJ;
+
+		NCent4 = 13;
+		NCent6 = 13;
+		NCent8 = 13;
+	}
+//	Int_t * pCent6 = MergedNoff6;
+//	Int_t * pCent8 = MergedNoff8;
+//	int NCent6 = 12;
 //	int NCent8 = 9;
 #include "../../style.h"
         SetStyle();
@@ -280,7 +312,6 @@
 		hNoffCent8->SetBinContent(i+1, noff/nevt);
 		hNevtCent8->SetBinContent(i+1, nevt);
 	}
-
 
 	for ( int i = 0; i < NCent4; i++ ) {
 		double sum2 = 0;
