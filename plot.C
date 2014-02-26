@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 33;
+	int s1 = 10;
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -274,7 +274,7 @@
 
 	TCanvas * cRatio = MakeCanvas("cRatio", "cRatio");
 	TH2D * frame_ratio = new TH2D("frame_ratio", "frame_ratio", 1, 0, 1, 1, 0.6, 1.5);
-	InitHist(frame_ratio, "v_{2}{4}/v{2}_{2}", "");
+	InitHist(frame_ratio, "v_{2}{4}/v_{2}{2}", "");
 	frame_ratio->Draw();
 	ffit64->Draw("same");
 	ffit86->Draw("same");
@@ -300,8 +300,8 @@
 	}
 	TGraphErrors * gr_Ratio64 = new TGraphErrors(blimit6-blimit06, dRatio64x+blimit06, dRatio64+blimit06, 0, 0);
 	TGraphErrors * gr_Ratio86 = new TGraphErrors(blimit8-blimit06, dRatio86x+blimit08, dRatio86+blimit08, 0, 0);
-	gr_Ratio64->SetMarkerColor(kRed);
-	gr_Ratio86->SetMarkerColor(kGreen);
+	gr_Ratio64->SetMarkerColor(kGreen);
+	gr_Ratio86->SetMarkerColor(kRed);
 	gr_Ratio64->SetMarkerStyle(kOpenSquare);
 	gr_Ratio86->SetMarkerStyle(kOpenCircle);
 
@@ -319,17 +319,21 @@
 
 
 	if ( save ) {
-		cNsigma->SaveAs(Form("cNsigma_%i_%i.png", s1, s3));
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.pdf", s1, s3));
-		cSum->SaveAs(Form("cSum_%i_%i.png", s1, s3));
 		cSum->SaveAs(Form("cSum_%i_%i.pdf", s1, s3));
-
 		cSumC2->SaveAs(Form("cSumC2_%i_%i.pdf", s1, s3));
 		cSumC4->SaveAs(Form("cSumC4_%i_%i.pdf", s1, s3));
 		cSumC6->SaveAs(Form("cSumC6_%i_%i.pdf", s1, s3));
 		cSumC8->SaveAs(Form("cSumC8_%i_%i.pdf", s1, s3));
-
 		cRatio->SaveAs(Form("cRatio_%i_%i.pdf", s1, s3));
+
+		cNsigma->SaveAs(Form("cNsigma_%i_%i_C.C", s1, s3));
+		cSum->SaveAs(Form("cSum_%i_%i_C.C", s1, s3));
+		cSumC2->SaveAs(Form("cSumC2_%i_%i_C.C", s1, s3));
+		cSumC4->SaveAs(Form("cSumC4_%i_%i_C.C", s1, s3));
+		cSumC6->SaveAs(Form("cSumC6_%i_%i_C.C", s1, s3));
+		cSumC8->SaveAs(Form("cSumC8_%i_%i_C.C", s1, s3));
+		cRatio->SaveAs(Form("cRatio_%i_%i_C.C", s1, s3));
 	}
 
 }

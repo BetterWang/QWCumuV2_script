@@ -9,4 +9,5 @@ bproc.sh
 *.pdf
 *.sh
 test*.C
+*_C.C
 *.root
