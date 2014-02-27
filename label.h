@@ -45,6 +45,34 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/", 	// 42 pPb MB std closed
 	"NA", 								// 43 40+41+42 pPb MB std closed
 	"../test/pPb_Hijing_MB_v2_00_f00/", 				// 44 pPb HIJING MB v2=0 std closed
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT/", 	// 45 pPb HLT sys
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT_rereco/", 	// 46 pPb HLT sys
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT_reverse/", 	// 47 pPb HLT sys
+	"NA",									// 48  45+46+47 pPb HLT sys
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose/", 		// 49 pPb HLT sysTrkLoose
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_rereco/", 	// 50 pPb HLT sysTrkLoose
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_reverse/", 	// 51 pPb HLT sysTrkLoose
+	"NA", 									// 52 49+50+51 pPb HLT sysTrkLoose
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose/", 		// 53 pPb MB sysTrkLoose
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_rereco/", 	// 54 pPb MB sysTrkLoose
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_reverse/", 	// 55 pPb MB sysTrkLoose
+	"NA", 									// 56 53+54+55 pPb MB sysTrkLoose
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight/", 		// 57 pPb HLT sysTrkTight
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_rereco/", 	// 58 pPb HLT sysTrkTight
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_reverse/", 	// 59 pPb HLT sysTrkTight
+	"NA", 									// 60 57+58+59 pPb HLT sysTrkTight
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight/", 		// 61 pPb MB sysTrkTight
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_rereco/", 	// 62 pPb MB sysTrkTight
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_reverse/", 	// 63 pPb MB sysTrkTight
+	"NA", 									// 64 61+62+63 pPb MB sysTrkTight
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU/", 			// 65 pPb HLT sysPU
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/", 		// 66 pPb HLT sysPU
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/", 		// 67 pPb HLT sysPU
+	"NA", 									// 68 65+66+67 pPb HLT sysPU
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU/", 			// 69 pPb MB sysPU
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/", 		// 70 pPb MB sysPU
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/", 		// 71 pPb MB sysPU
+	"NA", 									// 72 69+70+71 pPb MB sysPU
 };
 
 
@@ -94,4 +122,32 @@ char * ftxt[] = {
 	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_reverse/",	// 42
 	"txt/pPb_MB_rfp24_Noff_noacc_noeff_v12_cm1_full/",	// 43
 	"txt/pPb_Hijing_MB_v2_00_f00/",				// 44
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT/",	// 45
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT_rereco/",	// 46
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT_reverse/",	// 47
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysHLT_full/",	// 48
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose/",	// 49
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_rereco/",		// 50
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_reverse/",	// 51
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_full/",		// 52
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose/",			// 53
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_rereco/",		// 54
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_reverse/",		// 55
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkLoose_full/",		// 56
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight/",		// 57
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_rereco/",		// 58
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_reverse/",	// 59
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_full/",		// 60
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight/",			// 61
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_rereco/",		// 62
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_reverse/",		// 63
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysTrkTight_full/",		// 64
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU/",			// 65
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/",		// 66
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/",		// 67
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysPU_full/",			// 68
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU/",			// 69
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/",		// 70
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/",		// 71
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_full/",			// 72
 };

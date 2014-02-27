@@ -20,12 +20,19 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 44;
+	int s1 = 48;
 //	int s2 = 20;
 //	int s3 = 20;
 
+	cout << " s2 = " << s2 << endl;
 	TChain * ch = new TChain();
-	if ( s1 == 10 ) {
+
+	if ( s1 == 1 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
+		}
+	} else if ( s1 == 10 ) {
 		for ( int i = 0; i < 200; i++ ) {
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
@@ -49,6 +56,11 @@
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[14], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[15], i));
 		}
+	} else if ( s1 == 25 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
+		}
 	} else if ( s1 == 28 ) {
 		for ( int i = 0; i < 200; i++ ) {
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
@@ -71,6 +83,48 @@
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[40], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[41], i));
 			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[42], i));
+		}
+	} else if ( s1 == 48 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[45], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[46], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[47], i));
+		}
+	} else if ( s1 == 52 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[49], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
+		}
+	} else if ( s1 == 56 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[53], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[54], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[55], i));
+		}
+	} else if ( s1 == 60 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[57], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[58], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[59], i));
+		}
+	} else if ( s1 == 64 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[61], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[62], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[63], i));
+		}
+	} else if ( s1 == 68 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[65], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[66], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[68], i));
+		}
+	} else if ( s1 == 72 ) {
+		for ( int i = 0; i < 200; i++ ) {
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[69], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[70], i));
+			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[71], i));
 		}
 	} else
 	for ( int i = 0; i < 200; i++ ) {
