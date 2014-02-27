@@ -73,6 +73,22 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/", 		// 70 pPb MB sysPU
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/", 		// 71 pPb MB sysPU
 	"NA", 									// 72 69+70+71 pPb MB sysPU
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0/", 		// 73 pPb HLT sysVtx0
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_rereco/", 	// 74 pPb HLT sysVtx0
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_reverse/", 	// 75 pPb HLT sysVtx0
+	"NA", 									// 76 73+74+75 pPb HLT sysVtx0
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0/", 		// 77 pPb MB sysVtx0
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_rereco/", 		// 78 pPb MB sysVtx0
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_reverse/",		// 79 pPb MB sysVtx0
+	"NA",									// 80 77+78+79 pPb MB sysVtx0
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1/", 		// 81 pPb HLT sysVtx1
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/", 	// 82 pPb HLT sysVtx1
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/", 	// 83 pPb HLT sysVtx1
+	"NA", 									// 84 81+82+83 pPb HLT sysVtx1
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1/", 		// 85 pPb MB sysVtx1
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/", 		// 86 pPb MB sysVtx1
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/",		// 87 pPb MB sysVtx1
+	"NA",									// 88 85+86+87 pPb MB sysVtx1
 };
 
 
@@ -150,4 +166,20 @@ char * ftxt[] = {
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_rereco/",		// 70
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_reverse/",		// 71
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysPU_full/",			// 72
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0/",			// 73
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_rereco/",		// 74
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_reverse/",		// 75
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_full/",		// 76
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0/",			// 77
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_rereco/",		// 78
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_reverse/",		// 79
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx0_full/",		// 80
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1/",			// 81
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/",		// 82
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/",		// 83
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_full/",		// 84
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1/",			// 85
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/",		// 86
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/",		// 87
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_full/",		// 88
 };
