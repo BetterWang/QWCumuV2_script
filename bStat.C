@@ -21,9 +21,11 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 48;
+	int s1 = 10;
 //	int s2 = 20;
 //	int s3 = 20;
+
+	int s4 = 2;
 
 	Int_t * pCent4;
 	Int_t * pCent6;
@@ -130,29 +132,29 @@
 	double dWeight6[500];
 	double dWeight8[500];
 
-	double dC22x[100];
-	double dC24x[100];
-	double dC26x[100];
-	double dC28x[100];
+	double dC22x[500];
+	double dC24x[500];
+	double dC26x[500];
+	double dC28x[500];
 
-	double dQ22x[100];
-	double dQ24x[100];
-	double dQ26x[100];
-	double dQ28x[100];
+	double dQ22x[500];
+	double dQ24x[500];
+	double dQ26x[500];
+	double dQ28x[500];
 
-	double dW22x[100];
-	double dW24x[100];
-	double dW26x[100];
-	double dW28x[100];
+	double dW22x[500];
+	double dW24x[500];
+	double dW26x[500];
+	double dW28x[500];
 
-	double dMultx[100];
-	double dNoffx[100];
-	double dNevtx[100];
+	double dMultx[500];
+	double dNoffx[500];
+	double dNevtx[500];
 
-	double dWeight2x[100];
-	double dWeight4x[100];
-	double dWeight6x[100];
-	double dWeight8x[100];
+	double dWeight2x[500];
+	double dWeight4x[500];
+	double dWeight6x[500];
+	double dWeight8x[500];
 
 	TH1D * hC22CentS = new TH1D("hC22CentS", "hC22CentS", 20, 0, 20);
 	TH1D * hC24CentS = new TH1D("hC24CentS", "hC24CentS", 20, 0, 20);
@@ -193,7 +195,7 @@
 	TH1D * hNevtCent6 = new TH1D("hNevtCent6", "hNevtCent6", 20, 0, 20);
 	TH1D * hNevtCent8 = new TH1D("hNevtCent8", "hNevtCent8", 20, 0, 20);
 
-	for ( int c = 0; c < 100; c++ ) {
+	for ( int c = 0; c < 500/s4; c++ ) {
 		dQ22x[c] = 0;
 		dQ24x[c] = 0;
 		dQ26x[c] = 0;
@@ -220,25 +222,25 @@
 	}
 
 	for ( int c = 0; c < 500; c++ ) {
-		dQ22x[c/5] += dQ22[c];
-		dQ24x[c/5] += dQ24[c];
-		dQ26x[c/5] += dQ26[c];
-		dQ28x[c/5] += dQ28[c];
+		dQ22x[c/s4] += dQ22[c];
+		dQ24x[c/s4] += dQ24[c];
+		dQ26x[c/s4] += dQ26[c];
+		dQ28x[c/s4] += dQ28[c];
 
-		dW22x[c/5] += dW22[c];
-		dW24x[c/5] += dW24[c];
-		dW26x[c/5] += dW26[c];
-		dW28x[c/5] += dW28[c];
+		dW22x[c/s4] += dW22[c];
+		dW24x[c/s4] += dW24[c];
+		dW26x[c/s4] += dW26[c];
+		dW28x[c/s4] += dW28[c];
 
-		dMultx[c/5] += dMult[c];
+		dMultx[c/s4] += dMult[c];
 
-		dWeight2x[c/5] = dWeight2[c];
-		dWeight4x[c/5] = dWeight4[c];
-		dWeight6x[c/5] = dWeight6[c];
-		dWeight8x[c/5] = dWeight8[c];
+		dWeight2x[c/s4] = dWeight2[c];
+		dWeight4x[c/s4] = dWeight4[c];
+		dWeight6x[c/s4] = dWeight6[c];
+		dWeight8x[c/s4] = dWeight8[c];
 	}
 
-	for ( int c = 0; c < 100; c++ ) {
+	for ( int c = 0; c < 500/s4; c++ ) {
 		if (dW22x[c]==0.) dQ22x[c] = 0.; else dQ22x[c] /= dW22x[c];
 		if (dW24x[c]==0.) dQ24x[c] = 0.; else dQ24x[c] /= dW24x[c];
 		if (dW26x[c]==0.) dQ26x[c] = 0.; else dQ26x[c] /= dW26x[c];
@@ -316,9 +318,9 @@
 		double sum4 = 0;
 		double weight2 = 0;
 		double weight4 = 0;
-		int cstart = pCent4[i+1] / 5;
-		int cend = pCent4[i] / 5;
-		if ( cend > 100 ) cend = 100;
+		int cstart = pCent4[i+1] / s4;
+		int cend = pCent4[i] / s4;
+		if ( cend > 500/s4) cend = 500/s4;
 		for ( int c = cstart; c < cend; c++ ) {
 			double w2 = dWeight2x[c];
 			double w4 = dWeight4x[c];
@@ -346,9 +348,9 @@
 	for ( int i = 0; i < NCent6; i++ ) {
 		double sum6 = 0;
 		double weight6 = 0;
-		int cstart = pCent6[i+1] / 5;
-		int cend = pCent6[i] / 5;
-		if ( cend > 100 ) cend = 100;
+		int cstart = pCent6[i+1] / s4;
+		int cend = pCent6[i] / s4;
+		if ( cend > 500/s4 ) cend = 500/s4;
 		for ( int c = cstart; c < cend; c++ ) {
 			double w6 = dWeight6x[c];
 			double C6 = dC26x[c];
@@ -363,9 +365,9 @@
 	for ( int i = 0; i < NCent8; i++ ) {
 		double sum8 = 0;
 		double weight8 = 0;
-		int cstart = pCent8[i+1] / 5;
-		int cend = pCent8[i] / 5;
-		if ( cend > 100 ) cend = 100;
+		int cstart = pCent8[i+1] / s4;
+		int cend = pCent8[i] / s4;
+		if ( cend > 500/s4 ) cend = 500/s4;
 		for ( int c = cstart; c < cend; c++ ) {
 			double w8 = dWeight8x[c];
 			double C8 = dC28x[c];
@@ -377,13 +379,13 @@
 		hC28CentW->SetBinContent(i+1, weight8);
 	}
 
-	TH1D * hC22x = new TH1D("hC22x", "hC22x", 100, 0, 100);
-	TH1D * hC24x = new TH1D("hC24x", "hC24x", 100, 0, 100);
-	TH1D * hC26x = new TH1D("hC26x", "hC26x", 100, 0, 100);
-	TH1D * hC28x = new TH1D("hC28x", "hC28x", 100, 0, 100);
-	TH1D * hNoffx = new TH1D("hNoffx", "hNoffx", 100, 0, 100);
+	TH1D * hC22x = new TH1D("hC22x", "hC22x", 500/s4, 0, 500/s4);
+	TH1D * hC24x = new TH1D("hC24x", "hC24x", 500/s4, 0, 500/s4);
+	TH1D * hC26x = new TH1D("hC26x", "hC26x", 500/s4, 0, 500/s4);
+	TH1D * hC28x = new TH1D("hC28x", "hC28x", 500/s4, 0, 500/s4);
+	TH1D * hNoffx = new TH1D("hNoffx", "hNoffx", 500/s4, 0, 500/s4);
 
-	for ( int c = 0; c < 100; c++ ) {
+	for ( int c = 0; c < 500/s4; c++ ) {
 		hNoffx->SetBinContent(c+1, dNoffx[c]);
 		hC22x->SetBinContent(c+1, dC22x[c]);
 		hC24x->SetBinContent(c+1, dC24x[c]);
