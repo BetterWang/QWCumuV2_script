@@ -21,7 +21,7 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 44;
+	int s1 = 48;
 //	int s2 = 20;
 //	int s3 = 20;
 
@@ -29,31 +29,29 @@
 	Int_t * pCent6;
 	Int_t * pCent8;
 
-	int NCent4 = 18;
-	int NCent6 = 18;
-	int NCent8 = 18;
+	pCent4 = CentNoffCutTest4;
+	pCent6 = CentNoffCutTest6;
+	pCent8 = CentNoffCutTest8;
+
+	int NCent4 = 17;
+	int NCent6 = 11;
+	int NCent8 = 9;
+
 	if ( s1 == 33 ) {
 		pCent4 = CentNoffCutPbPb;
 		pCent6 = CentNoffCutPbPb;
 		pCent8 = CentNoffCutPbPb;
+
+		NCent4 = 18;
+		NCent6 = 18;
+		NCent8 = 18;
 	}
-	if ( s1 == 10 || s1 == 28 ) {
+//	if ( s1 == 1 || s1 == 3 || s1 == 25 || s1 == 27 || s1 == 10 || s1 == 28 ) {
 //		pCent4 = CentNoffCut;
 //		pCent6 = MergedNoff6;
 //		pCent8 = MergedNoff8;
-
-//		NCent4 = 18;
-//		NCent6 = 12;
-//		NCent8 = 9;
-
-		pCent4 = CentNoffCutTest4;
-		pCent6 = CentNoffCutTest6;
-		pCent8 = CentNoffCutTest8;
-
-		NCent4 = 17;
-		NCent6 = 11;
-		NCent8 = 9;
-	}
+//
+//	}
 	if ( s1 == 34 || s1 == 39 || s1 == 44) {
 		pCent4 = CentNoffCutHJ;
 		pCent6 = CentNoffCutHJ;

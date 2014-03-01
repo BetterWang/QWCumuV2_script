@@ -20,20 +20,28 @@
 {
 #include "label.h"
 
-	int s1 = 10;
+	int s1 = 48; 
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
 
 	int bPbPb = 1;
-	if ( s1 == 10 ) bPbPb = 0;
-	if ( s1 == 33 ) s2 = 33;
-	if ( s1 == 34 ) {s2 = 34; bPbPb = 0;}
-	if ( s1 == 36 ) {s2 = 36; bPbPb = 0;}
-	if ( s1 == 37 ) {s2 = 37; bPbPb = 0;}
-	if ( s1 == 38 ) {s2 = 38; bPbPb = 0;}
-	if ( s1 == 39 ) {s2 = 39; bPbPb = 0;}
-	if ( s1 == 44 ) {s2 = 44; bPbPb = 0;}
+	if ( s1 == 1  ) {s2 = 25; bPbPb = 0;} // pPb
+	if ( s1 == 3  ) {s2 = 27; bPbPb = 0;} // Pbp
+	if ( s1 == 10 ) {s2 = 28; bPbPb = 0;} // pPb+Pbp
+	if ( s1 == 33 ) {s2 = 33; bPbPb = 1;} // PbPb
+	if ( s1 == 34 ) {s2 = 34; bPbPb = 0;} // Hijing non-flow
+	if ( s1 == 36 ) {s2 = 36; bPbPb = 0;} // Hijing v2=0.05, fv2=0.01
+	if ( s1 == 37 ) {s2 = 37; bPbPb = 0;} // Hijing v2=0.05, fv2=0.01, non-flow
+	if ( s1 == 38 ) {s2 = 38; bPbPb = 0;} // Hijing v2=0.05, fv2=0.00
+	if ( s1 == 39 ) {s2 = 39; bPbPb = 0;} // Hijing v2=0.05, fv2=0.01 double stat
+	if ( s1 == 44 ) {s2 = 44; bPbPb = 0;} // Hijing v2=0
+	if ( s1 == 48 ) {s2 = 28; bPbPb = 0;} // pPb sysHLT
+	if ( s1 == 52 ) {s2 = 56; bPbPb = 0;} // pPb sysTrkLoose !!!!
+	if ( s1 == 60 ) {s2 = 64; bPbPb = 0;} // pPb sysTrkTight
+	if ( s1 == 68 ) {s2 = 72; bPbPb = 0;} // pPb sysTrkPU
+	if ( s1 == 76 ) {s2 = 80; bPbPb = 0;} // pPb sysVtx0  ! v26 one bin down
+	if ( s1 == 84 ) {s2 = 88; bPbPb = 0;} // pPb sysVtx1  !!! MB
 
 	double lim2L = 1e-5;
 	double lim2U = 2.e-2;
@@ -129,16 +137,23 @@
 	TH2D * frame_nsigma = new TH2D("frame_nsigma", ";N_{trk}^{offline};NSigma", 1, -5, 350, 1, -20, 20);
 	InitHist(frame_nsigma, "N_{trk}^{offline}", "NSigma");
 	frame_nsigma->Draw();
+
+	TBox * boxNSigma = new TBox(-5, -2, 350, 2);
+	TColor * clNSigma = new TColor(1001, 0, 0, 0, "shade",.3);
+	clNSigma->SetGrayscale();
+	boxNSigma->SetFillColor(1001);
 //	grNSigma2->Draw("Psame");
 	grNSigma4->Draw("Psame");
 	grNSigma6->Draw("Psame");
 	grNSigma8->Draw("Psame");
-	TLine * l1 = new TLine(-5, 1.5, 350, 1.5);
-	TLine * l2 = new TLine(-5, -1.5, 350, -1.5);
+	TLine * l1 = new TLine(-5, 2.0, 350, 2.0);
+	TLine * l2 = new TLine(-5, -2.0, 350, -2.0);
 	l1->SetLineColor(kRed);
 	l2->SetLineColor(kRed);
+	boxNSigma->Draw("same");
 	l1->Draw();
 	l2->Draw();
+
 
 	TLegend * legC;
 	if ( bPbPb ) legC = new TLegend(0.7, 0.6, 0.9, 0.79);
@@ -181,6 +196,16 @@
 	TGraphErrors * gr_pPb_c26 = new TGraphErrors( blimit6-blimit06, dNoff6+blimit06, dC26+blimit06, 0, eC26+blimit06);
 	TGraphErrors * gr_pPb_c28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit08, dC28+blimit08, 0, eC28+blimit08);
 
+	if ( bPbPb == 0 ) {
+		gr_pPb_v26->RemovePoint(0);
+		gr_pPb_v26->RemovePoint(7);
+		gr_pPb_v26->RemovePoint(7);
+
+		gr_pPb_v28->RemovePoint(0);
+		gr_pPb_v28->RemovePoint(0);
+		gr_pPb_v28->RemovePoint(4);
+		gr_pPb_v28->RemovePoint(4);
+	}
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
 	gr_pPb_v26->SetMarkerStyle(kFullStar);
@@ -234,6 +259,11 @@
 	TCanvas * cSumC6 = MakeCanvas("cSumC6", "cSumC6");
 	TCanvas * cSumC8 = MakeCanvas("cSumC8", "cSumC8");
 
+	cSumC2->SetGrid();
+	cSumC4->SetGrid();
+	cSumC6->SetGrid();
+	cSumC8->SetGrid();
+
 	TH2D * frame_centC2 = new TH2D("frame_centC2", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim2L, lim2U);
 	TH2D * frame_centC4 = new TH2D("frame_centC4", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim4L, lim4U);
 	TH2D * frame_centC6 = new TH2D("frame_centC6", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim6L, lim6U);
@@ -254,53 +284,129 @@
 	cSumC6->cd();
 	frame_centC6->Draw();
 	gr_pPb_c26->Draw("Psame");
-
+	if (s1 == 10) {
+		boxNSigma->DrawBox(-5, lim6L, 100, lim6U);
+		boxNSigma->DrawBox(300, lim6L, 350, lim6U);
+	}
 	cSumC8->cd();
 	frame_centC8->Draw();
 	gr_pPb_c28->Draw("Psame");
+	if (s1 == 10) {
+		boxNSigma->DrawBox(-5, lim8L, 100, lim8U);
+		boxNSigma->DrawBox(220, lim8L, 350, lim8U);
+	}
 
 	gROOT->Macro("OLLITRAULT.C");
-	TF1 * fHIN_13_002_v24 = new TF1("fHIN_13_002_v24", "pol6", 0, 350);
-	gr_HIN_13_002_v24->Fit(fHIN_13_002_v24, "N");
-	TF1 * fHIN_13_002_v22 = new TF1("fHIN_13_002_v22", "pol6", 0, 350);
-	gr_HIN_13_002_v22->Fit(fHIN_13_002_v22, "N");
+//	TF1 * fHIN_13_002_v24 = new TF1("fHIN_13_002_v24", "pol6", 0, 350);
+//	gr_HIN_13_002_v24->Fit(fHIN_13_002_v24, "N");
+//	TF1 * fHIN_13_002_v22 = new TF1("fHIN_13_002_v22", "pol6", 0, 350);
+//	gr_HIN_13_002_v22->Fit(fHIN_13_002_v22, "N");
 
 //	TF1 * fpPb_v24 = new TF1("fpPb_v24", "pol6", 0, 350);
-	TF1 * fpPb_v26 = new TF1("fpPb_v26", "pol6", 0, 350);
-	TF1 * fpPb_v28 = new TF1("fpPb_v28", "pol6", 0, 350);
+//	TF1 * fpPb_v26 = new TF1("fpPb_v26", "pol6", 0, 350);
+//	TF1 * fpPb_v28 = new TF1("fpPb_v28", "pol6", 0, 350);
 //	gr_pPb_v24->Fit(fpPb_v24, "N");
-	gr_pPb_v26->Fit(fpPb_v26, "N");
-	gr_pPb_v28->Fit(fpPb_v28, "N");
+//	gr_pPb_v26->Fit(fpPb_v26, "N");
+//	gr_pPb_v28->Fit(fpPb_v28, "N");
 
 	TCanvas * cRatio = MakeCanvas("cRatio", "cRatio");
-	TH2D * frame_ratio = new TH2D("frame_ratio", "frame_ratio", 1, 0, 1, 1, 0.6, 1.5);
+	TH2D * frame_ratio = new TH2D("frame_ratio", "frame_ratio", 1, 0, 1, 1, 0.6, 1.3);
 	InitHist(frame_ratio, "v_{2}{4}/v_{2}{2}", "");
 	frame_ratio->Draw();
 	ffit64->Draw("same");
 	ffit86->Draw("same");
 
-	double dRatio86x[20];
-	double dRatio64x[20];
+	double xRatio86[20];
+	double xRatio64[20];
 	double dRatio86[20];
 	double dRatio64[20];
+	double eRatio86[20];
+	double eRatio64[20];
 	for ( int i = 0; i < 20; i++ ) {
-		dRatio86x[i] = 0;
-		dRatio64x[i] = 0;
+		xRatio86[i] = 0;
+		xRatio64[i] = 0;
 		dRatio86[i] = 0;
 		dRatio64[i] = 0;
+		eRatio86[i] = 0;
+		eRatio64[i] = 0;
 	}
 
-	for ( int i = blimit06; i < blimit6; i++ ) {
-		dRatio64x[i] = fHIN_13_002_v24->Eval(dNoff6[i]) / fHIN_13_002_v22->Eval(dNoff6[i]);
-		dRatio64[i] = fpPb_v26->Eval(dNoff6[i]) / fHIN_13_002_v24->Eval(dNoff6[i]);
+	for ( int i = 0 ; i < gr_pPb_v26->GetN(); i++ ) {
+		double v24 = 0;
+		double ev24 = 0;
+		double noff4 = 0;
+		for ( int idx = 0; idx < gr_HIN_13_002_v24->GetN(); idx++ ) {
+			if ( fabs( gr_pPb_v26->GetX()[i] - gr_HIN_13_002_v24->GetX()[idx] ) < 5 ) {
+				v24 = gr_HIN_13_002_v24->GetY()[idx];
+				ev24 = gr_HIN_13_002_v24->GetEY()[idx];
+				noff4 = gr_HIN_13_002_v24->GetX()[idx];
+				break;
+			}
+		}
+		double v22 = 0;
+		double ev22 = 0;
+		double noff2 = 0;
+		for ( int idx = 0; idx < gr_HIN_13_002_v22->GetN(); idx++ ) {
+			if ( fabs( gr_pPb_v26->GetX()[i] - gr_HIN_13_002_v22->GetX()[idx] ) < 5 ) {
+				v22 = gr_HIN_13_002_v22->GetY()[idx];
+				ev22 = gr_HIN_13_002_v22->GetEY()[idx];
+				noff2 = gr_HIN_13_002_v22->GetX()[idx];
+			}
+		}
+
+		double v26 = gr_pPb_v26->GetY()[i];
+		double ev26 = gr_pPb_v26->GetEY()[i];
+
+		xRatio64[i] = v24 / v22;
+		dRatio64[i] = v26 / v24;
+		eRatio64[i] = sqrt( ev26*ev26/v26/v26 + ev24*ev24/v24/v24) * dRatio64[i];
 	}
-	for ( int i = blimit08; i < blimit8; i++ ) {
-		dRatio86x[i] = fHIN_13_002_v24->Eval(dNoff8[i]) / fHIN_13_002_v22->Eval(dNoff8[i]);
-		dRatio86[i] = fpPb_v28->Eval(dNoff8[i]) / fpPb_v26->Eval(dNoff8[i]);
+	for ( int i = 0 ; i < gr_pPb_v28->GetN(); i++ ) {
+		double v24 = 0;
+		double ev24 = 0;
+		double noff4 = 0;
+		for ( int idx = 0; idx < gr_HIN_13_002_v24->GetN(); idx++ ) {
+			if ( fabs( gr_pPb_v28->GetX()[i] - gr_HIN_13_002_v24->GetX()[idx] ) < 5 ) {
+				v24 = gr_HIN_13_002_v24->GetY()[idx];
+				ev24 = gr_HIN_13_002_v24->GetEY()[idx];
+				noff4 = gr_HIN_13_002_v24->GetX()[idx];
+				break;
+			}
+		}
+		double v22 = 0;
+		double ev22 = 0;
+		double noff2 = 0;
+		for ( int idx = 0; idx < gr_HIN_13_002_v22->GetN(); idx++ ) {
+			if ( fabs( gr_pPb_v28->GetX()[i] - gr_HIN_13_002_v22->GetX()[idx] ) < 5 ) {
+				v22 = gr_HIN_13_002_v22->GetY()[idx];
+				ev22 = gr_HIN_13_002_v22->GetEY()[idx];
+				noff2 = gr_HIN_13_002_v22->GetX()[idx];
+			}
+		}
+
+		double v26 = 0;
+		double ev26 = 0;
+		double noff6 = 0;
+		for ( int idx = 0; idx < gr_pPb_v26->GetN(); idx++ ) {
+			if ( fabs( gr_pPb_v28->GetX()[i] - gr_pPb_v26->GetX()[idx] ) < 5 ) {
+				v26 = gr_pPb_v26->GetY()[idx];
+				ev26 = gr_pPb_v26->GetEY()[idx];
+				noff6 = gr_pPb_v26->GetX()[idx];
+			}
+		}
+
+
+		double v28 = gr_pPb_v28->GetY()[i];
+		double ev28 = gr_pPb_v28->GetEY()[i];
+
+		xRatio86[i] = v24 / v22;
+		dRatio86[i] = v28 / v26;
+		eRatio86[i] = sqrt( ev26*ev26/v26/v26 + ev28*ev28/v28/v28) * dRatio86[i];
+
 	}
-	TGraphErrors * gr_Ratio64 = new TGraphErrors(blimit6-blimit06, dRatio64x+blimit06, dRatio64+blimit06, 0, 0);
-	TGraphErrors * gr_Ratio86 = new TGraphErrors(blimit8-blimit06, dRatio86x+blimit08, dRatio86+blimit08, 0, 0);
-	gr_Ratio64->SetMarkerColor(kGreen);
+	TGraphErrors * gr_Ratio64 = new TGraphErrors(gr_pPb_v26->GetN(), xRatio64, dRatio64, 0, eRatio64);
+	TGraphErrors * gr_Ratio86 = new TGraphErrors(gr_pPb_v28->GetN(), xRatio86, dRatio86, 0, eRatio86);
+	gr_Ratio64->SetMarkerColor(kBlue);
 	gr_Ratio86->SetMarkerColor(kRed);
 	gr_Ratio64->SetMarkerStyle(kOpenSquare);
 	gr_Ratio86->SetMarkerStyle(kOpenCircle);
@@ -308,13 +414,13 @@
 	gr_Ratio64->Draw("psame");
 	gr_Ratio86->Draw("psame");
 
-	TLegend * legR = new TLegend(0.18, 0.65, 0.55, 0.9);
+	TLegend * legR = new TLegend(0.18, 0.65, 0.6, 0.9);
 	legR->SetFillColor(kWhite);
 	legR->SetBorderSize(0);
-	legR->AddEntry(ffit64, "v_{2}{6}/v_{2}{4} OLLITRAULT", "l");
-	legR->AddEntry(ffit86, "v_{2}{8}/v_{2}{6} OLLITRAULT", "l");
-	legR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4}", "p");
-	legR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6}", "p");
+	legR->AddEntry(ffit86, "v_{2}{8}/v_{2}{6} arXiv:1312.6555", "l");
+	legR->AddEntry(ffit64, "v_{2}{6}/v_{2}{4} arXiv:1312.6555", "l");
+	legR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6} data", "p");
+	legR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4} data", "p");
 	legR->Draw();
 
 
@@ -334,6 +440,39 @@
 		cSumC6->SaveAs(Form("cSumC6_%i_%i_C.C", s1, s3));
 		cSumC8->SaveAs(Form("cSumC8_%i_%i_C.C", s1, s3));
 		cRatio->SaveAs(Form("cRatio_%i_%i_C.C", s1, s3));
-	}
 
+		TFile * fsave = new TFile(Form("%s/fsave.root", ftxt[s1]), "recreate");
+		grNSigma2->SetName("grNSigma2");
+		grNSigma4->SetName("grNSigma4");
+		grNSigma6->SetName("grNSigma6");
+		grNSigma8->SetName("grNSigma8");
+		grNSigma2->Write();
+		grNSigma4->Write();
+		grNSigma6->Write();
+		grNSigma8->Write();
+
+		gr_pPb_v22->SetName("gr_v22");
+		gr_pPb_v24->SetName("gr_v24");
+		gr_pPb_v26->SetName("gr_v26");
+		gr_pPb_v28->SetName("gr_v28");
+		gr_pPb_v22->Write();
+		gr_pPb_v24->Write();
+		gr_pPb_v26->Write();
+		gr_pPb_v28->Write();
+
+		gr_pPb_c22->SetName("gr_c22");
+		gr_pPb_c24->SetName("gr_c24");
+		gr_pPb_c26->SetName("gr_c26");
+		gr_pPb_c28->SetName("gr_c28");
+		gr_pPb_c22->Write();
+		gr_pPb_c24->Write();
+		gr_pPb_c26->Write();
+		gr_pPb_c28->Write();
+
+		gr_Ratio64->SetName("gr_Ratio64");
+		gr_Ratio86->SetName("gr_Ratio86");
+		gr_Ratio64->Write();
+		gr_Ratio86->Write();
+		fsave->Close();
+	}
 }

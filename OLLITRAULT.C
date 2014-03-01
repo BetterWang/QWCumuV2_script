@@ -38,6 +38,6 @@
 	ffit64->SetParameters(0.318186, 2.25153, -4.95326, 8.50799, -9.04852, 5.1117, -1.18764);
 	ffit86->SetParameters(0.592835, 1.69652, -4.30736, 7.82505, -8.72909, 5.15827, -1.23624);
 
-	ffit64->SetLineColor(kGreen);
+	ffit64->SetLineColor(kBlue);
 	ffit86->SetLineColor(kRed);
 }
