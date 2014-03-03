@@ -18,7 +18,7 @@
 
 {
 #include "label.h"
-	int s1 = 44;
+	int s1 = 10;
 	int s3 = 20;
 
 	TFile * f[100];

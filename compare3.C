@@ -19,13 +19,24 @@
 {
 #include "label.h"
 	int s1 = 10;
-	int s2 = 76;
+	int s2 = 10;
 	int s3 = 3;
 
 	TString text1 = "Combined";
 	TString text2 = "pPb";
 	TString text3 = "Pbp";
 	int b3 = 1;
+
+	TString fname2 = Form("%s/fsave.root", ftxt[s2]);
+
+	if ( s2 == 10 ) {
+		s3 = 10;
+		text1 = "bin width of 5";
+		text2 = "bin width of 2";
+		fname2 = Form("%s/fsave_bin2.root", ftxt[s2]);
+		b3 = 0;
+	}
+
 
 	if ( s2 == 48 ) {
 		s3 = 48;
@@ -46,12 +57,12 @@
 		text3 = "3 < |vz| < 15 cm";
 		b3 = 1;
 	}
+	TString fname1 = Form("%s/fsave.root", ftxt[s1]);
+	TString fname3 = Form("%s/fsave.root", ftxt[s3]);
 
-
-
-	TFile * f1 = new TFile(Form("%s/fsave.root", ftxt[s1]));
-	TFile * f2 = new TFile(Form("%s/fsave.root", ftxt[s2]));
-	TFile * f3 = new TFile(Form("%s/fsave.root", ftxt[s3]));
+	TFile * f1 = new TFile(fname1.Data());
+	TFile * f2 = new TFile(fname2.Data());
+	TFile * f3 = new TFile(fname3.Data());
 
 	TGraphErrors * gr1_v22 = (TGraphErrors*) f1->Get("gr_v22");
 	TGraphErrors * gr1_v24 = (TGraphErrors*) f1->Get("gr_v24");
@@ -152,35 +163,35 @@
 
 	int Nbins = gr1_v24->GetN();
 	cout << "--> v24" << endl;
-	cout << "idx\t Noff\t\t diff1\t\t diff2" << endl;
+	cout << "idx\t Noff\t\t diff1\t\t diff2 \t\t sys" << endl;
 	for ( int i = 0; i < Nbins; i++ ) {
 		double Noff = gr1_v24->GetX()[i];
 		double y1 = gr1_v24->GetY()[i];
 		double y2 = gr2_v24->GetY()[i];
 		double y3 = gr3_v24->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 	Nbins = gr1_v26->GetN();
 	cout << "--> v26" << endl;
-	cout << "idx\t Noff\t\t diff1\t\t diff2" << endl;
+	cout << "idx\t Noff\t\t diff1\t\t diff2 \t\t sys" << endl;
 	for ( int i = 0; i < Nbins; i++ ) {
 		double Noff = gr1_v26->GetX()[i];
 		double y1 = gr1_v26->GetY()[i];
 		double y2 = gr2_v26->GetY()[i];
 		double y3 = gr3_v26->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 	Nbins = gr1_v28->GetN();
 	cout << "--> v28" << endl;
-	cout << "idx\t Noff\t\t diff1\t\t diff2" << endl;
+	cout << "idx\t Noff\t\t diff1\t\t diff2 \t\t sys" << endl;
 	for ( int i = 0; i < Nbins; i++ ) {
 		double Noff = gr1_v28->GetX()[i];
 		double y1 = gr1_v28->GetY()[i];
 		double y2 = gr2_v28->GetY()[i];
 		double y3 = gr3_v28->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 

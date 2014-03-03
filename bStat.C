@@ -21,7 +21,7 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 48;
+	int s1 = 10;
 //	int s2 = 20;
 //	int s3 = 20;
 

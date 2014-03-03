@@ -20,10 +20,11 @@
 {
 #include "label.h"
 
-	int s1 = 48; 
+	int s1 = 10; 
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
+	int bFin = 1;
 
 	int bPbPb = 1;
 	if ( s1 == 1  ) {s2 = 25; bPbPb = 0;} // pPb
@@ -60,6 +61,11 @@
 		lim6U = 2e-6;
 		lim8L = -1e-7;
 		lim8U = -1e-10;
+	}
+	if ( s1==10 && bFin ) {
+		lim6U = 0.1e-6;
+		lim8L = -5e-9;
+		lim8U = 0;
 	}
 	if ( s1==39) {
 		lim2L = 1e-5;
@@ -170,9 +176,11 @@
 
 	TGraphErrors * gr_HIN_13_002_v22 = gr_HIN_13_002_pPbv22;
 	TGraphErrors * gr_HIN_13_002_v24 = gr_HIN_13_002_pPbv24;
+	TGraphErrors * gr_LYZ = grLYZpPbv2;
 	if ( bPbPb ) {
 		gr_HIN_13_002_v22 = gr_HIN_13_002_PbPbv22;
 		gr_HIN_13_002_v24 = gr_HIN_13_002_PbPbv24;
+		gr_LYZ = grLYZPbPbv2;
 	}
 
 	TCanvas * cSum = MakeCanvas("cSum", "cSum");
@@ -184,7 +192,6 @@
 
 	gr_HIN_13_002_v24->Draw("Psame");
 	gr_HIN_13_002_v22->Draw("Psame");
-//	grLYZnoff->Draw("Psame");
 
 	TGraphErrors * gr_pPb_v22 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV22+blimit04, 0, eV22+blimit04);
 	TGraphErrors * gr_pPb_v24 = new TGraphErrors( blimit4-blimit04, dNoff4+blimit04, dV24+blimit04, 0, eV24+blimit04);
@@ -205,6 +212,17 @@
 		gr_pPb_v28->RemovePoint(0);
 		gr_pPb_v28->RemovePoint(4);
 		gr_pPb_v28->RemovePoint(4);
+
+		if ( bFin ) {
+			gr_pPb_c26->RemovePoint(0);
+			gr_pPb_c26->RemovePoint(7);
+			gr_pPb_c26->RemovePoint(7);
+
+			gr_pPb_c28->RemovePoint(0);
+			gr_pPb_c28->RemovePoint(0);
+			gr_pPb_c28->RemovePoint(4);
+			gr_pPb_c28->RemovePoint(4);
+		}
 	}
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
 	gr_pPb_v24->SetMarkerStyle(kFullSquare);
@@ -234,9 +252,10 @@
 	gr_pPb_c28->SetMarkerSize(2.5);
 
 //	gr_pPb_v22->Draw("Psame");
-	gr_pPb_v24->Draw("Psame");
+	if ( !bFin ) gr_pPb_v24->Draw("Psame");
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
+	if ( bFin ) gr_LYZ->Draw("Psame");
 
 	TLegend * leg = new TLegend(0.18, 0.75, 0.45, 0.9);
 	leg->SetFillColor(kWhite);
@@ -244,10 +263,10 @@
 //	leg->AddEntry(gr_pPb_v22, "v_{2}{2}", "p");
 //	leg->AddEntry(gr_HIN_13_002_v22, "v_{2}{2PC} published", "p");
 //	leg->AddEntry(gr_HIN_13_002_v24, "v_{2}{4} published", "p");
-	leg->AddEntry(gr_pPb_v24, "v_{2}{4}", "p");
+	if ( !bFin ) leg->AddEntry(gr_pPb_v24, "v_{2}{4}", "p");
 	leg->AddEntry(gr_pPb_v26, "v_{2}{6}", "p");
 	leg->AddEntry(gr_pPb_v28, "v_{2}{8}", "p");
-//	leg->AddEntry(grLYZnoff, "v_{2}{LYZ}", "p");
+	if ( bFin ) leg->AddEntry(gr_LYZ, "v_{2}{LYZ}", "p");
 	leg->Draw();
 
 	TLine * linev2 = new TLine(0, 0.049, 300, 0.049);
@@ -261,8 +280,8 @@
 
 	cSumC2->SetGrid();
 	cSumC4->SetGrid();
-	cSumC6->SetGrid();
-	cSumC8->SetGrid();
+	if (!bFin) cSumC6->SetGrid();
+	if (!bFin) cSumC8->SetGrid();
 
 	TH2D * frame_centC2 = new TH2D("frame_centC2", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim2L, lim2U);
 	TH2D * frame_centC4 = new TH2D("frame_centC4", ";N_{trk}^{offline};v_{2}", 1, -5, 350, 1, lim4L, lim4U);
@@ -285,16 +304,30 @@
 	frame_centC6->Draw();
 	gr_pPb_c26->Draw("Psame");
 	if (s1 == 10) {
-		boxNSigma->DrawBox(-5, lim6L, 100, lim6U);
-		boxNSigma->DrawBox(300, lim6L, 350, lim6U);
+		if (!bFin) boxNSigma->DrawBox(-5, lim6L, 100, lim6U);
+		if (!bFin) boxNSigma->DrawBox(300, lim6L, 350, lim6U);
 	}
+	TLegend * legC6 = new TLegend(0.65, 0.83, 0.9, 0.9);
+	legC6->SetFillColor(kWhite);
+	legC6->SetBorderSize(0);
+	legC6->SetTextSize(0.05);
+	legC6->AddEntry(gr_pPb_c26, Form("%s c_{2}{6}", bPbPb?"PbPb":"pPb"), "p");
+	if ( bFin ) legC6->Draw();
+
 	cSumC8->cd();
 	frame_centC8->Draw();
 	gr_pPb_c28->Draw("Psame");
 	if (s1 == 10) {
-		boxNSigma->DrawBox(-5, lim8L, 100, lim8U);
-		boxNSigma->DrawBox(220, lim8L, 350, lim8U);
+		if (!bFin) boxNSigma->DrawBox(-5, lim8L, 100, lim8U);
+		if (!bFin) boxNSigma->DrawBox(220, lim8L, 350, lim8U);
 	}
+	TLegend * legC8 = new TLegend(0.65, 0.20, 0.9, 0.3);
+	legC8->SetFillColor(kWhite);
+	legC8->SetBorderSize(0);
+	legC8->SetTextSize(0.05);
+	legC8->AddEntry(gr_pPb_c28, Form("%s c_{2}{8}", bPbPb?"PbPb":"pPb"), "p");
+	if ( bFin ) legC8->Draw();
+
 
 	gROOT->Macro("OLLITRAULT.C");
 //	TF1 * fHIN_13_002_v24 = new TF1("fHIN_13_002_v24", "pol6", 0, 350);
@@ -317,18 +350,35 @@
 	ffit86->Draw("same");
 
 	double xRatio86[20];
-	double xRatio64[20];
 	double dRatio86[20];
-	double dRatio64[20];
 	double eRatio86[20];
+	double Noff86[20];
+
+	double dRatio84[20];
+	double eRatio84[20];
+	double Noff84[20];
+
+	double xRatio64[20];
+	double dRatio64[20];
 	double eRatio64[20];
+	double Noff64[20];
+
+	double Noff62[20];
+	double Noff82[20];
 	for ( int i = 0; i < 20; i++ ) {
 		xRatio86[i] = 0;
-		xRatio64[i] = 0;
 		dRatio86[i] = 0;
-		dRatio64[i] = 0;
 		eRatio86[i] = 0;
+		Noff86[i] = 0;
+
+		xRatio64[i] = 0;
+		dRatio64[i] = 0;
 		eRatio64[i] = 0;
+		Noff64[i] = 0;
+
+		Noff84[i] = 0;
+		dRatio84[i] = 0;
+		eRatio84[i] = 0;
 	}
 
 	for ( int i = 0 ; i < gr_pPb_v26->GetN(); i++ ) {
@@ -343,6 +393,7 @@
 				break;
 			}
 		}
+		Noff64[i] = noff4;
 		double v22 = 0;
 		double ev22 = 0;
 		double noff2 = 0;
@@ -353,6 +404,7 @@
 				noff2 = gr_HIN_13_002_v22->GetX()[idx];
 			}
 		}
+		Noff62[i] = noff2;
 
 		double v26 = gr_pPb_v26->GetY()[i];
 		double ev26 = gr_pPb_v26->GetEY()[i];
@@ -373,6 +425,7 @@
 				break;
 			}
 		}
+		Noff84[i] = noff4;
 		double v22 = 0;
 		double ev22 = 0;
 		double noff2 = 0;
@@ -383,6 +436,7 @@
 				noff2 = gr_HIN_13_002_v22->GetX()[idx];
 			}
 		}
+		Noff82[i] = noff2;
 
 		double v26 = 0;
 		double ev26 = 0;
@@ -394,7 +448,7 @@
 				noff6 = gr_pPb_v26->GetX()[idx];
 			}
 		}
-
+		Noff86[i] = noff6;
 
 		double v28 = gr_pPb_v28->GetY()[i];
 		double ev28 = gr_pPb_v28->GetEY()[i];
@@ -402,6 +456,8 @@
 		xRatio86[i] = v24 / v22;
 		dRatio86[i] = v28 / v26;
 		eRatio86[i] = sqrt( ev26*ev26/v26/v26 + ev28*ev28/v28/v28) * dRatio86[i];
+		dRatio84[i] = v28 / v24;
+		eRatio84[i] = sqrt( ev24*ev24/v24/v24 + ev28*ev28/v28/v28) * dRatio84[i];
 
 	}
 	TGraphErrors * gr_Ratio64 = new TGraphErrors(gr_pPb_v26->GetN(), xRatio64, dRatio64, 0, eRatio64);
@@ -423,6 +479,31 @@
 	legR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4} data", "p");
 	legR->Draw();
 
+	TCanvas * cRatioNoff = MakeCanvas("cRatioNoff", "cRatioNoff", 600, 250);
+	cRatioNoff->SetGridy();
+	TH2D * frame_rnoff = new TH2D("frame_rnoff", ";N_{trk}^{offline};NSigma", 1, -5, 350, 1, 0.8, 1.2);
+	InitHist(frame_rnoff, "N_{trk}^{offline}", "Ratio");
+	frame_rnoff->Draw();
+	TGraphErrors * gr_r84 = new TGraphErrors(gr_pPb_v28->GetN(), gr_pPb_v28->GetX(), dRatio84, 0, eRatio84);
+	TGraphErrors * gr_r86 = new TGraphErrors(gr_pPb_v28->GetN(), gr_pPb_v28->GetX(), dRatio86, 0, eRatio86);
+	TGraphErrors * gr_r64 = new TGraphErrors(gr_pPb_v26->GetN(), gr_pPb_v26->GetX(), dRatio64, 0, eRatio64);
+	gr_r84->SetLineColor(kRed);
+	gr_r64->SetLineColor(kBlue);
+	gr_r86->SetLineColor(kBlack);
+	gr_r84->SetLineWidth(2);
+	gr_r64->SetLineWidth(2);
+	gr_r86->SetLineWidth(2);
+	gr_r84->Draw("lxsame");
+	gr_r64->Draw("lxsame");
+//	gr_r86->Draw("lxsame");
+
+	TLegend * legRnoff = new TLegend(0.16, 0.2, 0.35, 0.45);
+	legRnoff->SetFillColor(kWhite);
+	legRnoff->SetBorderSize(0);
+	legRnoff->AddEntry(gr_r84, "v_{2}{8}/v_{2}{4}", "l");
+	legRnoff->AddEntry(gr_r64, "v_{2}{6}/v_{2}{4}", "l");
+//	legRnoff->AddEntry(gr_r86, "v_{2}{8}/v_{2}{6}", "l");
+	legRnoff->Draw();
 
 	if ( save ) {
 		cNsigma->SaveAs(Form("cNsigma_%i_%i.pdf", s1, s3));
@@ -440,6 +521,8 @@
 		cSumC6->SaveAs(Form("cSumC6_%i_%i_C.C", s1, s3));
 		cSumC8->SaveAs(Form("cSumC8_%i_%i_C.C", s1, s3));
 		cRatio->SaveAs(Form("cRatio_%i_%i_C.C", s1, s3));
+
+		cRatioNoff->SaveAs(Form("cRatioNoff_%i_%i.pdf", s1, s3));
 
 		TFile * fsave = new TFile(Form("%s/fsave.root", ftxt[s1]), "recreate");
 		grNSigma2->SetName("grNSigma2");
