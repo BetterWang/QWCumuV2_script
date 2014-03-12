@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 10; 
+	int s1 = 102; 
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
@@ -38,11 +38,18 @@
 	if ( s1 == 39 ) {s2 = 39; bPbPb = 0;} // Hijing v2=0.05, fv2=0.01 double stat
 	if ( s1 == 44 ) {s2 = 44; bPbPb = 0;} // Hijing v2=0
 	if ( s1 == 48 ) {s2 = 28; bPbPb = 0;} // pPb sysHLT
-	if ( s1 == 52 ) {s2 = 56; bPbPb = 0;} // pPb sysTrkLoose !!!!
+	if ( s1 == 52 ) {s2 = 56; bPbPb = 0;} // pPb sysTrkLoose
 	if ( s1 == 60 ) {s2 = 64; bPbPb = 0;} // pPb sysTrkTight
 	if ( s1 == 68 ) {s2 = 72; bPbPb = 0;} // pPb sysTrkPU
 	if ( s1 == 76 ) {s2 = 80; bPbPb = 0;} // pPb sysVtx0  ! v26 one bin down
 	if ( s1 == 84 ) {s2 = 88; bPbPb = 0;} // pPb sysVtx1  !!! MB
+	if ( s1 == 92 ) {s2 = 96; bPbPb = 0;} // pPb sysEff  ??
+	if ( s1 == 97 ) {s2 = 97; bPbPb = 1;} // PbPb sysPU
+	if ( s1 == 98 ) {s2 = 98; bPbPb = 1;} // PbPb sysTrkLoose
+	if ( s1 == 99 ) {s2 = 99; bPbPb = 1;} // PbPb sysTrkTight
+	if ( s1 == 100 ) {s2 = 100; bPbPb = 1;} // PbPb sysVtx0
+	if ( s1 == 101 ) {s2 = 101; bPbPb = 1;} // PbPb sysVtx1
+	if ( s1 == 102 ) {s2 = 102; bPbPb = 1;} // PbPb sysEff
 
 	double lim2L = 1e-5;
 	double lim2U = 2.e-2;
@@ -241,6 +248,15 @@
 	gr_pPb_c24->SetMarkerColor(kBlack);
 	gr_pPb_c26->SetMarkerColor(kBlue);
 	gr_pPb_c28->SetMarkerColor(kRed);
+
+	gr_pPb_v22->SetLineColor(kGreen);
+	gr_pPb_v24->SetLineColor(kBlack);
+	gr_pPb_v26->SetLineColor(kBlue);
+	gr_pPb_v28->SetLineColor(kRed);
+	gr_pPb_c22->SetLineColor(kBlack);
+	gr_pPb_c24->SetLineColor(kBlack);
+	gr_pPb_c26->SetLineColor(kBlue);
+	gr_pPb_c28->SetLineColor(kRed);
 
 	gr_pPb_v22->SetMarkerSize(2);
 	gr_pPb_v24->SetMarkerSize(2);

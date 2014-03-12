@@ -21,7 +21,7 @@
 #include "label.h"
 #include "noff.h"
 
-	int s1 = 10;
+//	int s1 = 10;
 //	int s2 = 20;
 //	int s3 = 20;
 
@@ -37,7 +37,7 @@
 	int NCent6 = 11;
 	int NCent8 = 9;
 
-	if ( s1 == 33 ) {
+	if ( s1 == 33 || s1 == 97 || s1 == 98 || s1 == 99 || s1 == 100 || s1 == 101 || s1 == 102 ) {
 		pCent4 = CentNoffCutPbPb;
 		pCent6 = CentNoffCutPbPb;
 		pCent8 = CentNoffCutPbPb;

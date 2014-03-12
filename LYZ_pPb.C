@@ -48,26 +48,24 @@
 
 	TGraphErrors * grLYZpPbv2 = new TGraphErrors(NLYZpPb, LYZpPbnoff, LYZpPbv2, 0, LYZpPbv2e);
 	grLYZpPbv2->SetMarkerStyle(kFullCircle);
-	grLYZpPbv2->SetMarkerColor(kBlack);
-	grLYZpPbv2->SetLineColor(kBlue);
+	grLYZpPbv2->SetMarkerColor(kGreen+2);
+	grLYZpPbv2->SetLineColor(kBlack);
 	grLYZpPbv2->SetMarkerSize(1.5);
 
 	TGraphErrors * grLYZpPbv2s = new TGraphErrors(NLYZpPb, LYZpPbnoff, LYZpPbv2, 0, LYZpPbv2s);
-	grLYZpPbv2s->SetMarkerStyle(kFullCircle);
 	grLYZpPbv2s->SetMarkerColor(kBlack);
-	grLYZpPbv2s->SetLineColor(kBlue);
+	grLYZpPbv2s->SetLineColor(kBlack);
 	grLYZpPbv2s->SetMarkerSize(1.5);
 
 
 	TGraphErrors * grLYZPbPbv2 = new TGraphErrors(NLYZPbPb, LYZPbPbnoff, LYZPbPbv2, 0, LYZPbPbv2e);
 	grLYZPbPbv2->SetMarkerStyle(kFullCircle);
-	grLYZPbPbv2->SetMarkerColor(kBlack);
-	grLYZPbPbv2->SetLineColor(kBlue);
+	grLYZPbPbv2->SetMarkerColor(kGreen+2);
+	grLYZPbPbv2->SetLineColor(kBlack);
 	grLYZPbPbv2->SetMarkerSize(1.5);
 
 	TGraphErrors * grLYZPbPbv2s = new TGraphErrors(NLYZPbPb, LYZPbPbnoff, LYZPbPbv2, 0, LYZPbPbv2s);
-	grLYZPbPbv2s->SetMarkerStyle(kFullCircle);
 	grLYZPbPbv2s->SetMarkerColor(kBlack);
-	grLYZPbPbv2s->SetLineColor(kBlue);
+	grLYZPbPbv2s->SetLineColor(kBlack);
 	grLYZPbPbv2s->SetMarkerSize(1.5);
 }

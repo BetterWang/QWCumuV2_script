@@ -18,8 +18,8 @@
 
 {
 #include "label.h"
-	int s1 = 10;
-	int s2 = 10;
+	int s1 = 33;
+	int s2 = 102;
 	int s3 = 3;
 
 	TString text1 = "Combined";
@@ -37,13 +37,21 @@
 		b3 = 0;
 	}
 
-
 	if ( s2 == 48 ) {
 		s3 = 48;
 		text1 = "Standard";
 		text2 = "Single HLT path";
 		b3 = 0;
 	}
+
+	if ( s2 == 52 ) {
+		s3 = 60;
+		text1 = "Standard";
+		text2 = "Loose track cuts";
+		text3 = "Tight track cuts";
+		b3 = 1;
+	}
+
 	if ( s2 == 68 ) {
 		s3 = 68;
 		text1 = "Standard";
@@ -53,10 +61,47 @@
 	if ( s2 == 76 ) {
 		s3 = 84;
 		text1 = "Standard";
-		text2 = "|vz| < 3cm";
-		text3 = "3 < |vz| < 15 cm";
+		text2 = "|v_{z}| < 3cm";
+		text3 = "3 < |v_{z}| < 15 cm";
 		b3 = 1;
 	}
+	if ( s2 == 92 ) {
+		s3 = 92;
+		text1 = "Standard HIJING Efficiency";
+		text2 = "PYTHIA Efficiency";
+		b3 = 0;
+	}
+
+	if ( s2 == 97 ) {
+		s3 = 97;
+		text1 = "Standard";
+		text2 = "Single vertex";
+		b3 = 0;
+	}
+	if ( s2 == 98 ) {
+		s3 = 99;
+		text1 = "Standard";
+		text2 = "Loose track cuts";
+		text3 = "Tight track cuts";
+		b3 = 1;
+	}
+	if ( s2 == 100 ) {
+		s3 = 101;
+		text1 = "Standard";
+		text2 = "|v_{z}| < 3cm";
+		text3 = "3 < |v_{z}| < 15 cm";
+		b3 = 1;
+	}
+	if ( s2 == 102 ) {
+		s3 = 102;
+		text1 = "Standard HIJING Efficiency";
+		text2 = "PYTHIA Efficiency";
+		b3 = 0;
+	}
+
+
+
+
 	TString fname1 = Form("%s/fsave.root", ftxt[s1]);
 	TString fname3 = Form("%s/fsave.root", ftxt[s3]);
 
@@ -125,6 +170,10 @@
 	gr2_v26->SetMarkerColor(kRed);
 	gr3_v26->SetMarkerColor(kBlue);
 
+	gr1_v26->SetLineColor(kBlack);
+	gr2_v26->SetLineColor(kRed);
+	gr3_v26->SetLineColor(kBlue);
+
 	gr1_v26->Draw("psame");
 	gr2_v26->Draw("psame");
 	if ( b3 ) gr3_v26->Draw("psame");
@@ -149,6 +198,10 @@
 	gr2_v28->SetMarkerColor(kRed);
 	gr3_v28->SetMarkerColor(kBlue);
 
+	gr1_v28->SetLineColor(kBlack);
+	gr2_v28->SetLineColor(kRed);
+	gr3_v28->SetLineColor(kBlue);
+
 	gr1_v28->Draw("psame");
 	gr2_v28->Draw("psame");
 	if ( b3 ) gr3_v28->Draw("psame");
@@ -169,7 +222,7 @@
 		double y1 = gr1_v24->GetY()[i];
 		double y2 = gr2_v24->GetY()[i];
 		double y3 = gr3_v24->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y1 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 	Nbins = gr1_v26->GetN();
@@ -180,7 +233,7 @@
 		double y1 = gr1_v26->GetY()[i];
 		double y2 = gr2_v26->GetY()[i];
 		double y3 = gr3_v26->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y1 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 	Nbins = gr1_v28->GetN();
@@ -191,7 +244,7 @@
 		double y1 = gr1_v28->GetY()[i];
 		double y2 = gr2_v28->GetY()[i];
 		double y3 = gr3_v28->GetY()[i];
-		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y2 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
+		cout << i << "\t" << Noff << "\t\t" << (y2-y1)/y1 << "\t\t" << (y3-y1)/y1 << "\t" << (y3+y2-2*y1)/2/y1 << endl;
 	}
 
 
