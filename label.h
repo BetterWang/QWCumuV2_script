@@ -33,7 +33,7 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm2_rereco/", 		// 30 pPb MB std closed
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm2_reverse/", 	// 31 pPb MB std closed
 	"NA", 								// 32 29+30+31 pPb MB std closed
-	"../PbPb/PbPb_MB_rfp24_Noff_noadd_eff_cm1/", 			// 33 PbPb MB ppreco std closed
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1/", 			// 33 PbPb MB ppreco std closed
 	"../test/pPb_Hijing_MB/", 					// 34 pPb HIJING MB v2=0 non-flow std closed
 	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_old_cm1/", 		// 35 PbPb MB ppreco old std closed
 	"../test/pPb_Hijing_MB_v2_05_f01/", 				// 36 pPb HIJING MB v2=0.05, fv2=0.01 std closed
@@ -89,6 +89,20 @@ char * fname[] = {
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/", 		// 86 pPb MB sysVtx1
 	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/",		// 87 pPb MB sysVtx1
 	"NA",									// 88 85+86+87 pPb MB sysVtx1
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff/", 		// 89 pPb HLT sysEff
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff_rereco/", 		// 90 pPb HLT sysEff
+	"../test/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff_reverse/", 	// 91 pPb HLT sysEff
+	"NA", 									// 92 89+90+91 pPb HLT sysEff
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff/", 			// 93 pPb MB sysEff
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff_rereco/", 		// 94 pPb MB sysEff
+	"../test/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff_reverse/", 		// 95 pPb MB sysEff
+	"NA", 									// 96 pPb 93+94+95 MB sysEff
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysPU/",			// 97 PbPb MB ppreco sysPU
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysTrkLoose/",		// 98 PbPb MB ppreco sysTrkLoose
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysTrkTight/",		// 99 PbPb MB ppreco sysTrkTight
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysVtx0/",			// 100 PbPb MB ppreco sysVtx0
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysVtx1/",			// 101 PbPb MB ppreco sysVtx1
+	"../PbPb/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysEff/",			// 102 PbPb MB ppreco sysEff
 };
 
 
@@ -182,4 +196,29 @@ char * ftxt[] = {
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_rereco/",		// 86
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_reverse/",		// 87
 	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysVtx1_full/",		// 88
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff/",			// 89
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff_rereco/",		// 90
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff_reverse/",		// 91
+	"txt/pPb_HLT_rfp24_Noff_noacc_eff_v12_cm1_sysEff_full/",		// 92
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff/",			// 93
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff_rereco/",		// 94
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff_reverse/",		// 95
+	"txt/pPb_MB_rfp24_Noff_noacc_eff_v12_cm1_sysEff_full/",			// 96
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysPU/",				// 97
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysTrkLoose/",			// 98
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysTrkTight/",			// 99
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysVtx0/",			// 100
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysVtx1/",			// 101
+	"txt/PbPb_MB_rfp24_Noff_noacc_eff_cm1_sysEff/",				// 102
 };
+
+
+void addchain(int s1)
+{
+	ch->Add(Form("%s/*.root/cumulant/ntResult",fname[s1]));
+	ch->Add(Form("%s/*.root/cumulant100/ntResult",fname[s1]));
+	ch->Add(Form("%s/*.root/cumulant130/ntResult",fname[s1]));
+	ch->Add(Form("%s/*.root/cumulant160/ntResult",fname[s1]));
+	ch->Add(Form("%s/*.root/cumulant190/ntResult",fname[s1]));
+	ch->Add(Form("%s/*.root/cumulant220/ntResult",fname[s1]));
+}

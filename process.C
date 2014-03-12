@@ -20,116 +20,192 @@
 {
 #include "../interface/QWConstV2.h"
 #include "label.h"
-	int s1 = 48;
-//	int s2 = 20;
+//	int s1 = 80;
+//	int s2 = 16;
 //	int s3 = 20;
 
 	cout << " s2 = " << s2 << endl;
 	TChain * ch = new TChain();
 
 	if ( s1 == 1 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
-		}
+		addchain(1);
+		addchain(2);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
+//		}
 	} else if ( s1 == 10 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[3], i));
-		}
+		addchain(1);
+		addchain(2);
+		addchain(3);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[1], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[2], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[3], i));
+//		}
 	} else if ( s1 == 11 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[4], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[5], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[6], i));
-		}
+		addchain(4);
+		addchain(5);
+		addchain(6);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[4], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[5], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[6], i));
+//		}
 	} else if ( s1 == 12 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[7], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[8], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[9], i));
-		}
+		addchain(7);
+		addchain(8);
+		addchain(9);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[7], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[8], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[9], i));
+//		}
 	} else if ( s1 == 22 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[13], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[14], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[15], i));
-		}
+		addchain(13);
+		addchain(14);
+		addchain(15);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[13], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[14], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[15], i));
+//		}
 	} else if ( s1 == 25 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
-		}
+		addchain(25);
+		addchain(26);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
+//		}
 	} else if ( s1 == 28 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[27], i));
-		}
+		addchain(25);
+		addchain(26);
+		addchain(27);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[25], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[26], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[27], i));
+//		}
 	} else if ( s1 == 32 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[29], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[30], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[31], i));
-		}
+		addchain(29);
+		addchain(30);
+		addchain(31);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[29], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[30], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[31], i));
+//		}
 	} else if ( s1 == 39 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[39], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[36], i));
-		}
+		addchain(39);
+		addchain(36);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[39], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[36], i));
+//		}
 	} else if ( s1 == 43 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[40], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[41], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[42], i));
-		}
+		addchain(29);
+		addchain(30);
+		addchain(31);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[40], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[41], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[42], i));
+//		}
 	} else if ( s1 == 48 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[45], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[46], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[47], i));
-		}
+		addchain(45);
+		addchain(46);
+		addchain(47);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[45], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[46], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[47], i));
+//		}
 	} else if ( s1 == 52 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[49], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
-		}
+		addchain(49);
+		addchain(50);
+		addchain(51);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[49], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
+//bug			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[50], i));
+//		}
 	} else if ( s1 == 56 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[53], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[54], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[55], i));
-		}
+		addchain(53);
+		addchain(54);
+		addchain(55);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[53], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[54], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[55], i));
+//		}
 	} else if ( s1 == 60 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[57], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[58], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[59], i));
-		}
+		addchain(57);
+		addchain(58);
+		addchain(59);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[57], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[58], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[59], i));
+//		}
 	} else if ( s1 == 64 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[61], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[62], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[63], i));
-		}
+		addchain(61);
+		addchain(62);
+		addchain(63);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[61], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[62], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[63], i));
+//		}
 	} else if ( s1 == 68 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[65], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[66], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[68], i));
-		}
+		addchain(65);
+		addchain(66);
+		addchain(67);
+//		for ( int i = 0; i < 200; i++ ) {
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[65], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[66], i));
+//			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[68], i));
+//		}
 	} else if ( s1 == 72 ) {
-		for ( int i = 0; i < 200; i++ ) {
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[69], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[70], i));
-			ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[71], i));
-		}
+		addchain(69);
+		addchain(70);
+		addchain(71);
+	} else if ( s1 == 76 ) {
+		addchain(73);
+		addchain(74);
+		addchain(75);
+	} else if ( s1 == 80 ) {
+		addchain(77);
+		addchain(78);
+		addchain(79);
+	} else if ( s1 == 84 ) {
+		addchain(81);
+		addchain(82);
+		addchain(83);
+	} else if ( s1 == 88 ) {
+		addchain(85);
+		addchain(86);
+		addchain(87);
+	} else if ( s1 == 92 ) {
+		addchain(89);
+		addchain(90);
+		addchain(91);
+	} else if ( s1 == 96 ) {
+		addchain(93);
+		addchain(94);
+		addchain(95);
 	} else
-	for ( int i = 0; i < 200; i++ ) {
-		ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[s1], i));
+	{
+		addchain(s1);
 	}
+//	for ( int i = 0; i < 200; i++ ) {
+//		ch->Add(Form("%s/%03i/*.root/cumulant/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant100/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant130/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant160/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant190/ntResult",fname[s1], i));
+//		ch->Add(Form("%s/res/*.root/cumulant220/ntResult",fname[s1], i));
+//	}
 //	ch->Add("../test/pPb_HLT_rfp24_Noff_noacc_noeff_v11_cm1/000/cumu_100.root/cumulant/ntResult");
 	double Noff,Mult,Cent,C22,C24,C26,C28,iC22,iC24,iC26,iC28,wC22,wC24,wC26,wC28,C32,C34,C36,C38,iC32,iC34,iC36,iC38,wC32,wC34,wC36,wC38;
 	ch->SetBranchAddress("Noff", &Noff);
