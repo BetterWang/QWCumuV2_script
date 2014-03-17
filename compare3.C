@@ -18,8 +18,8 @@
 
 {
 #include "label.h"
-	int s1 = 33;
-	int s2 = 102;
+	int s1 = 10;
+	int s2 = 68;
 	int s3 = 3;
 
 	TString text1 = "Combined";
@@ -36,6 +36,14 @@
 		fname2 = Form("%s/fsave_bin2.root", ftxt[s2]);
 		b3 = 0;
 	}
+	if ( s2 == 33 ) {
+		s3 = 33;
+		text1 = "bin width of 5";
+		text2 = "bin width of 2";
+		fname2 = Form("%s/fsave_bin2.root", ftxt[s2]);
+		b3 = 0;
+	}
+
 
 	if ( s2 == 48 ) {
 		s3 = 48;
@@ -67,8 +75,8 @@
 	}
 	if ( s2 == 92 ) {
 		s3 = 92;
-		text1 = "Standard HIJING Efficiency";
-		text2 = "PYTHIA Efficiency";
+		text1 = "HIJING";
+		text2 = "PYTHIA";
 		b3 = 0;
 	}
 
@@ -178,12 +186,13 @@
 	gr2_v26->Draw("psame");
 	if ( b3 ) gr3_v26->Draw("psame");
 
-	TLegend * leg6 = new TLegend(0.18, 0.75, 0.55, 0.9);
+	TLegend * leg6 = new TLegend(0.18, 0.7, 0.55, 0.9);
 	leg6->SetFillColor(kWhite);
 	leg6->SetBorderSize(0);
 	leg6->AddEntry(gr1_v26, Form("v_{2}{6} %s", text1.Data()), "p");
 	leg6->AddEntry(gr2_v26, Form("v_{2}{6} %s", text2.Data()), "p");
 	if ( b3 ) leg6->AddEntry(gr3_v26, Form("v_{2}{6} %s", text3.Data()), "p");
+	leg6->SetTextSize(0.06);
 	leg6->Draw();
 
 
@@ -206,12 +215,13 @@
 	gr2_v28->Draw("psame");
 	if ( b3 ) gr3_v28->Draw("psame");
 
-	TLegend * leg8 = new TLegend(0.18, 0.75, 0.55, 0.9);
+	TLegend * leg8 = new TLegend(0.18, 0.7, 0.55, 0.9);
 	leg8->SetFillColor(kWhite);
 	leg8->SetBorderSize(0);
 	leg8->AddEntry(gr1_v28, Form("v_{2}{8} %s", text1.Data()), "p");
 	leg8->AddEntry(gr2_v28, Form("v_{2}{8} %s", text2.Data()), "p");
 	if ( b3 ) leg8->AddEntry(gr3_v28, Form("v_{2}{8} %s", text3.Data()), "p");
+	leg8->SetTextSize(0.06);
 	leg8->Draw();
 
 	int Nbins = gr1_v24->GetN();
