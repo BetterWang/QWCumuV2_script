@@ -24,6 +24,7 @@
 //	int s2 = 16;
 //	int s3 = 20;
 
+	int sN = 3;
 	cout << " s2 = " << s2 << endl;
 	TChain * ch = new TChain();
 
@@ -299,6 +300,22 @@
 	{
 		if ( !(ievt%100000) ) cout << "!! ievt = " << ievt << endl;
 		ievt++;
+		if ( sN == 3 ) {
+			C22 = C32;
+			C24 = C34;
+			C26 = C36;
+			C28 = C38;
+
+			iC22 = iC32;
+			iC24 = iC34;
+			iC26 = iC36;
+			iC28 = iC38;
+
+			wC22 = wC32;
+			wC24 = wC34;
+			wC26 = wC36;
+			wC28 = wC38;
+		}
 		if (TMath::IsNaN(C22) || TMath::IsNaN(C24) || TMath::IsNaN(C24) || TMath::IsNaN(C24)) {
 			cout << "=> ievt = " << ievt << endl;
 			continue;
@@ -366,8 +383,20 @@
 		hV28Cent->SetBinContent(c, V8);
 	}
 	char *fwname;
-	if ( s2 < s3 ) fwname = Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3);
-	else fwname = Form("%s/output_mult.root", ftxt[s1]);
+	if ( s2 < s3 ) {
+		if ( sN == 3 ) {
+			fwname = Form("%s/output3_mult_%i_%i.root", ftxt[s1], s2, s3);
+		} else {
+			fwname = Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3);
+		}
+	}
+	else {
+		if ( sN == 3 ) {
+			fwname = Form("%s/output3_mult.root", ftxt[s1]);
+		} else {
+			fwname = Form("%s/output_mult.root", ftxt[s1]);
+		}
+	}
 	TFile *fw = new TFile(fwname, "recreate");
 	{
 		hMult->Write();
