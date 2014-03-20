@@ -20,11 +20,12 @@
 {
 #include "label.h"
 
-	int s1 = 102; 
+	int s1 = 10; 
 	int s2 = 28;
 	int s3 = 20;
+	int sN = 3;
 	int save = 1;
-	int bFin = 1;
+	int bFin = 0;
 
 	int bPbPb = 1;
 	if ( s1 == 1  ) {s2 = 25; bPbPb = 0;} // pPb
@@ -540,7 +541,12 @@
 
 		cRatioNoff->SaveAs(Form("cRatioNoff_%i_%i.pdf", s1, s3));
 
-		TFile * fsave = new TFile(Form("%s/fsave.root", ftxt[s1]), "recreate");
+		TFile * fsave;
+		if ( sN == 3 ) {
+			fsave = new TFile(Form("%s/fsave_%i.root", ftxt[s1], sN), "recreate");
+		} else {
+			fsave = new TFile(Form("%s/fsave.root", ftxt[s1]), "recreate");
+		}
 		grNSigma2->SetName("grNSigma2");
 		grNSigma4->SetName("grNSigma4");
 		grNSigma6->SetName("grNSigma6");

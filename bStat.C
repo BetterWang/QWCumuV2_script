@@ -25,6 +25,8 @@
 //	int s2 = 20;
 //	int s3 = 20;
 
+	int sN = 3;
+
 	Int_t * pCent4;
 	Int_t * pCent6;
 	Int_t * pCent8;
@@ -86,8 +88,19 @@
 	TH1D * hNoff;
 
 	TFile * f;
-	if ( s2 == s3 ) f = new TFile(Form("%s/output_mult.root", ftxt[s1]));
-	else f = new TFile(Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3));
+	if ( s2 == s3 ) {
+		if ( sN == 3 ) {
+			f = new TFile(Form("%s/output3_mult.root", ftxt[s1]));
+		} else {
+			f = new TFile(Form("%s/output_mult.root", ftxt[s1]));
+		}
+	} else {
+		if ( sN == 3 ) {
+			f = new TFile(Form("%s/output3_mult_%i_%i.root", ftxt[s1], s2, s3));
+		} else {
+			f = new TFile(Form("%s/output_mult_%i_%i.root", ftxt[s1], s2, s3));
+		}
+	}
 	hMult = (TH1D*)f->Get("hMult");
 	hNoff = (TH1D*)f->Get("hNoff");
 
@@ -392,8 +405,19 @@
 	}
 
 	TFile * fwrite;
-	if ( s2 == s3 ) f = new TFile(Form("%s/fit_mult.root", ftxt[s1]), "recreate");
-	else f = new TFile(Form("%s/fit_mult_%i_%i.root", ftxt[s1], s2, s3), "recreate");
+	if ( s2 == s3 ) {
+		if ( sN == 3 ) {
+			f = new TFile(Form("%s/fit3_mult.root", ftxt[s1]), "recreate");
+		} else {
+			f = new TFile(Form("%s/fit_mult.root", ftxt[s1]), "recreate");
+		}
+	} else {
+		if ( sN == 3 ) {
+			f = new TFile(Form("%s/fit3_mult_%i_%i.root", ftxt[s1], s2, s3), "recreate");
+		} else {
+			f = new TFile(Form("%s/fit_mult_%i_%i.root", ftxt[s1], s2, s3), "recreate");
+		}
+	}
 	hMult->Write();
 	hNoff->Write();
 

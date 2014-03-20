@@ -18,8 +18,15 @@
 
 
 {
-	TFile * fHM = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3));
-	TFile * fMB = new TFile(Form("%s/Cerror_%i.root", ftxt[s2], s3));
+	TFile * fHM;
+	TFile * fMB;
+	if ( sN == 3 ) {
+		fHM = new TFile(Form("%s/Cerror3_%i.root", ftxt[s1], s3));
+		fMN = new TFile(Form("%s/Cerror3_%i.root", ftxt[s2], s3));
+	} else {
+		fHM = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3));
+		fMN = new TFile(Form("%s/Cerror_%i.root", ftxt[s2], s3));
+	}
 
 	TH1D * hNoffCentHM4 = (TH1D*) fHM->Get("hNoffCent4");
 	TH1D * hNoffCentHM6 = (TH1D*) fHM->Get("hNoffCent6");

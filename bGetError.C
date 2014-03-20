@@ -18,8 +18,10 @@
 
 {
 #include "label.h"
-//	int s1 = 10;
+	int s1 = 10;
 	int s3 = 20;
+
+	int sN = 3;
 
 	TFile * f[100];
 
@@ -36,8 +38,19 @@
 	TProfile* hMultCent[100];
 
 	for ( int i = 0; i <= s3; i++ ) {
-		if ( i == s3 ) f[i] = new TFile(Form("%s/fit_mult.root", ftxt[s1]));
-		else f[i] = new TFile(Form("%s/fit_mult_%i_%i.root", ftxt[s1], i, s3));
+		if ( i == s3 ) {
+			if ( sN == 3 ) {
+				f[i] = new TFile(Form("%s/fit3_mult.root", ftxt[s1]));
+			} else {
+				f[i] = new TFile(Form("%s/fit_mult.root", ftxt[s1]));
+			}
+		} else {
+			if ( sN == 3 ) {
+				f[i] = new TFile(Form("%s/fit3_mult_%i_%i.root", ftxt[s1], i, s3));
+			} else {
+				f[i] = new TFile(Form("%s/fit_mult_%i_%i.root", ftxt[s1], i, s3));
+			}
+		}
 
 		hC22CentS[i] = (TH1D*) f[i]->Get("hC22CentS");
 		hC24CentS[i] = (TH1D*) f[i]->Get("hC24CentS");
@@ -185,7 +198,12 @@
 	TH1D * hNoffCent6 = (TH1D*) f[s3]->Get("hNoffCent6");
 	TH1D * hNoffCent8 = (TH1D*) f[s3]->Get("hNoffCent8");
 
-	TFile *fw = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3), "recreate");
+	TFile *fw;
+	if ( sN == 3 ) {
+		fw = new TFile(Form("%s/Cerror3_%i.root", ftxt[s1], s3), "recreate");
+	} else {
+		fw = new TFile(Form("%s/Cerror_%i.root", ftxt[s1], s3), "recreate");
+	}
 
 	hC22f->Write();
 	hC24f->Write();
