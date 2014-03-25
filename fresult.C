@@ -47,10 +47,16 @@
 	TGraphErrors * gr_PbPb_c28 = (TGraphErrors*) f2->Get("gr_c28");
 
 	TGraphErrors * gr_Ratio64 = (TGraphErrors*) f1->Get("gr_Ratio64");
+	TGraphErrors * gr_Ratio64s = gr_Ratio64->Clone("gr_Ratio64s");
 	TGraphErrors * gr_Ratio86 = (TGraphErrors*) f1->Get("gr_Ratio86");
+	TGraphErrors * gr_Ratio86s = gr_Ratio86->Clone("gr_Ratio86s");
+	TGraphErrors * gr_AARatio64 = (TGraphErrors*) f2->Get("gr_Ratio64");
+	TGraphErrors * gr_AARatio86 = (TGraphErrors*) f2->Get("gr_Ratio86");
+
 #include "../../style.h"
         SetStyle();
 	gStyle->SetOptTitle(0);
+//	gStyle->SetLegendFont(42);
 //	gStyle->SetTextFont(42);
 //	gStyle->SetLegendFont(42);
 
@@ -88,6 +94,68 @@
 		v28sysAA[i] = v28PbPb[i]*sys8AA[i];
 	}
 
+	for ( int i = 0; i < gr_pPb_v26->GetN(); i++ ) {
+		double sys = 99999.;
+		double v24 = 99999.;
+		for ( int idx = 0; idx < gr_HIN_13_002_pPbv24->GetN(); idx++ ) {
+			if ( fabs(gr_pPb_v26->GetX()[i] - gr_HIN_13_002_pPbv24s->GetX()[idx]) < 5 ) {
+				sys = gr_HIN_13_002_pPbv24s->GetEY()[idx];
+				v24 = gr_HIN_13_002_pPbv24s->GetY()[idx];
+				break;
+			}
+		}
+		gr_Ratio64s->GetEY()[i] = gr_Ratio64s->GetY()[i] * sqrt(sys*sys/v24/v24 + v26sys[i]*v26sys[i]/gr_pPb_v26->GetY()[i]/gr_pPb_v26->GetY()[i]);
+	}
+
+	for ( int i = 0; i < gr_pPb_v28->GetN(); i++ ) {
+		double sys = 99999.;
+		double y6 = 99999.;
+		for ( int idx = 0; idx < gr_pPb_v26->GetN(); idx++ ) {
+			if ( fabs(gr_pPb_v28->GetX()[i] - gr_pPb_v26->GetX()[idx]) < 5 ) {
+				sys = v26sys[idx];
+				y6 = gr_pPb_v26->GetY()[idx];
+				break;
+			}
+		}
+		cout << "y6 = " << y6 << "\t sys = " << sys << endl;
+		cout << "y8 = " << gr_pPb_v28->GetY()[i] << "\t sys8 = " << v28sys[i] << endl;
+		gr_Ratio86s->GetEY()[i] = gr_Ratio86s->GetY()[i] * sqrt(sys*sys/y6/y6 + v28sys[i]*v28sys[i]/gr_pPb_v28->GetY()[i]/gr_pPb_v28->GetY()[i]);
+		cout << "sysR = " << gr_Ratio86s->GetEY()[i] << endl;
+	}
+
+	// sort ratio
+	for ( int i = 0; i < gr_Ratio64s->GetN(); i++ ) {
+		for ( int j = i+1; j < gr_Ratio64s->GetN(); j++ ) {
+			if (gr_Ratio64s->GetX()[i]> gr_Ratio64s->GetX()[j]) {
+				double t = gr_Ratio64s->GetX()[i];
+				gr_Ratio64s->GetX()[i] = gr_Ratio64s->GetX()[j];
+				gr_Ratio64s->GetX()[j] = t;
+				t = gr_Ratio64s->GetY()[i];
+				gr_Ratio64s->GetY()[i] = gr_Ratio64s->GetY()[j];
+				gr_Ratio64s->GetY()[j] = t;
+				t = gr_Ratio64s->GetEY()[i];
+				gr_Ratio64s->GetEY()[i] = gr_Ratio64s->GetEY()[j];
+				gr_Ratio64s->GetEY()[j] = t;
+			}
+		}
+	}
+
+	for ( int i = 0; i < gr_Ratio86s->GetN(); i++ ) {
+		for ( int j = i+1; j < gr_Ratio86s->GetN(); j++ ) {
+			if (gr_Ratio86s->GetX()[i]> gr_Ratio86s->GetX()[j]) {
+				double t = gr_Ratio86s->GetX()[i];
+				gr_Ratio86s->GetX()[i] = gr_Ratio86s->GetX()[j];
+				gr_Ratio86s->GetX()[j] = t;
+				t = gr_Ratio86s->GetY()[i];
+				gr_Ratio86s->GetY()[i] = gr_Ratio86s->GetY()[j];
+				gr_Ratio86s->GetY()[j] = t;
+				t = gr_Ratio86s->GetEY()[i];
+				gr_Ratio86s->GetEY()[i] = gr_Ratio86s->GetEY()[j];
+				gr_Ratio86s->GetEY()[j] = t;
+			}
+		}
+	}
+
 
 	TGraphErrors * gr_pPb_v26s = new TGraphErrors(gr_pPb_v26->GetN(), Noff6, v26, 0, v26sys);
 	TGraphErrors * gr_pPb_v28s = new TGraphErrors(gr_pPb_v28->GetN(), Noff8, v28, 0, v28sys);
@@ -100,6 +168,9 @@
 	gr_pPb_v26s->SetFillColor(1003);
 	gr_pPb_v28s->SetFillColor(1001);
 	grLYZpPbv2s->SetFillColor(1002);
+
+	gr_Ratio64s->SetFillColor(1003);
+	gr_Ratio86s->SetFillColor(1001);
 
 	TGraphErrors * gr_PbPb_v26s = new TGraphErrors(gr_PbPb_v26->GetN(), Noff6PbPb, v26PbPb, 0, v26sysAA);
 	TGraphErrors * gr_PbPb_v28s = new TGraphErrors(gr_PbPb_v28->GetN(), Noff8PbPb, v28PbPb, 0, v28sysAA);
@@ -115,10 +186,10 @@
 	gr_HIN_13_002_pPbv22->SetMarkerSize(1.5);
 	gr_HIN_13_002_pPbv24->SetMarkerSize(1.5);
 
-	gr_PbPb_v26->SetMarkerSize(2.1);
-	gr_PbPb_v28->SetMarkerSize(2.1);
-	gr_pPb_v26->SetMarkerSize(2.1);
-	gr_pPb_v28->SetMarkerSize(2.1);
+	gr_PbPb_v26->SetMarkerSize(2.2);
+	gr_PbPb_v28->SetMarkerSize(2.0);
+	gr_pPb_v26->SetMarkerSize(2.2);
+	gr_pPb_v28->SetMarkerSize(2.0);
 
 	grLYZPbPbv2->SetMarkerSize(1.7);
 	grLYZpPbv2->SetMarkerSize(1.7);
@@ -134,7 +205,7 @@
 	legLeft->AddEntry(grLYZpPbv2, "v_{2}{LYZ}", "p");
 
 	TLatex latex;
-	latex.SetTextFont(23);
+	latex.SetTextFont(43);
 	latex.SetTextSize(20);
 	latex.SetTextAlign(13);
 
@@ -160,7 +231,7 @@
 	gr_PbPb_v26->Draw("Psame");
 	gr_PbPb_v28->Draw("Psame");
 	legLeft->Draw();
-	latex.DrawLatexNDC(0.2, 0.95, "#splitline{(a) PbPb #sqrt{s_{NN}} = 2.76 TeV}{CMS 0.3 < p_{T} < 3 GeV/#it{c}}");
+	latex.DrawLatexNDC(0.2, 0.95, "#splitline{(a) PbPb #sqrt{s_{NN}} = 2.76 TeV}{CMS Preliminary}");
 
 //	gStyle->SetEndErrorSize(5);
 	gStyle->SetErrorX(5);
@@ -176,13 +247,23 @@
 	grLYZpPbv2->Draw("Psame");
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
-	latex.DrawLatexNDC(0.1, 0.95, "(b) pPb #sqrt{s_{NN}} = 5.02 TeV");
+	latex.DrawLatexNDC(0.1, 0.95, "#splitline{(b) pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3 GeV/#it{c}}");
 
 
 	gr_Ratio64->SetMarkerStyle(kFullSquare);
 	gr_Ratio64->SetMarkerSize(1.7);
 	gr_Ratio86->SetMarkerStyle(kFullCircle);
 	gr_Ratio86->SetMarkerSize(1.7);
+
+	gr_Ratio64s->SetMarkerStyle(kFullSquare);
+	gr_Ratio64s->SetMarkerSize(1.7);
+	gr_Ratio86s->SetMarkerStyle(kFullCircle);
+	gr_Ratio86s->SetMarkerSize(1.7);
+
+	gr_AARatio64->SetMarkerStyle(kFullSquare);
+	gr_AARatio64->SetMarkerSize(1.7);
+	gr_AARatio86->SetMarkerStyle(kFullCircle);
+	gr_AARatio86->SetMarkerSize(1.7);
 
 	TLegend * legLeftR = new TLegend(0.22, 0.8, 0.65, 0.92);
 	legLeftR->SetFillColor(kWhite);
@@ -198,14 +279,30 @@
 	legRightR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6} pPb" , "p");
 	legRightR->SetTextSize(0.038);
 
+	TLegend * legLeftAAR = new TLegend(0.22, 0.8, 0.65, 0.92);
+	legLeftAAR->SetFillColor(kWhite);
+	legLeftAAR->SetBorderSize(0);
+	legLeftAAR->AddEntry(ffit64, "v_{2}{6}/v_{2}{4} arXiv:1312.6555" , "l");
+	legLeftAAR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4} PbPb" , "p");
+	legLeftAAR->SetTextSize(0.038);
+
+	TLegend * legRightAAR = new TLegend(0.32, 0.25, 0.9, 0.4);
+	legRightAAR->SetFillColor(kWhite);
+	legRightAAR->SetBorderSize(0);
+	legRightAAR->AddEntry(ffit86, "v_{2}{8}/v_{2}{6} arXiv:1312.6555" , "l");
+	legRightAAR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6} PbPb" , "p");
+	legRightAAR->SetTextSize(0.038);
+
+
 
 	TCanvas * cSumR = MakeCanvas("cSumR", "cSumR", 900, 500);
 	makeMultiPanelCanvas(cSumR, 2, 1, 0., 0., 0.14, 0.18, 0.04);
 	cSumR->cd(1);
-	TH2D * frame_ratio64 = new TH2D("frame_ratio64", "frame_ratio64", 1, 0.41, 0.98, 1, 0.7, 1.3);
+	TH2D * frame_ratio64 = new TH2D("frame_ratio64", "frame_ratio64", 1, 0.601, 0.799, 1, 0.7, 1.3);
 	InitHist(frame_ratio64, "v_{2}{4}/v_{2}{2}", "Ratio");
 	frame_ratio64->Draw();
 	ffit64->Draw("same");
+	gr_Ratio64s->Draw("[]3");
 	gr_Ratio64->Draw("psame");
 	legLeftR->Draw();
 	latex.DrawLatexNDC(0.18, 0.92, "(a)");
@@ -213,10 +310,32 @@
 	cSumR->cd(2);
 	frame_ratio64->Draw();
 	ffit86->Draw("same");
+	gr_Ratio86s->Draw("[]3");
 	gr_Ratio86->Draw("psame");
 	legRightR->Draw();
-	latex.DrawLatexNDC(0.05, 0.92, "(b) CMS");
+	latex.DrawLatexNDC(0.05, 0.92, "(b) CMS Preliminary");
 	latex.DrawLatexNDC(0.05, 0.85, "    pPb #sqrt{s_{NN}} = 5.02 TeV");
+
+	TCanvas * cSumAAR = MakeCanvas("cSumAAR", "cSumAAR", 900, 500);
+	makeMultiPanelCanvas(cSumAAR, 2, 1, 0., 0., 0.14, 0.18, 0.04);
+	TH2D * frame_AAratio64 = new TH2D("frame_AAratio64", "frame_AAratio64", 1, 0.801, 0.849, 1, 0.751, 1.399);
+	InitHist(frame_AAratio64, "v_{2}{4}/v_{2}{2}", "Ratio");
+	cSumAAR->cd(1);
+	frame_AAratio64->Draw();
+	ffit64->Draw("same");
+	gr_AARatio64->Draw("psame");
+	legLeftAAR->Draw();
+	latex.DrawLatexNDC(0.18, 0.92, "(a)");
+
+	cSumAAR->cd(2);
+	frame_AAratio64->Draw();
+	ffit86->Draw("same");
+	gr_AARatio86->Draw("psame");
+	legRightAAR->Draw();
+	latex.DrawLatexNDC(0.05, 0.92, "(b) CMS Preliminary");
+	latex.DrawLatexNDC(0.05, 0.85, "    PbPb #sqrt{s_{NN}} = 2.76 TeV");
+
+
 
 	TCanvas * cC26pPb = MakeCanvas("cC26pPb", "cC26pPb");
 	TCanvas * cC28pPb = MakeCanvas("cC28pPb", "cC28pPb");
@@ -232,41 +351,54 @@
 	InitHist(frame_c26PbPb, "N_{trk}^{offline}", "c_{2}{6}");
 	InitHist(frame_c28PbPb, "N_{trk}^{offline}", "c_{2}{8}");
 	
-	cC26pPb->SetBottomMargin(0.2);
-	cC26pPb->SetLeftMargin(0.2);
-	cC28pPb->SetBottomMargin(0.2);
-	cC28pPb->SetLeftMargin(0.2);
+	cC26pPb->SetTopMargin(0.1);
+	cC26pPb->SetBottomMargin(0.23);
+	cC26pPb->SetLeftMargin(0.25);
+	cC28pPb->SetTopMargin(0.1);
+	cC28pPb->SetBottomMargin(0.23);
+	cC28pPb->SetLeftMargin(0.25);
 
-	cC26PbPb->SetBottomMargin(0.2);
-	cC26PbPb->SetLeftMargin(0.2);
-	cC28PbPb->SetBottomMargin(0.2);
-	cC28PbPb->SetLeftMargin(0.2);
+	cC26PbPb->SetTopMargin(0.1);
+	cC26PbPb->SetBottomMargin(0.23);
+	cC26PbPb->SetLeftMargin(0.25);
+	cC28PbPb->SetTopMargin(0.1);
+	cC28PbPb->SetBottomMargin(0.23);
+	cC28PbPb->SetLeftMargin(0.25);
 
-	frame_c26pPb->GetXaxis()->SetTitleSize(0.065);
-//	frame_c26pPb->GetXaxis()->SetLabelSize(0.065);
-	frame_c26pPb->GetYaxis()->SetTitleSize(0.065);
-//	frame_c26pPb->GetYaxis()->SetLabelSize(0.065);
-	frame_c26pPb->GetYaxis()->SetTitleOffset(1.3);
+
+	frame_c26pPb->GetXaxis()->SetTitleSize(0.07);
+	frame_c26pPb->GetXaxis()->SetLabelSize(0.065);
+	frame_c26pPb->GetYaxis()->SetTitleSize(0.07);
+	frame_c26pPb->GetYaxis()->SetLabelSize(0.065);
+	frame_c26pPb->GetXaxis()->SetTitleOffset(1.5);
+	frame_c26pPb->GetYaxis()->SetTitleOffset(1.5);
 	frame_c26pPb->SetLineWidth(5);
-	frame_c28pPb->GetXaxis()->SetTitleSize(0.065);
-//	frame_c28pPb->GetXaxis()->SetLabelSize(0.065);
-	frame_c28pPb->GetYaxis()->SetTitleSize(0.065);
-//	frame_c28pPb->GetYaxis()->SetLabelSize(0.065);
-	frame_c28pPb->GetYaxis()->SetTitleOffset(1.3);
+
+	frame_c28pPb->GetXaxis()->SetTitleSize(0.07);
+	frame_c28pPb->GetXaxis()->SetLabelSize(0.065);
+	frame_c28pPb->GetYaxis()->SetTitleSize(0.07);
+	frame_c28pPb->GetYaxis()->SetLabelSize(0.065);
+	frame_c28pPb->GetXaxis()->SetTitleOffset(1.5);
+	frame_c28pPb->GetYaxis()->SetTitleOffset(1.5);
 	frame_c28pPb->SetLineWidth(5);
 
-	frame_c26PbPb->GetXaxis()->SetTitleSize(0.065);
-//	frame_c26PbPb->GetXaxis()->SetLabelSize(0.065);
-	frame_c26PbPb->GetYaxis()->SetTitleSize(0.065);
-//	frame_c26PbPb->GetYaxis()->SetLabelSize(0.065);
-	frame_c26PbPb->GetYaxis()->SetTitleOffset(1.3);
+	frame_c26PbPb->GetXaxis()->SetTitleSize(0.07);
+	frame_c26PbPb->GetXaxis()->SetLabelSize(0.065);
+	frame_c26PbPb->GetYaxis()->SetTitleSize(0.07);
+	frame_c26PbPb->GetYaxis()->SetLabelSize(0.065);
+	frame_c26PbPb->GetXaxis()->SetTitleOffset(1.5);
+	frame_c26PbPb->GetYaxis()->SetTitleOffset(1.5);
 	frame_c26PbPb->SetLineWidth(5);
-	frame_c28PbPb->GetXaxis()->SetTitleSize(0.065);
-//	frame_c28PbPb->GetXaxis()->SetLabelSize(0.065);
-	frame_c28PbPb->GetYaxis()->SetTitleSize(0.065);
-//	frame_c28PbPb->GetYaxis()->SetLabelSize(0.065);
-	frame_c28PbPb->GetYaxis()->SetTitleOffset(1.3);
+
+	frame_c28PbPb->GetXaxis()->SetTitleSize(0.07);
+	frame_c28PbPb->GetXaxis()->SetLabelSize(0.065);
+	frame_c28PbPb->GetYaxis()->SetTitleSize(0.07);
+	frame_c28PbPb->GetYaxis()->SetLabelSize(0.065);
+	frame_c28PbPb->GetXaxis()->SetTitleOffset(1.5);
+	frame_c28PbPb->GetYaxis()->SetTitleOffset(1.5);
 	frame_c28PbPb->SetLineWidth(5);
+
+
 
 	gr_pPb_c26->SetMarkerSize(3.5);
 	gr_pPb_c28->SetMarkerSize(3.5);
@@ -277,57 +409,63 @@
 	frame_c26pPb->Draw();
 	gr_pPb_c26->SetLineColor(kBlack);
 	gr_pPb_c26->Draw("psame");
-	TLegend * legC6pPb = new TLegend(0.6, 0.8, 0.9, 0.9);
+	TLegend * legC6pPb = new TLegend(0.6, 0.8, 0.9, 0.88);
 	legC6pPb->SetFillColor(kWhite);
 	legC6pPb->SetBorderSize(0);
 	legC6pPb->SetTextSize(0.05);
 	legC6pPb->AddEntry(gr_pPb_c26, "pPb c_{2}{6}", "p");
 	legC6pPb->SetTextSize(0.058);
 	legC6pPb->Draw();
+	latex->DrawLatexNDC(0.3, 0.86, "CMS Preliminary");
 
 
 	cC28pPb->cd();
 	frame_c28pPb->Draw();
 	gr_pPb_c28->SetLineColor(kBlack);
 	gr_pPb_c28->Draw("psame");
-	TLegend * legC8pPb = new TLegend(0.5, 0.25, 0.9, 0.3);
+	TLegend * legC8pPb = new TLegend(0.5, 0.28, 0.9, 0.3);
 	legC8pPb->SetFillColor(kWhite);
 	legC8pPb->SetBorderSize(0);
 	legC8pPb->SetTextSize(0.05);
 	legC8pPb->AddEntry(gr_pPb_c28, "pPb c_{2}{8}", "p");
 	legC8pPb->SetTextSize(0.058);
 	legC8pPb->Draw();
+	latex->DrawLatexNDC(0.56, 0.4, "CMS Preliminary");
 
 	cC26PbPb->cd();
 	frame_c26PbPb->Draw();
 	gr_PbPb_c26->SetLineColor(kBlack);
 	gr_PbPb_c26->Draw("psame");
-	TLegend * legC6PbPb = new TLegend(0.6, 0.8, 0.9, 0.9);
+	TLegend * legC6PbPb = new TLegend(0.6, 0.8, 0.9, 0.88);
 	legC6PbPb->SetFillColor(kWhite);
 	legC6PbPb->SetBorderSize(0);
 	legC6PbPb->SetTextSize(0.05);
 	legC6PbPb->AddEntry(gr_PbPb_c26, "PbPb c_{2}{6}", "p");
 	legC6PbPb->SetTextSize(0.058);
 	legC6PbPb->Draw();
+	latex->DrawLatexNDC(0.3, 0.86, "CMS Preliminary");
 
 
 	cC28PbPb->cd();
 	frame_c28PbPb->Draw();
 	gr_PbPb_c28->SetLineColor(kBlack);
 	gr_PbPb_c28->Draw("psame");
-	TLegend * legC8PbPb = new TLegend(0.5, 0.25, 0.9, 0.3);
+	TLegend * legC8PbPb = new TLegend(0.5, 0.28, 0.9, 0.3);
 	legC8PbPb->SetFillColor(kWhite);
 	legC8PbPb->SetBorderSize(0);
 	legC8PbPb->SetTextSize(0.05);
 	legC8PbPb->AddEntry(gr_PbPb_c28, "PbPb c_{2}{8}", "p");
 	legC8PbPb->SetTextSize(0.058);
 	legC8PbPb->Draw();
+	latex->DrawLatexNDC(0.56, 0.4, "CMS Preliminary");
 
 
 	cSum2->SaveAs("final_v2.pdf");
 	cSumR->SaveAs("final_ratio.pdf");
+	cSumAAR->SaveAs("final_ratioAA.pdf");
 	cSum2->SaveAs("final_v2_C.C");
 	cSumR->SaveAs("final_ratio_C.C");
+	cSumAAR->SaveAs("final_ratioAA_C.C");
 
 	cC26pPb->SaveAs("final_pPb_c26.pdf");
 	cC28pPb->SaveAs("final_pPb_c28.pdf");

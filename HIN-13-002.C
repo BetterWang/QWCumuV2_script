@@ -74,6 +74,22 @@
 		0.004329 ,
 	};
 
+	double pPbv24_ye2[12] = {
+		0.003173,
+		0.004187,
+		0.003093,
+		0.003162,
+		0.001977,
+		0.002032,
+		0.002009,
+		0.00197 ,
+		0.002637,
+		0.002612,
+		0.003579,
+		0.003598,
+	};
+
+
 //		6.917   0.05367   0.001655    0.002093
 //		14.37   0.05428   0.0006222   0.002117
 //		24.41   0.05379   0.0003994   0.002098
@@ -158,6 +174,9 @@
 	gr_HIN_13_002_pPbv24->SetMarkerColor(kBlue);
 	gr_HIN_13_002_pPbv24->SetLineColor(kBlue);
 	gr_HIN_13_002_pPbv24->SetMarkerSize(2);
+
+	TGraphErrors * gr_HIN_13_002_pPbv24s = new TGraphErrors(12, pPbv24_x, pPbv24_y, 0, pPbv24_ye2);
+
 
 	TGraphErrors * gr_HIN_13_002_pPbv22 = new TGraphErrors(18, pPbv22_x, pPbv22_y, 0, pPbv22_ye);
 	gr_HIN_13_002_pPbv22->SetMarkerStyle(kOpenCircle);
