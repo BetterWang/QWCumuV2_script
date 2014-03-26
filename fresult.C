@@ -105,6 +105,7 @@
 			}
 		}
 		gr_Ratio64s->GetEY()[i] = gr_Ratio64s->GetY()[i] * sqrt(sys*sys/v24/v24 + v26sys[i]*v26sys[i]/gr_pPb_v26->GetY()[i]/gr_pPb_v26->GetY()[i]);
+		gr_Ratio64s->GetEX()[i] = 0.005;
 	}
 
 	for ( int i = 0; i < gr_pPb_v28->GetN(); i++ ) {
@@ -117,10 +118,8 @@
 				break;
 			}
 		}
-		cout << "y6 = " << y6 << "\t sys = " << sys << endl;
-		cout << "y8 = " << gr_pPb_v28->GetY()[i] << "\t sys8 = " << v28sys[i] << endl;
 		gr_Ratio86s->GetEY()[i] = gr_Ratio86s->GetY()[i] * sqrt(sys*sys/y6/y6 + v28sys[i]*v28sys[i]/gr_pPb_v28->GetY()[i]/gr_pPb_v28->GetY()[i]);
-		cout << "sysR = " << gr_Ratio86s->GetEY()[i] << endl;
+		gr_Ratio86s->GetEX()[i] = 0.005;
 	}
 
 	// sort ratio
@@ -157,8 +156,9 @@
 	}
 
 
-	TGraphErrors * gr_pPb_v26s = new TGraphErrors(gr_pPb_v26->GetN(), Noff6, v26, 0, v26sys);
-	TGraphErrors * gr_pPb_v28s = new TGraphErrors(gr_pPb_v28->GetN(), Noff8, v28, 0, v28sys);
+	double eX[20] = { 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5.};
+	TGraphErrors * gr_pPb_v26s = new TGraphErrors(gr_pPb_v26->GetN(), Noff6, v26, eX, v26sys);
+	TGraphErrors * gr_pPb_v28s = new TGraphErrors(gr_pPb_v28->GetN(), Noff8, v28, eX, v28sys);
 	gr_pPb_v26s->SetLineColor(gr_pPb_v26->GetLineColor());
 	gr_pPb_v28s->SetLineColor(gr_pPb_v28->GetLineColor());
 
@@ -166,14 +166,16 @@
 	TColor blue(1002, 0, 1, 0, "red", 0.2);
 	TColor green(1003, 0, 0, 1, "red", 0.2);
 	gr_pPb_v26s->SetFillColor(1003);
+	gr_pPb_v26s->SetLineColor(1003);
+	gr_pPb_v26s->SetMarkerStyle(kDot);
 	gr_pPb_v28s->SetFillColor(1001);
 	grLYZpPbv2s->SetFillColor(1002);
 
 	gr_Ratio64s->SetFillColor(1003);
 	gr_Ratio86s->SetFillColor(1001);
 
-	TGraphErrors * gr_PbPb_v26s = new TGraphErrors(gr_PbPb_v26->GetN(), Noff6PbPb, v26PbPb, 0, v26sysAA);
-	TGraphErrors * gr_PbPb_v28s = new TGraphErrors(gr_PbPb_v28->GetN(), Noff8PbPb, v28PbPb, 0, v28sysAA);
+	TGraphErrors * gr_PbPb_v26s = new TGraphErrors(gr_PbPb_v26->GetN(), Noff6PbPb, v26PbPb, eX, v26sysAA);
+	TGraphErrors * gr_PbPb_v28s = new TGraphErrors(gr_PbPb_v28->GetN(), Noff8PbPb, v28PbPb, eX, v28sysAA);
 	gr_PbPb_v26s->SetLineColor(gr_PbPb_v26->GetLineColor());
 	gr_PbPb_v28s->SetLineColor(gr_PbPb_v28->GetLineColor());
 
@@ -224,9 +226,9 @@
 	frame_cent->Draw();
 	gr_HIN_13_002_PbPbv22->Draw("Psame");
 	gr_HIN_13_002_PbPbv24->Draw("Psame");
-	grLYZPbPbv2s->Draw("[]3");
-	gr_PbPb_v26s->Draw("[]3");
-	gr_PbPb_v28s->Draw("[]3");
+	grLYZPbPbv2s->Draw("same2");
+	gr_PbPb_v26s->Draw("same2");
+	gr_PbPb_v28s->Draw("same2");
 	grLYZPbPbv2->Draw("Psame");
 	gr_PbPb_v26->Draw("Psame");
 	gr_PbPb_v28->Draw("Psame");
@@ -239,9 +241,9 @@
 	TH2D * frame_cent2 = new TH2D("frame_cent2", ";N_{trk}^{offline};v_{2}", 1, 1, 350, 1, 0.00001, 0.12 );
 	InitHist(frame_cent2, "N_{trk}^{offline}", "v_{2}");
 	frame_cent->Draw();
-	grLYZpPbv2s->Draw("[]3");
-	gr_pPb_v26s->Draw("[]3");
-	gr_pPb_v28s->Draw("[]3");
+	grLYZpPbv2s->Draw("same2");
+	gr_pPb_v26s->Draw("same2");
+	gr_pPb_v28s->Draw("same2");
 	gr_HIN_13_002_pPbv22->Draw("Psame");
 	gr_HIN_13_002_pPbv24->Draw("Psame");
 	grLYZpPbv2->Draw("Psame");
@@ -257,7 +259,7 @@
 
 	gr_Ratio64s->SetMarkerStyle(kFullSquare);
 	gr_Ratio64s->SetMarkerSize(1.7);
-	gr_Ratio86s->SetMarkerStyle(kFullCircle);
+	gr_Ratio86s->SetMarkerStyle(kDot);
 	gr_Ratio86s->SetMarkerSize(1.7);
 
 	gr_AARatio64->SetMarkerStyle(kFullSquare);
@@ -302,7 +304,7 @@
 	InitHist(frame_ratio64, "v_{2}{4}/v_{2}{2}", "Ratio");
 	frame_ratio64->Draw();
 	ffit64->Draw("same");
-	gr_Ratio64s->Draw("[]3");
+	gr_Ratio64s->Draw("[]2");
 	gr_Ratio64->Draw("psame");
 	legLeftR->Draw();
 	latex.DrawLatexNDC(0.18, 0.92, "(a)");
@@ -310,7 +312,7 @@
 	cSumR->cd(2);
 	frame_ratio64->Draw();
 	ffit86->Draw("same");
-	gr_Ratio86s->Draw("[]3");
+	gr_Ratio86s->Draw("same2");
 	gr_Ratio86->Draw("psame");
 	legRightR->Draw();
 	latex.DrawLatexNDC(0.05, 0.92, "(b) CMS Preliminary");

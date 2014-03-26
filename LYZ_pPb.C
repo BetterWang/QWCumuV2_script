@@ -52,7 +52,8 @@
 	grLYZpPbv2->SetLineColor(kBlack);
 	grLYZpPbv2->SetMarkerSize(1.5);
 
-	TGraphErrors * grLYZpPbv2s = new TGraphErrors(NLYZpPb, LYZpPbnoff, LYZpPbv2, 0, LYZpPbv2s);
+	double eXLYZ[20] = { 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5., 5.};
+	TGraphErrors * grLYZpPbv2s = new TGraphErrors(NLYZpPb, LYZpPbnoff, LYZpPbv2, eXLYZ, LYZpPbv2s);
 	grLYZpPbv2s->SetMarkerColor(kBlack);
 	grLYZpPbv2s->SetLineColor(kBlack);
 	grLYZpPbv2s->SetMarkerSize(1.5);
@@ -64,7 +65,7 @@
 	grLYZPbPbv2->SetLineColor(kBlack);
 	grLYZPbPbv2->SetMarkerSize(1.5);
 
-	TGraphErrors * grLYZPbPbv2s = new TGraphErrors(NLYZPbPb, LYZPbPbnoff, LYZPbPbv2, 0, LYZPbPbv2s);
+	TGraphErrors * grLYZPbPbv2s = new TGraphErrors(NLYZPbPb, LYZPbPbnoff, LYZPbPbv2, eXLYZ, LYZPbPbv2s);
 	grLYZPbPbv2s->SetMarkerColor(kBlack);
 	grLYZPbPbv2s->SetLineColor(kBlack);
 	grLYZPbPbv2s->SetMarkerSize(1.5);
