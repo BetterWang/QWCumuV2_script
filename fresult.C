@@ -344,20 +344,19 @@
 	gr_AARatio86->SetMarkerStyle(kFullCircle);
 	gr_AARatio86->SetMarkerSize(1.7);
 
-	TLegend * legLeftR = new TLegend(0.40, 0.15, 0.85, 0.35);
+	TLegend * legLeftR = new TLegend(0.50, 0.05, 0.95, 0.25);
 	legLeftR->SetFillColor(kWhite);
 	legLeftR->SetBorderSize(0);
-	legLeftR->AddEntry(ffit64, "v_{2}{6}/v_{2}{4} hydro" , "l");
-	legLeftR->AddEntry(gr_Ratio64, "v_{2}{6}/v_{2}{4}" , "p");
+	legLeftR->AddEntry(ffit64, "hydro" , "l");
+	legLeftR->AddEntry(gr_Ratio64, "data" , "p");
 	legLeftR->SetTextSize(0.05);
 	legLeftR->SetTextFont(42);
 
-	TLegend * legRightR = new TLegend(0.4, 0.15, 0.85, 0.35);
-//	TLegend * legRightR = new TLegend(0.32, 0.25, 0.9, 0.4);
+	TLegend * legRightR = new TLegend(0.50, 0.15, 0.95, 0.35);
 	legRightR->SetFillColor(kWhite);
 	legRightR->SetBorderSize(0);
-	legRightR->AddEntry(ffit86, "v_{2}{8}/v_{2}{6} hydro" , "l");
-	legRightR->AddEntry(gr_Ratio86, "v_{2}{8}/v_{2}{6}" , "p");
+	legRightR->AddEntry(ffit86, "hydro" , "l");
+	legRightR->AddEntry(gr_Ratio86, "data" , "p");
 	legRightR->SetTextSize(0.05);
 	legRightR->SetTextFont(42);
 
@@ -379,13 +378,14 @@
 
 
 
-	TCanvas * cSumR = MakeCanvas("cSumR", "cSumR", 900, 500);
-	makeMultiPanelCanvas(cSumR, 2, 1, 0., 0., 0.12, 0.12, 0.01);
+	TCanvas * cSumR = MakeCanvas("cSumR", "cSumR", 500, 900);
+	makeMultiPanelCanvas(cSumR, 1, 2, 0.0, 0., 0.01, 0.12, 0.01);
 	cSumR->cd(1);
+	gPad->SetLeftMargin(0.15);
 	TH2D * frame_ratio64 = new TH2D("frame_ratio64", "frame_ratio64", 1, 0.621, 0.799, 1, 0.7, 1.3);
-	InitHist(frame_ratio64, "v_{2}{4}/v_{2}{2}", "Ratio");
+	InitHist(frame_ratio64, "v_{2}{4}/v_{2}{2}", "v_{2}{6}/v_{2}{4}");
 	frame_ratio64->GetXaxis()->SetTitleOffset(0.93);
-	frame_ratio64->GetYaxis()->SetTitleOffset(0.97);
+	frame_ratio64->GetYaxis()->SetTitleOffset(1.);
 	frame_ratio64->Draw();
 	ffit64->Draw("same");
 	gr_Ratio64s->Draw("[]3");
@@ -395,7 +395,10 @@
 //	latex.DrawLatexNDC(0.18, 0.92, "(a)");
 
 	cSumR->cd(2);
-	frame_ratio64->Draw();
+	gPad->SetLeftMargin(0.15);
+	TH2D * frame_ratio86 = frame_ratio64->Clone("frame_ratio86");
+	frame_ratio86->SetYTitle("v_{2}{8}/v_{2}{6}");
+	frame_ratio86->Draw();
 	ffit86->Draw("same");
 	gr_Ratio86s->Draw("[]3");
 	gr_Ratio86->Draw("psame");
@@ -404,7 +407,7 @@
 //	latex.DrawLatexNDC(0.05, 0.85, "    pPb #sqrt{s_{NN}} = 5.02 TeV");
 //	latex.DrawLatexNDC(0.05, 0.92, "(b)");
 //	latex.DrawLatexNDC(0.1, 0.36, "pPb #sqrt{s_{NN}} = 5.02 TeV");
-	latex.DrawLatexNDC(0.12, 0.9, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.9, "CMS Preliminary");
 
 	TCanvas * cSumAAR = MakeCanvas("cSumAAR", "cSumAAR", 900, 500);
 	makeMultiPanelCanvas(cSumAAR, 2, 1, 0., 0., 0.12, 0.12, 0.01);
