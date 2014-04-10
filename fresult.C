@@ -396,8 +396,12 @@
 	gPad->SetLeftMargin(0.15);
 	TH2D * frame_ratio64 = new TH2D("frame_ratio64", "frame_ratio64", 1, 0.621, 0.799, 1, 0.7, 1.3);
 	InitHist(frame_ratio64, "v_{2}{4} / v_{2}{2}", "v_{2}{6} / v_{2}{4}");
-	frame_ratio64->GetXaxis()->SetTitleOffset(0.93);
-	frame_ratio64->GetYaxis()->SetTitleOffset(1.1);
+	frame_ratio64->GetXaxis()->SetTitleFont(43);
+	frame_ratio64->GetYaxis()->SetTitleFont(43);
+	frame_ratio64->GetXaxis()->SetTitleSize(26);
+	frame_ratio64->GetYaxis()->SetTitleSize(26);
+	frame_ratio64->GetXaxis()->SetTitleOffset(1.8);
+	frame_ratio64->GetYaxis()->SetTitleOffset(2.2);
 	frame_ratio64->Draw();
 	ffit64->Draw("same");
 	gr_Ratio64s->Draw("[]3");
