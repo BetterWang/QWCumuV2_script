@@ -36,6 +36,10 @@
 	double sys6AA[13] = {0.0184,	0.0185,	0.0197,	0.0187,	0.0185,	0.0182,	0.0192,	0.0187,	0.0181,	0.0245,	0.0148,	0.0251,	0.0321};
         double sys8AA[12] = {0.0184,	0.0186,	0.0198,	0.0186,	0.0183,	0.0183,	0.0191,	0.0189,	0.0182,	0.0235,	0.0143,	0.0573};
 
+
+	double xe6pA[7] = {0.021, 0.013, 0.006, 0.004, 0.004, 0.006, 0.025};
+	double xe8pA[4] = {0.004, 0.004, 0.006, 0.025};
+
 	TFile * f1 = new TFile(Form("%s/fsave.root", ftxt[s1]));
 	TFile * f2 = new TFile(Form("%s/fsave.root", ftxt[s2]));
 	TGraphErrors * gr_pPb_v26 = (TGraphErrors*) f1->Get("gr_v26");
@@ -56,6 +60,13 @@
 	TGraphErrors * gr_AARatio64s = gr_AARatio64->Clone("gr_AARatio64s");
 	TGraphErrors * gr_AARatio86 = (TGraphErrors*) f2->Get("gr_Ratio86");
 	TGraphErrors * gr_AARatio86s = gr_AARatio86->Clone("gr_AARatio86s");
+
+	for ( int i = 0; i < gr_Ratio64->GetN(); i++ ) {
+		gr_Ratio64->GetEX()[i] = xe6pA[i];
+	}
+	for ( int i = 0; i < gr_Ratio86->GetN(); i++ ) {
+		gr_Ratio86->GetEX()[i] = xe8pA[i];
+	}
 
 #include "../../style.h"
 	SetStyle();
@@ -113,7 +124,7 @@
 			}
 		}
 		gr_Ratio64s->GetEY()[i] = gr_Ratio64s->GetY()[i] * sqrt(sys*sys/v24/v24 + v26sys[i]*v26sys[i]/gr_pPb_v26->GetY()[i]/gr_pPb_v26->GetY()[i]);
-		cout << gr_pPb_v26->GetX()[i] << "\t" << gr_pPb_v26->GetY()[i] << "\\pm" << gr_pPb_v26->GetEY()[i] << "\t" << v24 << "\\pm" << v24e << "\t" << gr_Ratio64->GetY()[i] <<"\\pm"<< gr_Ratio64->GetEY()[i] << endl;
+		cout <<gr_Ratio64s->GetX()[i] << "\t" << gr_pPb_v26->GetX()[i] << "\t" << gr_pPb_v26->GetY()[i] << "\\pm" << gr_pPb_v26->GetEY()[i] << "\t" << v24 << "\\pm" << v24e << "\t" << gr_Ratio64->GetY()[i] <<"\\pm"<< gr_Ratio64->GetEY()[i] << endl;
 	}
 
 	for ( int i = 0; i < gr_PbPb_v26->GetN(); i++ ) {
@@ -269,7 +280,7 @@
 	grLYZPbPbv2->SetMarkerSize(1.7);
 	grLYZpPbv2->SetMarkerSize(1.7);
 
-	TLegend * legLeft = new TLegend(0.55, 0.25, 0.95, 0.55);
+	TLegend * legLeft = new TLegend(0.55, 0.23, 0.95, 0.53);
 	legLeft->SetFillColor(kWhite);
 	legLeft->SetTextFont(42);
 	legLeft->SetTextSize(0.05);
@@ -309,8 +320,7 @@
 	gr_PbPb_v26->Draw("Psame");
 	gr_PbPb_v28->Draw("Psame");
 	legLeft->Draw();
-	latex.DrawLatexNDC(0.20, 0.94, "#splitline{CMS PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.58, 0.23, "CMS Preliminary");
+	latex.DrawLatexNDC(0.20, 0.94, "#splitline{PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3 GeV/c; |#eta| < 2.4}");
 
 //	gStyle->SetEndErrorSize(5);
 	gStyle->SetErrorX(5);
@@ -327,6 +337,7 @@
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
 	latex.DrawLatexNDC(0.1, 0.94, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3 GeV/c; |#eta| < 2.4}");
+	latex.DrawLatexNDC(0.5, 0.27, "CMS Preliminary");
 
 
 	gr_Ratio64->SetMarkerStyle(kFullSquare);
@@ -344,21 +355,22 @@
 	gr_AARatio86->SetMarkerStyle(kFullCircle);
 	gr_AARatio86->SetMarkerSize(1.7);
 
-	TLegend * legLeftR = new TLegend(0.50, 0.05, 0.95, 0.25);
+//	TLegend * legLeftR = new TLegend(0.40, 0.05, 0.95, 0.22);
+	TLegend * legLeftR = new TLegend(0.30, 0.15, 0.85, 0.3);
 	legLeftR->SetFillColor(kWhite);
 	legLeftR->SetBorderSize(0);
-	legLeftR->AddEntry(ffit64, "hydro" , "l");
-	legLeftR->AddEntry(gr_Ratio64, "data" , "p");
-	legLeftR->SetTextSize(0.05);
-	legLeftR->SetTextFont(42);
+	legLeftR->AddEntry(ffit64, "hydro Yan" , "l");
+//	legLeftR->AddEntry(gr_Ratio64, "data" , "p");
+	legLeftR->SetTextFont(43);
+	legLeftR->SetTextSize(24);
 
-	TLegend * legRightR = new TLegend(0.50, 0.15, 0.95, 0.35);
+	TLegend * legRightR = new TLegend(0.35, 0.2, 0.95, 0.3);
 	legRightR->SetFillColor(kWhite);
 	legRightR->SetBorderSize(0);
-	legRightR->AddEntry(ffit86, "hydro" , "l");
-	legRightR->AddEntry(gr_Ratio86, "data" , "p");
-	legRightR->SetTextSize(0.05);
-	legRightR->SetTextFont(42);
+	legRightR->AddEntry(ffit86, "hydro (Yan and Ollitrault)" , "");
+//	legRightR->AddEntry(gr_Ratio86, "data" , "p");
+	legRightR->SetTextFont(43);
+	legRightR->SetTextSize(22);
 
 	TLegend * legLeftAAR = new TLegend(0.40, 0.15, 0.85, 0.35);
 	legLeftAAR->SetFillColor(kWhite);
@@ -383,36 +395,47 @@
 	cSumR->cd(1);
 	gPad->SetLeftMargin(0.15);
 	TH2D * frame_ratio64 = new TH2D("frame_ratio64", "frame_ratio64", 1, 0.621, 0.799, 1, 0.7, 1.3);
-	InitHist(frame_ratio64, "v_{2}{4}/v_{2}{2}", "v_{2}{6}/v_{2}{4}");
+	InitHist(frame_ratio64, "v_{2}{4} / v_{2}{2}", "v_{2}{6} / v_{2}{4}");
 	frame_ratio64->GetXaxis()->SetTitleOffset(0.93);
-	frame_ratio64->GetYaxis()->SetTitleOffset(1.);
+	frame_ratio64->GetYaxis()->SetTitleOffset(1.1);
 	frame_ratio64->Draw();
 	ffit64->Draw("same");
 	gr_Ratio64s->Draw("[]3");
 	gr_Ratio64->Draw("psame");
-	legLeftR->Draw();
-	latex.DrawLatexNDC(0.20, 0.94, "#splitline{CMS pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3 GeV/c; |#eta| < 2.4}");
+//	legLeftR->Draw();
+	latex.DrawLatexNDC(0.20, 0.88, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3 GeV/c; |#eta| < 2.4}");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
 //	latex.DrawLatexNDC(0.18, 0.92, "(a)");
 
 	cSumR->cd(2);
 	gPad->SetLeftMargin(0.15);
 	TH2D * frame_ratio86 = frame_ratio64->Clone("frame_ratio86");
-	frame_ratio86->SetYTitle("v_{2}{8}/v_{2}{6}");
+	frame_ratio86->SetYTitle("v_{2}{8} / v_{2}{6}");
 	frame_ratio86->Draw();
 	ffit86->Draw("same");
 	gr_Ratio86s->Draw("[]3");
 	gr_Ratio86->Draw("psame");
+//	legLeftR->Draw();
 	legRightR->Draw();
 //	latex.DrawLatexNDC(0.05, 0.92, "(b) CMS Preliminary");
 //	latex.DrawLatexNDC(0.05, 0.85, "    pPb #sqrt{s_{NN}} = 5.02 TeV");
 //	latex.DrawLatexNDC(0.05, 0.92, "(b)");
 //	latex.DrawLatexNDC(0.1, 0.36, "pPb #sqrt{s_{NN}} = 5.02 TeV");
-	latex.DrawLatexNDC(0.2, 0.9, "CMS Preliminary");
+//	latex.DrawLatexNDC(0.2, 0.9, "CMS Preliminary");
+
+	TLine *lr = new TLine();
+	lr->SetLineColor(kRed);
+	lr->SetLineWidth(2);
+	TLine *lb = lr->Clone();
+	lb->SetLineColor(kBlue);
+
+	lr->DrawLineNDC(0.38, 0.225, 0.47, 0.225);
+	lb->DrawLineNDC(0.38, 0.25, 0.47, 0.25);
 
 	TCanvas * cSumAAR = MakeCanvas("cSumAAR", "cSumAAR", 900, 500);
 	makeMultiPanelCanvas(cSumAAR, 2, 1, 0., 0., 0.12, 0.12, 0.01);
 	TH2D * frame_AAratio64 = new TH2D("frame_AAratio64", "frame_AAratio64", 1, 0.801, 0.849, 1, 0.751, 1.399);
-	InitHist(frame_AAratio64, "v_{2}{4}/v_{2}{2}", "Ratio");
+	InitHist(frame_AAratio64, "v_{2}{4} / v_{2}{2}", "Ratio");
 	frame_AAratio64->GetXaxis()->SetTitleOffset(0.93);
 	frame_AAratio64->GetYaxis()->SetTitleOffset(0.97);
 	cSumAAR->cd(1);

@@ -10,10 +10,10 @@ void cResults(Bool_t IsPreliminary = kTRUE){
   Double_t ph = 0.45;
   Double_t rm = 0.02;
   Double_t lm = 0.03;
-  Double_t bmtoprow = 0.003;
+  Double_t bmtoprow = 0.00;
   Double_t bm = 0.03;
   Double_t tm = 0.04;
-  Double_t tmbot = 0.01;
+  Double_t tmbot = 0.0;
   Int_t xaxlab = 807;
   TH1D * h1 = new TH1D("h1","h1",100,0,380);
   h1->GetXaxis()->SetNdivisions(xaxlab);
@@ -111,32 +111,58 @@ void cResults(Bool_t IsPreliminary = kTRUE){
 
   Double_t prescale = 0.43;
   p1->cd();
-  TLatex * l1 = new TLatex(40,9e-9,"CMS PbPb #sqrt{s_{NN}} = 2.76 TeV");
+  TLatex * l1 = new TLatex(0.3, 0.2,"PbPb #sqrt{s_{NN}} = 2.76 TeV");
+  l1->SetNDC();
   l1->SetTextFont(43);
   l1->SetTextSize(28);
   l1->Draw();
-  TLatex * l1a = new TLatex(40,prescale*9e-9,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+  TLatex * l1a = new TLatex(0.3, 0.1,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+  l1a->SetNDC();
   l1a->SetTextFont(43);
   l1a->SetTextSize(24);
   l1a->Draw();
-  TLatex * prelim = new TLatex(40,pow(prescale,2)*9e-9,"CMS Preliminary");
+  TLatex * prelim = new TLatex(0.3, 0.3,"CMS Preliminary");
+  prelim->SetNDC();
   prelim->SetTextFont(43);
   prelim->SetTextSize(24);
   if(IsPreliminary) prelim->Draw();
 
   p2->cd();
-  TLatex * l2 = new TLatex(40,3e-6,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+  TLatex * l2 = new TLatex(0.1, 0.75,"pPb #sqrt{s_{NN}} = 5.02 TeV");
+  l2->SetNDC();
   l2->SetTextFont(43);
   l2->SetTextSize(28);
   l2->Draw();
-  TLatex * l2a = new TLatex(40,prescale*3e-6,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+  TLatex * l2a = new TLatex(0.1, 0.65,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+  l2a->SetNDC();
   l2a->SetTextFont(43);
   l2a->SetTextSize(24);
   l2a->Draw();
-  TLatex * prelim2 = new TLatex(40,pow(prescale,2)*3e-6,"CMS Preliminary");
+  TLatex * prelim2 = new TLatex(0.1, 0.85,"CMS Preliminary");
+  prelim2->SetNDC();
   prelim2->SetTextFont(43);
   prelim2->SetTextSize(24);
   if(IsPreliminary) prelim2->Draw();
+
+  p4->cd();
+  TLegend * legc26 = new TLegend(0.6, 0.75, 0.9, 0.9);
+  legc26->SetFillColor(kWhite);
+  legc26->SetBorderSize(0);
+  legc26->SetTextFont(43);
+  legc26->SetTextSize(24);
+  legc26->AddEntry(g6_pPb, "c_{2}{6}", "p");
+  legc26->AddEntry(g8_pPb, "#scale[1.1]{|} c_{2}{8} #scale[1.1]{|}", "p");
+  legc26->Draw();
+
+//  p1->cd();
+//  g8_PbPb->Draw("p");
+//  p2->cd();
+//  g8_pPb->Draw("p");
+//  p4->cd();
+//  TLegend * legc28 = new TLegend(0.6, 0.8, 0.9, 0.88);
+//  legc28->AddEntry(g8_pPb, "c_{2}{8}");
+//  legc28->Draw();
+
   c->Print("cResults.pdf","pdf");
 }
 void LoadData(){
