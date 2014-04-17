@@ -55,6 +55,11 @@
 	TGraphErrors * gr_PbPb_c26 = (TGraphErrors*) f2->Get("gr_c26");
 	TGraphErrors * gr_PbPb_c28 = (TGraphErrors*) f2->Get("gr_c28");
 
+	TGraphErrors * gr_pPb_c26s = gr_pPb_c26->Clone("gr_pPb_c26s");
+	TGraphErrors * gr_pPb_c28s = gr_pPb_c28->Clone("gr_pPb_c28s");
+	TGraphErrors * gr_PbPb_c26s = gr_PbPb_c26->Clone("gr_PbPb_c26s");
+	TGraphErrors * gr_PbPb_c28s = gr_PbPb_c28->Clone("gr_PbPb_c28s");
+
 	TGraphErrors * gr_Ratio64 = (TGraphErrors*) f1->Get("gr_Ratio64");
 	TGraphErrors * gr_Ratio64s = gr_Ratio64->Clone("gr_Ratio64s");
 	TGraphErrors * gr_Ratio86 = (TGraphErrors*) f1->Get("gr_Ratio86");
@@ -63,6 +68,16 @@
 	TGraphErrors * gr_AARatio64s = gr_AARatio64->Clone("gr_AARatio64s");
 	TGraphErrors * gr_AARatio86 = (TGraphErrors*) f2->Get("gr_Ratio86");
 	TGraphErrors * gr_AARatio86s = gr_AARatio86->Clone("gr_AARatio86s");
+
+//	gr_pPb_c26->SetLineWidth(2);
+//	gr_pPb_c28->SetLineWidth(2);
+//	gr_PbPb_c26->SetLineWidth(2);
+//	gr_PbPb_c28->SetLineWidth(2);
+//
+//	gr_pPb_v26->SetLineWidth(2);
+//	gr_pPb_v28->SetLineWidth(2);
+//	gr_PbPb_v26->SetLineWidth(2);
+//	gr_PbPb_v28->SetLineWidth(2);
 
 	for ( int i = 0; i < gr_Ratio64->GetN(); i++ ) {
 		gr_Ratio64->GetEX()[i] = xe6pA[i];
@@ -251,6 +266,12 @@
 	TGraphErrors * gr_pPb_v28s = new TGraphErrors(gr_pPb_v28->GetN(), Noff8, v28, 0, v28sys);
 	gr_pPb_v26s->SetLineColor(gr_pPb_v26->GetLineColor());
 	gr_pPb_v28s->SetLineColor(gr_pPb_v28->GetLineColor());
+	for ( int i = 0; i < gr_pPb_c26s->GetN(); i++ ) {
+		gr_pPb_c26s->GetEY()[i] = 6 * gr_pPb_c26s->GetY()[i] * gr_pPb_v26s->GetEY()[i] / gr_pPb_v26s->GetY()[i];
+	}
+	for ( int i = 0; i < gr_pPb_c28s->GetN(); i++ ) {
+		gr_pPb_c28s->GetEY()[i] = 8 * gr_pPb_c28s->GetY()[i] * gr_pPb_v28s->GetEY()[i] / gr_pPb_v28s->GetY()[i];
+	}
 
 	TColor red(1001, 1, 0, 0, "red", 0.2);
 	TColor blue(1002, 0, 1, 0, "red", 0.2);
@@ -258,6 +279,9 @@
 	gr_pPb_v26s->SetFillColor(1003);
 	gr_pPb_v28s->SetFillColor(1001);
 	grLYZpPbv2s->SetFillColor(1002);
+
+	gr_pPb_c26s->SetFillColor(1003);
+	gr_pPb_c28s->SetFillColor(1001);
 
 	gr_Ratio64s->SetFillColor(1003);
 	gr_Ratio86s->SetFillColor(1001);
@@ -268,10 +292,35 @@
 	TGraphErrors * gr_PbPb_v28s = new TGraphErrors(gr_PbPb_v28->GetN(), Noff8PbPb, v28PbPb, 0, v28sysAA);
 	gr_PbPb_v26s->SetLineColor(gr_PbPb_v26->GetLineColor());
 	gr_PbPb_v28s->SetLineColor(gr_PbPb_v28->GetLineColor());
+	for ( int i = 0; i < gr_PbPb_c26s->GetN(); i++ ) {
+		gr_PbPb_c26s->GetEY()[i] = 6 * gr_PbPb_c26s->GetY()[i] * gr_PbPb_v26s->GetEY()[i] / gr_PbPb_v26s->GetY()[i];
+	}
+	for ( int i = 0; i < gr_PbPb_c28s->GetN(); i++ ) {
+		gr_PbPb_c28s->GetEY()[i] = 8 * gr_PbPb_c28s->GetY()[i] * gr_PbPb_v28s->GetEY()[i] / gr_PbPb_v28s->GetY()[i];
+	}
 
 	gr_PbPb_v26s->SetFillColor(1003);
 	gr_PbPb_v28s->SetFillColor(1001);
 	grLYZPbPbv2s->SetFillColor(1002);
+	gr_PbPb_c26s->SetFillColor(1003);
+	gr_PbPb_c28s->SetFillColor(1001);
+
+	gr_HIN_13_002_PbPbv22s->SetFillColor(kGray);
+	gr_HIN_13_002_PbPbv24s->SetFillColor(kGray);
+	gr_HIN_13_002_pPbv22s->SetFillColor(kGray);
+	gr_HIN_13_002_pPbv24s->SetFillColor(kGray);
+	for ( int i = 0; i < gr_HIN_13_002_PbPbv22s->GetN(); i++ ) {
+		gr_HIN_13_002_PbPbv22s->GetEX()[i] = 8;
+	}
+	for ( int i = 0; i < gr_HIN_13_002_PbPbv24s->GetN(); i++ ) {
+		gr_HIN_13_002_PbPbv24s->GetEX()[i] = 8;
+	}
+	for ( int i = 0; i < gr_HIN_13_002_pPbv22s->GetN(); i++ ) {
+		gr_HIN_13_002_pPbv22s->GetEX()[i] = 8;
+	}
+	for ( int i = 0; i < gr_HIN_13_002_pPbv24s->GetN(); i++ ) {
+		gr_HIN_13_002_pPbv24s->GetEX()[i] = 8;
+	}
 
 	gr_HIN_13_002_PbPbv22->SetMarkerSize(1.5);
 	gr_HIN_13_002_PbPbv24->SetMarkerSize(1.5);
@@ -320,6 +369,8 @@
 	frame_cent->GetYaxis()->SetTitleOffset(1.3);
 	frame_cent->GetXaxis()->SetTitleOffset(1.1);
 	frame_cent->Draw();
+	gr_HIN_13_002_PbPbv22s->Draw("[]2");
+	gr_HIN_13_002_PbPbv24s->Draw("[]2");
 	gr_HIN_13_002_PbPbv22->Draw("Psame");
 	gr_HIN_13_002_PbPbv24->Draw("Psame");
 	grLYZPbPbv2s->Draw("[]3");
@@ -340,6 +391,8 @@
 	grLYZpPbv2s->Draw("[]3");
 	gr_pPb_v26s->Draw("[]3");
 	gr_pPb_v28s->Draw("[]3");
+	gr_HIN_13_002_pPbv22s->Draw("[]2");
+	gr_HIN_13_002_pPbv24s->Draw("[]2");
 	gr_HIN_13_002_pPbv22->Draw("Psame");
 	gr_HIN_13_002_pPbv24->Draw("Psame");
 	grLYZpPbv2->Draw("Psame");
@@ -697,6 +750,7 @@
   p1->SetLogy();
   h1->Draw();
   gr_PbPb_c26->SetMarkerStyle(kFullCross);
+  gr_PbPb_c26s->Draw("[]3");
   gr_PbPb_c26->Draw("p");
 
 
@@ -711,6 +765,7 @@
   p2->SetLogy();
   h2->Draw();
   gr_pPb_c26->SetMarkerStyle(kFullCross);
+  gr_pPb_c26s->Draw("[]3");
   gr_pPb_c26->Draw("p");
 
   TPad * p3 = new TPad("p3","p3",0,0.0,1.0-pw,1.0-ph);
@@ -723,7 +778,11 @@
   p3->cd();
   p3->SetLogy();
   h3->Draw();
-  for ( int i = 0; i < gr_PbPb_c28->GetN(); i++ ) gr_PbPb_c28->GetY()[i] *= -1;
+  for ( int i = 0; i < gr_PbPb_c28->GetN(); i++ ) {
+	  gr_PbPb_c28->GetY()[i] *= -1;
+	  gr_PbPb_c28s->GetY()[i] *= -1;
+  }
+  gr_PbPb_c28s->Draw("[]3");
   gr_PbPb_c28->Draw("p");
 
 
@@ -737,8 +796,12 @@
   p4->cd();
   p4->SetLogy();
   h4->Draw();
-  for ( int i = 0; i < gr_pPb_c28->GetN(); i++ ) gr_pPb_c28->GetY()[i] *= -1;
-  gr_pPb_c28->Draw("pe");
+  for ( int i = 0; i < gr_pPb_c28->GetN(); i++ ) {
+	  gr_pPb_c28->GetY()[i] *= -1;
+	  gr_pPb_c28s->GetY()[i] *= -1;
+  }
+  gr_pPb_c28s->Draw("[]3");
+  gr_pPb_c28->Draw("p");
 
   Double_t prescale = 0.43;
   p1->cd();
