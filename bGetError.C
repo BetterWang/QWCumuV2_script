@@ -66,10 +66,6 @@
 		}
 	}
 
-	double trx[100];
-	for ( int i = 0; i <= s3; i++ ) {
-		trx[i] = i;
-	}
 	TH1D * hC22trial[20];
 	TH1D * hC24trial[20];
 	TH1D * hC26trial[20];
@@ -102,12 +98,14 @@
 	double eV24[20];
 	double eV26[20];
 	double eV28[20];
+
+
 	for ( int c = 0; c < 20; c++ ) {
 		double sum2 = 0;
 		double sum4 = 0;
 		double sum6 = 0;
 		double sum8 = 0;
-		for ( int i = 0; i <= s3; i++ ) {
+		for ( int i = 0; i < s3; i++ ) { // !!!!
 			sum2 += dC22[c][i] * dC22[c][i];
 			sum4 += dC24[c][i] * dC24[c][i];
 			sum6 += dC26[c][i] * dC26[c][i];
@@ -138,17 +136,53 @@
 		eV24[c] = fabs( V4 / dC24[c] * eC24[c] / 4.);
 		eV26[c] = fabs( V6 / dC26[c] * eC26[c] / 6.);
 		eV28[c] = fabs( V8 / dC28[c] * eC28[c] / 8.);
+		
 	}
-//	double rC22[20];
-//	double rC24[20];
-//	double rC26[20];
-//	double rC28[20];
-//	for ( int c = 0; c < 20; c++ ) {
-//		if ( eC22[c] != 0. ) rC22[c] = dC22[c] / eC22[c]; else rC22[c] = 0.;
-//		if ( eC24[c] != 0. ) rC24[c] = dC24[c] / eC24[c]; else rC24[c] = 0.;
-//		if ( eC26[c] != 0. ) rC26[c] = dC26[c] / eC26[c]; else rC26[c] = 0.;
-//		if ( eC28[c] != 0. ) rC28[c] = dC28[c] / eC28[c]; else rC28[c] = 0.;
-//	}
+
+	double dR22[20][100];
+	double dR24[20][100];
+	double dR26[20][100];
+	double dR28[20][100];
+
+	double eR22[20];
+	double eR24[20];
+	double eR26[20];
+	double eR28[20];
+
+	for ( int c = 0; c < 20; c++ ) {
+		double sum2 = 0;
+		double sum4 = 0;
+		double sum6 = 0;
+		double sum8 = 0;
+		for ( int i = 0; i <= s3; i++ ) {
+			double C2 = dC22[c][i];
+			double C4 = dC24[c][i];
+			double C6 = dC26[c][i];
+			double C8 = dC28[c][i];
+
+			double V2, V4, V6, V8;
+			if ( C2 > 0 ) V2 = pow(C2, 1./2); else V2 = -pow(-C2, 1./2);
+			if ( C4 > 0 ) V4 = -pow(C4, 1./4); else V4 = pow(-C4, 1./4);
+			if ( C6 > 0 ) V6 = pow(C6/4., 1./6); else V6 = -pow(-C6/4., 1./6);
+			if ( C8 > 0 ) V8 = -pow(C8/33., 1./8); else V8 = pow(-C8/33., 1./8);
+
+			dR22[c][i] = V2;
+			dR24[c][i] = V4/V2;
+			dR26[c][i] = V6/V4;
+			dR28[c][i] = V8/V6;
+			if ( i != s3 ) {
+				sum2 += dR22[c][i] * dR22[c][i];
+				sum4 += dR24[c][i] * dR24[c][i];
+				sum6 += dR26[c][i] * dR26[c][i];
+				sum8 += dR28[c][i] * dR28[c][i];
+			}
+		}
+
+		eR22[c] = sqrt( ( sum2/s3 - dR22[c][s3] * dR22[c][s3] ) / s3 );
+		eR24[c] = sqrt( ( sum4/s3 - dR24[c][s3] * dR24[c][s3] ) / s3 );
+		eR26[c] = sqrt( ( sum6/s3 - dR26[c][s3] * dR26[c][s3] ) / s3 );
+		eR28[c] = sqrt( ( sum8/s3 - dR28[c][s3] * dR28[c][s3] ) / s3 );
+	}
 
 	TH1D * hC22f = new TH1D("hC22f", "hC22f", 20, 0, 20);
 	TH1D * hC24f = new TH1D("hC24f", "hC24f", 20, 0, 20);
@@ -159,6 +193,11 @@
 	TH1D * hV24f = new TH1D("hV24f", "hV24f", 20, 0, 20);
 	TH1D * hV26f = new TH1D("hV26f", "hV26f", 20, 0, 20);
 	TH1D * hV28f = new TH1D("hV28f", "hV28f", 20, 0, 20);
+
+	TH1D * hR22f = new TH1D("hR22f", "hR22f", 20, 0, 20);
+	TH1D * hR24f = new TH1D("hR24f", "hR24f", 20, 0, 20);
+	TH1D * hR26f = new TH1D("hR26f", "hR26f", 20, 0, 20);
+	TH1D * hR28f = new TH1D("hR28f", "hR28f", 20, 0, 20);
 	for ( int c = 0; c < 20; c++ ) {
 		hC22f->SetBinContent(c+1, dC22[c][s3]);
 		hC24f->SetBinContent(c+1, dC24[c][s3]);
@@ -179,6 +218,16 @@
 		hV24f->SetBinError(c+1, eV24[c]);
 		hV26f->SetBinError(c+1, eV26[c]);
 		hV28f->SetBinError(c+1, eV28[c]);
+
+		hR22f->SetBinContent(c+1, dR22[c][s3]);
+		hR24f->SetBinContent(c+1, dR24[c][s3]);
+		hR26f->SetBinContent(c+1, dR26[c][s3]);
+		hR28f->SetBinContent(c+1, dR28[c][s3]);
+
+		hR22f->SetBinError(c+1, eR22[c]);
+		hR24f->SetBinError(c+1, eR24[c]);
+		hR26f->SetBinError(c+1, eR26[c]);
+		hR28f->SetBinError(c+1, eR28[c]);
 	}
 
 	TH1D * hNoffCent4 = (TH1D*) f[s3]->Get("hNoffCent4");
@@ -196,6 +245,11 @@
 	hV24f->Write();
 	hV26f->Write();
 	hV28f->Write();
+
+	hR22f->Write();
+	hR24f->Write();
+	hR26f->Write();
+	hR28f->Write();
 
 	hNoffCent4->Write();
 	hNoffCent6->Write();

@@ -20,7 +20,7 @@
 {
 #include "label.h"
 
-	int s1 = 102; 
+	int s1 = 10; 
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;

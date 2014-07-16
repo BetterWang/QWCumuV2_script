@@ -40,4 +40,6 @@
 
 	ffit64->SetLineColor(kBlue);
 	ffit86->SetLineColor(kRed);
+	ffit64->SetLineWidth(3);
+	ffit86->SetLineWidth(3);
 }

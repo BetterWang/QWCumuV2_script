@@ -19,7 +19,7 @@
 {
 #include "label.h"
 	int s1 = 10;
-	int s2 = 68;
+	int s2 = 52;
 	int s3 = 3;
 
 	TString text1 = "Combined";
@@ -29,13 +29,13 @@
 
 	TString fname2 = Form("%s/fsave.root", ftxt[s2]);
 
-	if ( s2 == 10 ) {
-		s3 = 10;
-		text1 = "bin width of 5";
-		text2 = "bin width of 2";
-		fname2 = Form("%s/fsave_bin2.root", ftxt[s2]);
-		b3 = 0;
-	}
+//	if ( s2 == 10 ) {
+//		s3 = 10;
+//		text1 = "bin width of 5";
+//		text2 = "bin width of 2";
+//		fname2 = Form("%s/fsave_bin2.root", ftxt[s2]);
+//		b3 = 0;
+//	}
 	if ( s2 == 33 ) {
 		s3 = 33;
 		text1 = "bin width of 5";
