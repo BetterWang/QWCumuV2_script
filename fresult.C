@@ -26,6 +26,7 @@
 	int bRatioSys = 1;
 
 
+	// v2 sys
 //	double sys6pA[7] = {0.0792, 0.1762, 0.0212, 0.0727, 0.1238, 0.0917, 0.0180};
 //	double sys8pA[4] = {0.0412, 0.0411, 0.0892, 0.0184};
 
@@ -35,7 +36,6 @@
 	double sys6AA[13] = {0.0184,	0.0185,	0.0197,	0.0187,	0.0185,	0.0182,	0.0192,	0.0187,	0.0181,	0.0245,	0.0148,	0.0251,	0.0321};
         double sys8AA[12] = {0.0184,	0.0186,	0.0198,	0.0186,	0.0183,	0.0183,	0.0191,	0.0189,	0.0182,	0.0235,	0.0143,	0.0573};
 
-
 	double xe6pA[7] = {0.021, 0.013, 0.006, 0.004, 0.004, 0.006, 0.025};
 	double xe8pA[4] = {0.004, 0.004, 0.006, 0.025};
 	double xe6pAs[7] = {0.072, 0.052, 0.053, 0.039, 0.041, 0.042, 0.042};
@@ -44,21 +44,21 @@
 //	double ye6pAYs[7] = {0.0621180223,	0.1176494255,	0.01447037168,	0.007016761734,	0.02696280641,	0.006004923697,	0.05873763201};
 //	double ye8pAYs[4] = {0.05500183388,	0.1307786536,	0.1049608983,	0.02506903903};
 
-	double ye6pAYs[7] = {
-		0.0621,
-		0.1176,
-		0.0145,
-		0.0070,
-		0.0270,
-		0.0060,
-		0.0587
-	};
-	double ye8pAYs[4] = {
-		0.0607,
-		0.0207,
-		0.0982,
-		0.0622
-	};
+//	double ye6pAYs[7] = {
+//		0.0621,
+//		0.1176,
+//		0.0145,
+//		0.0070,
+//		0.0270,
+//		0.0060,
+//		0.0587
+//	};
+//	double ye8pAYs[4] = {
+//		0.0607,
+//		0.0207,
+//		0.0982,
+//		0.0622
+//	};
 
 //	double ye6pAYs[7] = {0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042};
 //	double ye8pAYs[4] = {0.079, 0.079, 0.079, 0.079};
@@ -66,6 +66,9 @@
 //	double ye6pAYs[7] = {0.020, 0.020, 0.020, 0.020, 0.020, 0.020, 0.020};
 	double ye8pAXs[4] = {0.028, 0.028, 0.028, 0.028};
 //	double ye8pAYs[4] = {0.020, 0.020, 0.020, 0.020};
+
+	double ye6pAYs[7] = {0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010};
+	double ye8pAYs[4] = {0.036, 0.036, 0.036, 0.036};
 
 //	double ye6AAYs[14] = {0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472};
 //	double ye8AAYs[13] = {0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445};
@@ -340,9 +343,9 @@
 		gr_pPb_c28s->GetEY()[i] = 8 * gr_pPb_c28s->GetY()[i] * gr_pPb_v28s->GetEY()[i] / gr_pPb_v28s->GetY()[i];
 	}
 
-	TColor red(1001, 1, 0, 0, "red", 0.2);
-	TColor blue(1002, 0, 1, 0, "red", 0.2);
-	TColor green(1003, 0, 0, 1, "red", 0.2);
+	TColor red(1001, 1, 0, 0, "red", 0.4);
+	TColor blue(1002, 0, 1, 0, "red", 0.4);
+	TColor green(1003, 0, 0, 1, "red", 0.4);
 	gr_pPb_v26s->SetFillColor(1003);
 	gr_pPb_v28s->SetFillColor(1001);
 	grLYZpPbv2s->SetFillColor(1002);
@@ -451,7 +454,7 @@
 	gr_PbPb_v26->Draw("Psame");
 	gr_PbPb_v28->Draw("Psame");
 	legLeft->Draw();
-	latex.DrawLatexNDC(0.20, 0.94, "#splitline{PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
+	latex.DrawLatexNDC(0.20, 0.94, "#splitline{CMS PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
 
 //	gStyle->SetEndErrorSize(5);
 	gStyle->SetErrorX(5);
@@ -469,8 +472,8 @@
 	grLYZpPbv2->Draw("Psame");
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
-	latex.DrawLatexNDC(0.1, 0.94, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.5, 0.27, "CMS Preliminary");
+	latex.DrawLatexNDC(0.1, 0.94, "#splitline{CMS pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
+//	latex.DrawLatexNDC(0.5, 0.27, "CMS");
 
 
 	TCanvas * cSum2pA = MakeCanvas("cSum2pA", "cSum2pA", 600, 500);
@@ -491,8 +494,8 @@
 	grLYZpPbv2->Draw("Psame");
 	gr_pPb_v26->Draw("Psame");
 	gr_pPb_v28->Draw("Psame");
-	latex.DrawLatexNDC(0.19, 0.95, "CMS Preliminary");
-	latex.DrawLatexNDC(0.19, 0.90, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV, L_{int} = 35 nb^{-1}}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
+	latex.DrawLatexNDC(0.19, 0.95, "CMS");
+	latex.DrawLatexNDC(0.19, 0.90, "#splitline{CMS pPb #sqrt{s_{NN}} = 5.02 TeV, L_{int} = 35 nb^{-1}}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
 	TLegend * legLeftpA = new TLegend(0.5, 0.18, 0.85, 0.43);
 	legLeftpA->SetFillColor(kWhite);
 	legLeftpA->SetTextFont(42);
@@ -578,7 +581,7 @@
 	gr_Ratio64->Draw("psame");
 //	legLeftR->Draw();
 	latex.DrawLatexNDC(0.20, 0.88, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS");
 //	latex.DrawLatexNDC(0.18, 0.92, "(a)");
 
 	cSumR->cd(2);
@@ -595,7 +598,7 @@
 //	latex.DrawLatexNDC(0.05, 0.85, "    pPb #sqrt{s_{NN}} = 5.02 TeV");
 //	latex.DrawLatexNDC(0.05, 0.92, "(b)");
 //	latex.DrawLatexNDC(0.1, 0.36, "pPb #sqrt{s_{NN}} = 5.02 TeV");
-//	latex.DrawLatexNDC(0.2, 0.9, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.9, "CMS");
 
 	TLine *lr = new TLine();
 	lr->SetLineColor(kRed);
@@ -624,7 +627,7 @@
 	gr_AARatio64->Draw("psame");
 //	legLeftR->Draw();
 	latex.DrawLatexNDC(0.20, 0.88, "#splitline{PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS");
 //	latex.DrawLatexNDC(0.18, 0.92, "(a)");
 
 	cSumAAR->cd(2);
@@ -666,7 +669,7 @@
 	gr_AARatio64->SetMarkerStyle(kOpenSquare);
 	gr_AARatio64->Draw("psame");
 	latex.DrawLatexNDC(0.20, 0.88, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV, PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS");
 
 	TLegend * legRatioSamepA = new TLegend(0.4, 0.05, 0.65, 0.13);
 	legRatioSamepA->SetFillColor(kWhite);
@@ -730,7 +733,7 @@
 	gr_Ratio64s->Draw("[]2");
 	gr_Ratio64->Draw("psame");
 	latex.DrawLatexNDC(0.20, 0.88, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS");
 
 
 	cSumRSame1->cd(2);
@@ -766,7 +769,7 @@
 	gr_Ratio64->Draw("psame");
 	gr_AARatio64->Draw("psame");
 	latex.DrawLatexNDC(0.20, 0.88, "#splitline{pPb #sqrt{s_{NN}} = 5.02 TeV, PbPb #sqrt{s_{NN}} = 2.76 TeV}{0.3 < p_{T} < 3.0 GeV/c; |#eta| < 2.4}");
-	latex.DrawLatexNDC(0.2, 0.94, "CMS Preliminary");
+	latex.DrawLatexNDC(0.2, 0.94, "CMS");
 
 	legRatioSamepA->Draw("same");
 	legRatioSameAA->Draw("same");
@@ -841,7 +844,7 @@
   h3->GetYaxis()->SetTitleSize(32);
   h3->GetYaxis()->CenterTitle(kTRUE);
   h3->GetYaxis()->SetTitleOffset(2.4);
-  h3->SetYTitle("- c_{2}\{8\}");
+  h3->SetYTitle("#minus c_{2}\{8\}");
   TH1D * h4 = (TH1D *) h3->Clone("h4");
   h4->GetYaxis()->SetLabelSize(0);
   h4->GetXaxis()->SetLabelFont(43);
@@ -920,34 +923,34 @@
   TLatex * l1 = new TLatex(0.3, 0.2,"PbPb #sqrt{s_{NN}} = 2.76 TeV");
   l1->SetNDC();
   l1->SetTextFont(43);
-  l1->SetTextSize(28);
+  l1->SetTextSize(24);
   l1->Draw();
   TLatex * l1a = new TLatex(0.3, 0.1,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
   l1a->SetNDC();
   l1a->SetTextFont(43);
   l1a->SetTextSize(24);
   l1a->Draw();
-  TLatex * prelim = new TLatex(0.3, 0.3,"CMS Preliminary");
+  TLatex * prelim = new TLatex(0.3, 0.3,"CMS");
   prelim->SetNDC();
   prelim->SetTextFont(43);
-  prelim->SetTextSize(24);
+  prelim->SetTextSize(28);
   prelim->Draw();
 
   p2->cd();
   TLatex * l2 = new TLatex(0.1, 0.75,"pPb #sqrt{s_{NN}} = 5.02 TeV");
   l2->SetNDC();
   l2->SetTextFont(43);
-  l2->SetTextSize(28);
+  l2->SetTextSize(24);
   l2->Draw();
   TLatex * l2a = new TLatex(0.1, 0.65,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
   l2a->SetNDC();
   l2a->SetTextFont(43);
   l2a->SetTextSize(24);
   l2a->Draw();
-  TLatex * prelim2 = new TLatex(0.1, 0.85,"CMS Preliminary");
+  TLatex * prelim2 = new TLatex(0.1, 0.85,"CMS");
   prelim2->SetNDC();
   prelim2->SetTextFont(43);
-  prelim2->SetTextSize(24);
+  prelim2->SetTextSize(28);
   prelim2->Draw();
 
   p4->cd();
@@ -957,7 +960,7 @@
   legc26->SetTextFont(43);
   legc26->SetTextSize(24);
   legc26->AddEntry(gr_pPb_c26, "c_{2}{6}", "p");
-  legc26->AddEntry(gr_pPb_c28, "#scale[1.1]{|} c_{2}{8} #scale[1.1]{|}", "p");
+  legc26->AddEntry(gr_pPb_c28, "c_{2}{8}", "p");
   legc26->Draw();
 	}
 
@@ -993,6 +996,7 @@
 //	cC28PbPb->SaveAs("final_PbPb_c28.pdf");
 
 
+	// anime
 	legEnVLYZ->SetObject((TObject*)0);
 	legEnVLYZ->SetLabel("");
 	legEnVLYZ->SetOption("");
@@ -1044,6 +1048,50 @@
 	gr_HIN_13_002_pPbv24s->Delete();
 	cSum2->SaveAs("final_v2_2.pdf");
 	cSum2pA->SaveAs("final_v2pA_2.pdf");
+
+	cout << "PbPb v22: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_HIN_13_002_PbPbv22->GetN(); i++ ) {
+		cout << gr_HIN_13_002_PbPbv22->GetX()[i] << "\t" << gr_HIN_13_002_PbPbv22->GetY()[i] << "\t" << gr_HIN_13_002_PbPbv22->GetEY()[i] << "\t" << gr_HIN_13_002_PbPbv22s->GetEY()[i] << endl;
+	}
+	cout << "PbPb v24: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_HIN_13_002_PbPbv24->GetN(); i++ ) {
+		cout << gr_HIN_13_002_PbPbv24->GetX()[i] << "\t" << gr_HIN_13_002_PbPbv24->GetY()[i] << "\t" << gr_HIN_13_002_PbPbv24->GetEY()[i] << "\t" << gr_HIN_13_002_PbPbv24s->GetEY()[i] << endl;
+	}
+	cout << "PbPb v26: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_PbPb_v26->GetN(); i++ ) {
+		cout << gr_PbPb_v26->GetX()[i] << "\t" << gr_PbPb_v26->GetY()[i] << "\t" << gr_PbPb_v26->GetEY()[i] << "\t" << gr_PbPb_v26s->GetEY()[i] << endl;
+	}
+	cout << "PbPb v28: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_PbPb_v28->GetN(); i++ ) {
+		cout << gr_PbPb_v28->GetX()[i] << "\t" << gr_PbPb_v28->GetY()[i] << "\t" << gr_PbPb_v28->GetEY()[i] << "\t" << gr_PbPb_v28s->GetEY()[i] << endl;
+	}
+	cout << "PbPb v2LYZ: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < grLYZPbPbv2->GetN(); i++ ) {
+		cout << grLYZPbPbv2->GetX()[i] << "\t" << grLYZPbPbv2->GetY()[i] << "\t" << grLYZPbPbv2->GetEY()[i] << "\t" << grLYZPbPbv2->GetEY()[i] << endl;
+	}
+
+	cout << "pPb v22: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_HIN_13_002_pPbv22->GetN(); i++ ) {
+		cout << gr_HIN_13_002_pPbv22->GetX()[i] << "\t" << gr_HIN_13_002_pPbv22->GetY()[i] << "\t" << gr_HIN_13_002_pPbv22->GetEY()[i] << "\t" << gr_HIN_13_002_pPbv22s->GetEY()[i] << endl;
+	}
+	cout << "pPb v24: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_HIN_13_002_pPbv24->GetN(); i++ ) {
+		cout << gr_HIN_13_002_pPbv24->GetX()[i] << "\t" << gr_HIN_13_002_pPbv24->GetY()[i] << "\t" << gr_HIN_13_002_pPbv24->GetEY()[i] << "\t" << gr_HIN_13_002_pPbv24s->GetEY()[i] << endl;
+	}
+	cout << "pPb v26: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_pPb_v26->GetN(); i++ ) {
+		cout << gr_pPb_v26->GetX()[i] << "\t" << gr_pPb_v26->GetY()[i] << "\t" << gr_pPb_v26->GetEY()[i] << "\t" << gr_pPb_v26s->GetEY()[i] << endl;
+	}
+	cout << "pPb v28: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < gr_pPb_v28->GetN(); i++ ) {
+		cout << gr_pPb_v28->GetX()[i] << "\t" << gr_pPb_v28->GetY()[i] << "\t" << gr_pPb_v28->GetEY()[i] << "\t" << gr_pPb_v28s->GetEY()[i] << endl;
+	}
+	cout << "pPb v2LYZ: Noff\tv2\tstat.\tsys." << endl;
+	for ( int i = 0; i < grLYZpPbv2->GetN(); i++ ) {
+		cout << grLYZpPbv2->GetX()[i] << "\t" << grLYZpPbv2->GetY()[i] << "\t" << grLYZpPbv2->GetEY()[i] << "\t" << grLYZpPbv2->GetEY()[i] << endl;
+	}
+
+
 
 
 }
