@@ -966,6 +966,76 @@
 
 
 
+	TCanvas * cResult = MakeCanvas("cResult", "cResult", 600, 800);
+	cResult->SetLogy();
+	cResult->SetLeftMargin(0.15);
+	cResult->SetRightMargin(0.02);
+	cResult->SetTopMargin(0.02);
+	cResult->SetBottomMargin(0.15);
+	h1->SetYTitle("#minus c_{2}\{8\}   and   c_{2}\{6\}");
+	h1->SetXTitle("N_{trk}^{offline}");
+	h1->SetLabelSize(0.05);
+	h1->SetMinimum(1e-10);
+	h1->SetMaximum(0.999e-5);
+	h1->GetYaxis()->SetTitleOffset(1.80);
+	h1->GetXaxis()->SetTitleOffset(0.85);
+	h1->Draw();
+	gr_PbPb_c26s->Draw("[]3");
+	gr_PbPb_c26->Draw("p");
+	gr_PbPb_c28s->Draw("[]3");
+	gr_PbPb_c28->Draw("p");
+
+	gr_pPb_c26->SetMarkerStyle(kOpenCross);
+	gr_pPb_c26s->SetMarkerStyle(kOpenCross);
+	gr_pPb_c28->SetMarkerStyle(kOpenDiamond);
+	gr_pPb_c28s->SetMarkerStyle(kOpenDiamond);
+
+	gr_pPb_c26s->Draw("[]3");
+	gr_pPb_c26->Draw("p");
+	gr_pPb_c28s->Draw("[]3");
+	gr_pPb_c28->Draw("p");
+
+	TLatex * l1cms = new TLatex(0.2, 0.92,"CMS");
+	l1cms->SetNDC();
+	l1cms->SetTextFont(43);
+	l1cms->SetTextSize(28);
+	l1cms->Draw();
+	TLatex * l1c = new TLatex(0.2, 0.88,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+	l1c->SetNDC();
+	l1c->SetTextFont(43);
+	l1c->SetTextSize(24);
+	l1c->Draw();
+ 
+	TLegend * legcAA = new TLegend(0.7, 0.35, 0.97, 0.42);
+	legcAA->SetFillColor(kWhite);
+	legcAA->SetBorderSize(0);
+	legcAA->SetTextFont(43);
+	legcAA->SetTextSize(22);
+	legcAA->AddEntry(gr_PbPb_c26, "c_{2}\{6\}", "p");
+	legcAA->AddEntry(gr_PbPb_c28, "c_{2}\{8\}", "p");
+//	legcAA->SetHeader("PbPb #sqrt{s_{NN}} = 2.76 TeV");
+	legcAA->Draw();
+	TLatex * l1cAA = new TLatex(0.62, 0.45, "PbPb #sqrt{s_{NN}} = 2.76 TeV");
+	l1cAA->SetNDC();
+	l1cAA->SetTextFont(43);
+	l1cAA->SetTextSize(22);
+	l1cAA->Draw();
+
+	TLegend * legcpA = new TLegend(0.7, 0.2, 0.97, 0.27);
+	legcpA->SetFillColor(kWhite);
+	legcpA->SetBorderSize(0);
+	legcpA->SetTextFont(43);
+	legcpA->SetTextSize(22);
+	legcpA->AddEntry(gr_pPb_c26, "c_{2}\{6\}", "p");
+	legcpA->AddEntry(gr_pPb_c28, "c_{2}\{8\}", "p");
+//	legcpA->SetHeader("pPb #sqrt{s_{NN}} = 5.02 TeV");
+	legcpA->Draw();
+	TLatex * l1cpA = new TLatex(0.62, 0.3, "pPb #sqrt{s_{NN}} = 5.02 TeV");
+	l1cpA->SetNDC();
+	l1cpA->SetTextFont(43);
+	l1cpA->SetTextSize(22);
+	l1cpA->Draw();
+
 
 
 
@@ -977,9 +1047,8 @@
 	cSum2->SaveAs("final_v2_C.C");
 	cSumR->SaveAs("final_ratio_C.C");
 	cSumAAR->SaveAs("final_ratioAA_C.C");
-	c->SaveAs("cResults.pdf");
-	c->SaveAs("cResults_C.C");
-
+	cResult->SaveAs("cResults.pdf");
+	cResult->SaveAs("cResults_C.C");
 
 	cSum2pA->SaveAs("final_v2pA.pdf");
 	cSum2pA->SaveAs("final_v2pA_C.C");
@@ -997,57 +1066,57 @@
 
 
 	// anime
-	legEnVLYZ->SetObject((TObject*)0);
-	legEnVLYZ->SetLabel("");
-	legEnVLYZ->SetOption("");
-	legEntryLYZA->SetObject((TObject*)0);
-	legEntryLYZA->SetLabel("");
-	legEntryLYZA->SetOption("");
-	grLYZPbPbv2->Delete();
-	grLYZpPbv2->Delete();
-	grLYZPbPbv2s->Delete();
-	grLYZpPbv2s->Delete();
-	cSum2->SaveAs("final_v2_5.pdf");
-	cSum2pA->SaveAs("final_v2pA_5.pdf");
-
-	legEnV8->SetObject((TObject*)0);
-	legEnV8->SetLabel("");
-	legEnV8->SetOption("");
-	legEnV8A->SetObject((TObject*)0);
-	legEnV8A->SetLabel("");
-	legEnV8A->SetOption("");
-	gr_PbPb_v28->Delete();
-	gr_PbPb_v28s->Delete();
-	gr_pPb_v28->Delete();
-	gr_pPb_v28s->Delete();
-	cSum2->SaveAs("final_v2_4.pdf");
-	cSum2pA->SaveAs("final_v2pA_4.pdf");
-
-	legEnV6->SetObject((TObject*)0);
-	legEnV6->SetLabel("");
-	legEnV6->SetOption("");
-	legEnV6A->SetObject((TObject*)0);
-	legEnV6A->SetLabel("");
-	legEnV6A->SetOption("");
-	gr_PbPb_v26->Delete();
-	gr_PbPb_v26s->Delete();
-	gr_pPb_v26->Delete();
-	gr_pPb_v26s->Delete();
-	cSum2->SaveAs("final_v2_3.pdf");
-	cSum2pA->SaveAs("final_v2pA_3.pdf");
-
-	legEnV4->SetObject((TObject*)0);
-	legEnV4->SetLabel("");
-	legEnV4->SetOption("");
-	legEnV4A->SetObject((TObject*)0);
-	legEnV4A->SetLabel("");
-	legEnV4A->SetOption("");
-	gr_HIN_13_002_PbPbv24->Delete();
-	gr_HIN_13_002_PbPbv24s->Delete();
-	gr_HIN_13_002_pPbv24->Delete();
-	gr_HIN_13_002_pPbv24s->Delete();
-	cSum2->SaveAs("final_v2_2.pdf");
-	cSum2pA->SaveAs("final_v2pA_2.pdf");
+//	legEnVLYZ->SetObject((TObject*)0);
+//	legEnVLYZ->SetLabel("");
+//	legEnVLYZ->SetOption("");
+//	legEntryLYZA->SetObject((TObject*)0);
+//	legEntryLYZA->SetLabel("");
+//	legEntryLYZA->SetOption("");
+//	grLYZPbPbv2->Delete();
+//	grLYZpPbv2->Delete();
+//	grLYZPbPbv2s->Delete();
+//	grLYZpPbv2s->Delete();
+//	cSum2->SaveAs("final_v2_5.pdf");
+//	cSum2pA->SaveAs("final_v2pA_5.pdf");
+//
+//	legEnV8->SetObject((TObject*)0);
+//	legEnV8->SetLabel("");
+//	legEnV8->SetOption("");
+//	legEnV8A->SetObject((TObject*)0);
+//	legEnV8A->SetLabel("");
+//	legEnV8A->SetOption("");
+//	gr_PbPb_v28->Delete();
+//	gr_PbPb_v28s->Delete();
+//	gr_pPb_v28->Delete();
+//	gr_pPb_v28s->Delete();
+//	cSum2->SaveAs("final_v2_4.pdf");
+//	cSum2pA->SaveAs("final_v2pA_4.pdf");
+//
+//	legEnV6->SetObject((TObject*)0);
+//	legEnV6->SetLabel("");
+//	legEnV6->SetOption("");
+//	legEnV6A->SetObject((TObject*)0);
+//	legEnV6A->SetLabel("");
+//	legEnV6A->SetOption("");
+//	gr_PbPb_v26->Delete();
+//	gr_PbPb_v26s->Delete();
+//	gr_pPb_v26->Delete();
+//	gr_pPb_v26s->Delete();
+//	cSum2->SaveAs("final_v2_3.pdf");
+//	cSum2pA->SaveAs("final_v2pA_3.pdf");
+//
+//	legEnV4->SetObject((TObject*)0);
+//	legEnV4->SetLabel("");
+//	legEnV4->SetOption("");
+//	legEnV4A->SetObject((TObject*)0);
+//	legEnV4A->SetLabel("");
+//	legEnV4A->SetOption("");
+//	gr_HIN_13_002_PbPbv24->Delete();
+//	gr_HIN_13_002_PbPbv24s->Delete();
+//	gr_HIN_13_002_pPbv24->Delete();
+//	gr_HIN_13_002_pPbv24s->Delete();
+//	cSum2->SaveAs("final_v2_2.pdf");
+//	cSum2pA->SaveAs("final_v2pA_2.pdf");
 
 	cout << "PbPb v22: Noff\tv2\tstat.\tsys." << endl;
 	for ( int i = 0; i < gr_HIN_13_002_PbPbv22->GetN(); i++ ) {
