@@ -30,16 +30,16 @@
 //	double sys6pA[7] = {0.0792, 0.1762, 0.0212, 0.0727, 0.1238, 0.0917, 0.0180};
 //	double sys8pA[4] = {0.0412, 0.0411, 0.0892, 0.0184};
 
-	double sys6pA[7] = {0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05};
-	double sys8pA[4] = {0.06, 0.06, 0.06, 0.06};
+	double sys6pA[] = {0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05};
+	double sys8pA[] = {0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06};
 
 	double sys6AA[13] = {0.0184,	0.0185,	0.0197,	0.0187,	0.0185,	0.0182,	0.0192,	0.0187,	0.0181,	0.0245,	0.0148,	0.0251,	0.0321};
         double sys8AA[12] = {0.0184,	0.0186,	0.0198,	0.0186,	0.0183,	0.0183,	0.0191,	0.0189,	0.0182,	0.0235,	0.0143,	0.0573};
 
-	double xe6pA[7] = {0.021, 0.013, 0.006, 0.004, 0.004, 0.006, 0.025};
-	double xe8pA[4] = {0.004, 0.004, 0.006, 0.025};
-	double xe6pAs[7] = {0.072, 0.052, 0.053, 0.039, 0.041, 0.042, 0.042};
-	double xe8pAs[4] = {0.039, 0.041, 0.042, 0.042};
+	double xe6pA[] = {0.021, 0.013, 0.006, 0.004, 0.004, 0.006, 0.025, 0., 0., 0., 0., 0., 0., 0.};
+	double xe8pA[] = {0.004, 0.004, 0.006, 0.025, 0., 0., 0., 0., 0.};
+	double xe6pAs[] = {0.072, 0.052, 0.053, 0.039, 0.041, 0.042, 0.042, 0., 0., 0., 0., 0., 0., 0.};
+	double xe8pAs[] = {0.039, 0.041, 0.042, 0.042, 0., 0., 0., 0., 0., 0., 0., 0.};
 
 //	double ye6pAYs[7] = {0.0621180223,	0.1176494255,	0.01447037168,	0.007016761734,	0.02696280641,	0.006004923697,	0.05873763201};
 //	double ye8pAYs[4] = {0.05500183388,	0.1307786536,	0.1049608983,	0.02506903903};
@@ -62,13 +62,13 @@
 
 //	double ye6pAYs[7] = {0.042, 0.042, 0.042, 0.042, 0.042, 0.042, 0.042};
 //	double ye8pAYs[4] = {0.079, 0.079, 0.079, 0.079};
-	double ye6pAXs[7] = {0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028};
+	double ye6pAXs[] = {0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028};
 //	double ye6pAYs[7] = {0.020, 0.020, 0.020, 0.020, 0.020, 0.020, 0.020};
-	double ye8pAXs[4] = {0.028, 0.028, 0.028, 0.028};
+	double ye8pAXs[] = {0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028};
 //	double ye8pAYs[4] = {0.020, 0.020, 0.020, 0.020};
 
-	double ye6pAYs[7] = {0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010};
-	double ye8pAYs[4] = {0.036, 0.036, 0.036, 0.036};
+	double ye6pAYs[] = {0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010, 0.010};
+	double ye8pAYs[] = {0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036};
 
 //	double ye6AAYs[14] = {0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472, 0.00767557472};
 //	double ye8AAYs[13] = {0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445, 0.006553631445};
@@ -803,10 +803,10 @@
 	{
   Double_t pw = 0.45;
   Double_t ph = 0.45;
-  Double_t rm = 0.02;
-  Double_t lm = 0.03;
+  Double_t rm = 0.00;
+  Double_t lm = 0.00;
   Double_t bmtoprow = 0.00;
-  Double_t bm = 0.03;
+  Double_t bm = 0.00;
   Double_t tm = 0.04;
   Double_t tmbot = 0.0;
   Int_t xaxlab = 807;
@@ -852,6 +852,9 @@
   h4->SetMinimum(1e-10);
   h4->SetMaximum(1e-6);
 
+  h2->GetXaxis()->SetRangeUser(5, 380);
+  h4->GetXaxis()->SetRangeUser(5, 380);
+
   TCanvas * c = new TCanvas("c","c",900,900);
 
   TPad * p1 = new TPad("p1","p1",0,1.0-ph,1.0-pw,1.0);
@@ -881,7 +884,7 @@
   h2->Draw();
   gr_pPb_c26->SetMarkerStyle(kFullCross);
   gr_pPb_c26s->Draw("[]3");
-  gr_pPb_c26->Draw("p");
+  gr_pPb_c26->Draw("pl");
 
   TPad * p3 = new TPad("p3","p3",0,0.0,1.0-pw,1.0-ph);
   p3->SetRightMargin(rm);
@@ -916,7 +919,7 @@
 	  gr_pPb_c28s->GetY()[i] *= -1;
   }
   gr_pPb_c28s->Draw("[]3");
-  gr_pPb_c28->Draw("p");
+  gr_pPb_c28->Draw("pl");
 
   Double_t prescale = 0.43;
   p1->cd();
@@ -997,57 +1000,57 @@
 
 
 	// anime
-	legEnVLYZ->SetObject((TObject*)0);
-	legEnVLYZ->SetLabel("");
-	legEnVLYZ->SetOption("");
-	legEntryLYZA->SetObject((TObject*)0);
-	legEntryLYZA->SetLabel("");
-	legEntryLYZA->SetOption("");
-	grLYZPbPbv2->Delete();
-	grLYZpPbv2->Delete();
-	grLYZPbPbv2s->Delete();
-	grLYZpPbv2s->Delete();
-	cSum2->SaveAs("final_v2_5.pdf");
-	cSum2pA->SaveAs("final_v2pA_5.pdf");
-
-	legEnV8->SetObject((TObject*)0);
-	legEnV8->SetLabel("");
-	legEnV8->SetOption("");
-	legEnV8A->SetObject((TObject*)0);
-	legEnV8A->SetLabel("");
-	legEnV8A->SetOption("");
-	gr_PbPb_v28->Delete();
-	gr_PbPb_v28s->Delete();
-	gr_pPb_v28->Delete();
-	gr_pPb_v28s->Delete();
-	cSum2->SaveAs("final_v2_4.pdf");
-	cSum2pA->SaveAs("final_v2pA_4.pdf");
-
-	legEnV6->SetObject((TObject*)0);
-	legEnV6->SetLabel("");
-	legEnV6->SetOption("");
-	legEnV6A->SetObject((TObject*)0);
-	legEnV6A->SetLabel("");
-	legEnV6A->SetOption("");
-	gr_PbPb_v26->Delete();
-	gr_PbPb_v26s->Delete();
-	gr_pPb_v26->Delete();
-	gr_pPb_v26s->Delete();
-	cSum2->SaveAs("final_v2_3.pdf");
-	cSum2pA->SaveAs("final_v2pA_3.pdf");
-
-	legEnV4->SetObject((TObject*)0);
-	legEnV4->SetLabel("");
-	legEnV4->SetOption("");
-	legEnV4A->SetObject((TObject*)0);
-	legEnV4A->SetLabel("");
-	legEnV4A->SetOption("");
-	gr_HIN_13_002_PbPbv24->Delete();
-	gr_HIN_13_002_PbPbv24s->Delete();
-	gr_HIN_13_002_pPbv24->Delete();
-	gr_HIN_13_002_pPbv24s->Delete();
-	cSum2->SaveAs("final_v2_2.pdf");
-	cSum2pA->SaveAs("final_v2pA_2.pdf");
+//	legEnVLYZ->SetObject((TObject*)0);
+//	legEnVLYZ->SetLabel("");
+//	legEnVLYZ->SetOption("");
+//	legEntryLYZA->SetObject((TObject*)0);
+//	legEntryLYZA->SetLabel("");
+//	legEntryLYZA->SetOption("");
+//	grLYZPbPbv2->Delete();
+//	grLYZpPbv2->Delete();
+//	grLYZPbPbv2s->Delete();
+//	grLYZpPbv2s->Delete();
+//	cSum2->SaveAs("final_v2_5.pdf");
+//	cSum2pA->SaveAs("final_v2pA_5.pdf");
+//
+//	legEnV8->SetObject((TObject*)0);
+//	legEnV8->SetLabel("");
+//	legEnV8->SetOption("");
+//	legEnV8A->SetObject((TObject*)0);
+//	legEnV8A->SetLabel("");
+//	legEnV8A->SetOption("");
+//	gr_PbPb_v28->Delete();
+//	gr_PbPb_v28s->Delete();
+//	gr_pPb_v28->Delete();
+//	gr_pPb_v28s->Delete();
+//	cSum2->SaveAs("final_v2_4.pdf");
+//	cSum2pA->SaveAs("final_v2pA_4.pdf");
+//
+//	legEnV6->SetObject((TObject*)0);
+//	legEnV6->SetLabel("");
+//	legEnV6->SetOption("");
+//	legEnV6A->SetObject((TObject*)0);
+//	legEnV6A->SetLabel("");
+//	legEnV6A->SetOption("");
+//	gr_PbPb_v26->Delete();
+//	gr_PbPb_v26s->Delete();
+//	gr_pPb_v26->Delete();
+//	gr_pPb_v26s->Delete();
+//	cSum2->SaveAs("final_v2_3.pdf");
+//	cSum2pA->SaveAs("final_v2pA_3.pdf");
+//
+//	legEnV4->SetObject((TObject*)0);
+//	legEnV4->SetLabel("");
+//	legEnV4->SetOption("");
+//	legEnV4A->SetObject((TObject*)0);
+//	legEnV4A->SetLabel("");
+//	legEnV4A->SetOption("");
+//	gr_HIN_13_002_PbPbv24->Delete();
+//	gr_HIN_13_002_PbPbv24s->Delete();
+//	gr_HIN_13_002_pPbv24->Delete();
+//	gr_HIN_13_002_pPbv24s->Delete();
+//	cSum2->SaveAs("final_v2_2.pdf");
+//	cSum2pA->SaveAs("final_v2pA_2.pdf");
 
 	cout << "PbPb v22: Noff\tv2\tstat.\tsys." << endl;
 	for ( int i = 0; i < gr_HIN_13_002_PbPbv22->GetN(); i++ ) {

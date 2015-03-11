@@ -24,7 +24,7 @@
 	int s2 = 28;
 	int s3 = 20;
 	int save = 1;
-	int bFin = 1;
+	int bFin = 2;
 
 	int bPbPb = 1;
 	if ( s1 == 1  ) {s2 = 25; bPbPb = 0;} // pPb
@@ -211,16 +211,16 @@
 	TGraphErrors * gr_pPb_c28 = new TGraphErrors( blimit8-blimit08, dNoff8+blimit08, dC28+blimit08, 0, eC28+blimit08);
 
 	if ( bPbPb == 0 ) {
-		gr_pPb_v26->RemovePoint(0);
-		gr_pPb_v26->RemovePoint(7);
-		gr_pPb_v26->RemovePoint(7);
+		if ( bFin == 1 ) {
+			gr_pPb_v26->RemovePoint(0);
+			gr_pPb_v26->RemovePoint(7);
+			gr_pPb_v26->RemovePoint(7);
+	
+			gr_pPb_v28->RemovePoint(0);
+			gr_pPb_v28->RemovePoint(0);
+			gr_pPb_v28->RemovePoint(4);
+			gr_pPb_v28->RemovePoint(4);
 
-		gr_pPb_v28->RemovePoint(0);
-		gr_pPb_v28->RemovePoint(0);
-		gr_pPb_v28->RemovePoint(4);
-		gr_pPb_v28->RemovePoint(4);
-
-		if ( bFin ) {
 			gr_pPb_c26->RemovePoint(0);
 			gr_pPb_c26->RemovePoint(7);
 			gr_pPb_c26->RemovePoint(7);
@@ -229,6 +229,17 @@
 			gr_pPb_c28->RemovePoint(0);
 			gr_pPb_c28->RemovePoint(4);
 			gr_pPb_c28->RemovePoint(4);
+		}
+		if ( bFin == 2 ) {
+			gr_pPb_v26->RemovePoint(0);
+	
+			gr_pPb_v28->RemovePoint(0);
+			gr_pPb_v28->RemovePoint(0);
+
+			gr_pPb_c26->RemovePoint(0);
+
+			gr_pPb_c28->RemovePoint(0);
+			gr_pPb_c28->RemovePoint(0);
 		}
 	}
 	gr_pPb_v22->SetMarkerStyle(kOpenTriangleUp);
