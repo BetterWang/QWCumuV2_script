@@ -977,8 +977,12 @@
 	h1->SetLabelSize(0.05);
 	h1->SetMinimum(1e-10);
 	h1->SetMaximum(0.999e-5);
-	h1->GetYaxis()->SetTitleOffset(1.80);
+	h1->GetYaxis()->SetTitleOffset(1.70);
 	h1->GetXaxis()->SetTitleOffset(0.85);
+
+  	h1->GetYaxis()->SetTitleSize(34);
+  	h1->GetYaxis()->SetLabelSize(28);
+
 	h1->Draw();
 	gr_PbPb_c26s->Draw("[]3");
 	gr_PbPb_c26->Draw("p");
@@ -998,30 +1002,29 @@
 	TLatex * l1cms = new TLatex(0.2, 0.92,"CMS");
 	l1cms->SetNDC();
 	l1cms->SetTextFont(43);
-	l1cms->SetTextSize(28);
+	l1cms->SetTextSize(32);
 	l1cms->Draw();
-	TLatex * l1c = new TLatex(0.2, 0.88,"0.3 < p_{T} < 3.0 GeV/c;  |#eta| < 2.4");
+	TLatex * l1c = new TLatex(0.2, 0.84,"#splitline{0.3 < p_{T} < 3.0 GeV/c}{|#eta| < 2.4}");
 	l1c->SetNDC();
 	l1c->SetTextFont(43);
-	l1c->SetTextSize(24);
+	l1c->SetTextSize(26);
 	l1c->Draw();
  
-	TLegend * legcAA = new TLegend(0.7, 0.35, 0.97, 0.42);
+	TLegend * legcAA = new TLegend(0.7, 0.32, 0.97, 0.4);
 	legcAA->SetFillColor(kWhite);
 	legcAA->SetBorderSize(0);
 	legcAA->SetTextFont(43);
 	legcAA->SetTextSize(22);
 	legcAA->AddEntry(gr_PbPb_c26, "c_{2}\{6\}", "p");
 	legcAA->AddEntry(gr_PbPb_c28, "c_{2}\{8\}", "p");
-//	legcAA->SetHeader("PbPb #sqrt{s_{NN}} = 2.76 TeV");
 	legcAA->Draw();
-	TLatex * l1cAA = new TLatex(0.62, 0.45, "PbPb #sqrt{s_{NN}} = 2.76 TeV");
+	TLatex * l1cAA = new TLatex(0.62, 0.42, "PbPb #sqrt{s_{NN}} = 2.76 TeV");
 	l1cAA->SetNDC();
 	l1cAA->SetTextFont(43);
 	l1cAA->SetTextSize(22);
 	l1cAA->Draw();
 
-	TLegend * legcpA = new TLegend(0.7, 0.2, 0.97, 0.27);
+	TLegend * legcpA = new TLegend(0.7, 0.18, 0.97, 0.25);
 	legcpA->SetFillColor(kWhite);
 	legcpA->SetBorderSize(0);
 	legcpA->SetTextFont(43);
@@ -1030,7 +1033,7 @@
 	legcpA->AddEntry(gr_pPb_c28, "c_{2}\{8\}", "p");
 //	legcpA->SetHeader("pPb #sqrt{s_{NN}} = 5.02 TeV");
 	legcpA->Draw();
-	TLatex * l1cpA = new TLatex(0.62, 0.3, "pPb #sqrt{s_{NN}} = 5.02 TeV");
+	TLatex * l1cpA = new TLatex(0.62, 0.28, "pPb #sqrt{s_{NN}} = 5.02 TeV");
 	l1cpA->SetNDC();
 	l1cpA->SetTextFont(43);
 	l1cpA->SetTextSize(22);
