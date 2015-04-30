@@ -1164,6 +1164,72 @@
 	}
 
 
+	TFile * fnew = new TFile("fhepdata.root", "recreate");
+	gr_HIN_13_002_PbPbv22->SetName("gr_HIN_13_002_PbPbv22");
+	gr_HIN_13_002_PbPbv24->SetName("gr_HIN_13_002_PbPbv24");
+	gr_HIN_13_002_PbPbv22->Write();
+	gr_HIN_13_002_PbPbv24->Write();
+
+	gr_PbPb_v26->SetName("gr_PbPb_v26");
+	gr_PbPb_v28->SetName("gr_PbPb_v28");
+	grLYZPbPbv2->SetName("grLYZPbPbv2");
+	gr_PbPb_v26->Write();
+	gr_PbPb_v28->Write();
+	grLYZPbPbv2->Write();
+
+	gr_HIN_13_002_pPbv22->SetName("gr_HIN_13_002_pPbv22");
+	gr_HIN_13_002_pPbv24->SetName("gr_HIN_13_002_pPbv24");
+	gr_HIN_13_002_pPbv22->Write();
+	gr_HIN_13_002_pPbv24->Write();
+	gr_pPb_v26->SetName("gr_pPb_v26");
+	gr_pPb_v28->SetName("gr_pPb_v28");
+	grLYZpPbv2->SetName("grLYZpPbv2");
+	gr_pPb_v26->Write();
+	gr_pPb_v28->Write();
+	grLYZpPbv2->Write();
+
+
+	gr_PbPb_c26->SetName("gr_PbPb_c26");
+	gr_PbPb_c28->SetName("gr_PbPb_c28");
+	gr_pPb_c26->SetName("gr_pPb_c26");
+	gr_pPb_c28->SetName("gr_pPb_c28");
+
+	gr_PbPb_c26->Write();
+	gr_PbPb_c28->Write();
+	gr_pPb_c26->Write();
+	gr_pPb_c28->Write();
+
+	TFile * fnew = new TFile("fhepdata2.root", "recreate");
+
+	gr_PbPb_c26s->SetName("gr_PbPb_c26s");
+	gr_PbPb_c28s->SetName("gr_PbPb_c28s");
+	gr_pPb_c26s->SetName("gr_pPb_c26s");
+	gr_pPb_c28s->SetName("gr_pPb_c28s");
+
+	gr_PbPb_c26s->Write();
+	gr_PbPb_c28s->Write();
+	gr_pPb_c26s->Write();
+	gr_pPb_c28s->Write();
+
+	gr_Ratio64->SetName("gr_Ratio64");
+	gr_Ratio86->SetName("gr_Ratio86");
+	gr_Ratio64s->SetName("gr_Ratio64s");
+	gr_Ratio86s->SetName("gr_Ratio86s");
+
+	gr_Ratio64->Write();
+	gr_Ratio86->Write();
+	gr_Ratio64s->Write();
+	gr_Ratio86s->Write();
+
+	gr_AARatio64->SetName("gr_AARatio64");
+	gr_AARatio86->SetName("gr_AARatio86");
+	gr_AARatio64s->SetName("gr_AARatio64s");
+	gr_AARatio86s->SetName("gr_AARatio86s");
+
+	gr_AARatio64->Write();
+	gr_AARatio86->Write();
+	gr_AARatio64s->Write();
+	gr_AARatio86s->Write();
 
 
 }

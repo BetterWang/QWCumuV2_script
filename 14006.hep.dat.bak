@@ -1,0 +1,340 @@
+*reference: ARXIV:1502.05382 : 2015
+*reference: https://twiki.cern.ch/twiki/bin/view/CMSPublic/PhysicsResultsHIN14006 : 2015
+*doi: GIVE DOI
+*status: Encoded 29 APRIL 2015 by CMS
+*experiment: CERN-LHC-CMS
+*detector: CMS
+*inspireId: 1345262
+*cdsId: 1992911
+*title: Evidence for collective multi-particle correlations in pPb collisions
+*comment: CERN-LHC. The second-order azimuthal anisotropy Fourier harmonics, $v_2$, are obtained in pPb and PbPb collisions over a wide pseudorapidity ($\eta$) range based on correlations among six or more charged particles. The pPb data, corresponding to an integrated luminosity of 35 inverse nanobarns, were collected during the 2013 LHC pPb run at a nucleon-nucleon center-of-mass energy of 5.02 TeV by the CMS experiment. A sample of semi-peripheral PbPb collision data at \sqrt{s_{NN}}= 2.76 TeV, corresponding to an integrated luminosity of 2.5 inverse microbarns and covering a similar range of particle multiplicities as the pPb data, is also analyzed for comparison. The six- and eight-particle cumulant and the Lee-Yang zeros methods are used to extract the $v_2$ coefficients, extending previous studies of two- and four-particle correlations. For both the pPb and PbPb systems, the $v_2$ values obtained with correlations among more than four particles are consistent with previously published four-particle results. These data support the interpretation of a collective origin for the previously observed long-range (large $\Delta\eta$) correlations in both systems. The ratios of $v_2$ values corresponding to correlations including different numbers of particles are compared to theoretical predictions that assume a hydrodynamic behavior of a pPb system dominated by fluctuations in the positions of participant nucleons. These results provide new insights into the multi-particle dynamics of collision systems with a very small overlapping region.
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{2, |\Delta\eta|>2\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in PbPb collisions
+*reackey: Pb Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 2.76
+*yheader: $v_2\{2, |\Delta\eta|>2\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 6.967; 0.04862 +- 0.004403  (DSYS= 0.001459);
+ 14.22; 0.05233 +- 0.001615 (DSYS=  0.00157 );
+ 24.3; 0.05476 +- 0.001056 (DSYS=   0.001643);
+ 34.34; 0.05762 +- 0.0007978 (DSYS= 0.001729);
+ 44.37; 0.06139 +- 0.0006379 (DSYS= 0.001842);
+ 54.39; 0.06476 +- 0.0005337 (DSYS= 0.001943);
+ 69.1; 0.07128 +- 0.0002986 (DSYS=  0.002138);
+ 89.21; 0.07666 +- 0.000239 (DSYS=  0.0023  );
+ 109.3; 0.08179 +- 0.0001984 (DSYS= 0.002454);
+ 134.1; 0.08609 +- 0.0001364 (DSYS= 0.002583);
+ 166.5; 0.09026 +- 0.0001058 (DSYS= 0.002708);
+ 201.6; 0.09364 +- 9.088e-05 (DSYS= 0.002809);
+ 229.4; 0.09594 +- 0.0001086 (DSYS= 0.002878);
+ 249.4; 0.09672 +- 0.0001023 (DSYS= 0.002902);
+ 269.4; 0.09802 +- 9.647e-05 (DSYS= 0.002941);
+ 289.4; 0.09909 +- 9.123e-05 (DSYS= 0.002973);
+ 309.4; 0.0999 +- 8.688e-05 (DSYS=  0.002997);
+ 334.3; 0.1005 +- 6.729e-05 (DSYS=  0.003015);
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{4\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in PbPb collisions
+*reackey: Pb Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 2.76
+*yheader: $v_2\{4\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 34.34; 0.0398 +- 0.01727     (DSYS= 0.001194   );
+ 44.37; 0.05425 +- 0.005501 (DSYS=   0.001627 );
+ 54.39; 0.05399 +- 0.004521 (DSYS=   0.00162  );
+ 69.11; 0.05996 +- 0.001912 (DSYS=   0.001799 );
+ 89.21; 0.0641 +- 0.001249 (DSYS=   0.001923 );
+ 109.3; 0.06684 +- 0.0009372 (DSYS=  0.002005  );
+ 134.1; 0.07102 +- 0.0005783 (DSYS=  0.002131  );
+ 166.5; 0.07426 +- 0.0004147 (DSYS=  0.002228  );
+ 201.6; 0.07692 +- 0.000347 (DSYS=   0.002308 );
+ 229.4; 0.07842 +- 0.0004179 (DSYS=  0.002353  );
+ 249.4; 0.08031 +- 0.0003848 (DSYS=  0.002409  );
+ 269.4; 0.08057 +- 0.000382 (DSYS=   0.002417 );
+ 289.4; 0.08251 +- 0.0003449 (DSYS=  0.002475  );
+ 309.4; 0.08261 +- 0.0003349 (DSYS=  0.002478  );
+ 334.3; 0.08355 +- 0.0002693 (DSYS=  0.002507  );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{6\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in PbPb collisions
+*reackey: Pb Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 2.76
+*yheader: $v_2\{6\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 334.3; 0.08249 +- 0.0003129 (DSYS= 0.00151788   );
+ 309.4; 0.08148 +- 0.0002922 (DSYS= 0.00150747   );
+ 289.4; 0.08098 +- 0.0003542 (DSYS= 0.00159536   );
+ 269.4; 0.07946 +- 0.0003639 (DSYS= 0.00148586   );
+ 249.4; 0.0788 +- 0.000314 (DSYS=   0.00145775 );
+ 229.4; 0.07748 +- 0.0003536 (DSYS= 0.00141012   );
+ 201.6; 0.07574 +- 0.0003647 (DSYS= 0.0014543    );
+ 166.5; 0.07294 +- 0.0004179 (DSYS= 0.00136391   );
+ 134.1; 0.06989 +- 0.0004638 (DSYS= 0.00126509   );
+ 109.3; 0.06541 +- 0.0008645 (DSYS= 0.00160243   );
+ 89.2; 0.06483 +- 0.001121 (DSYS=   0.000959444);
+ 69.12; 0.05985 +- 0.002261 (DSYS=  0.00150235  );
+ 54.38; 0.06082 +- 0.004268 (DSYS=  0.00195233  );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{8\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in PbPb collisions
+*reackey: Pb Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 2.76
+*yheader: $v_2\{8\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 334.3; 0.08233 +- 0.0003489  (DSYS= 0.00151482   );
+ 309.4; 0.08132 +- 0.0003413  (DSYS= 0.00151249   );
+ 289.4; 0.08064 +- 0.000438  (DSYS=  0.00159666  );
+ 269.4; 0.07918 +- 0.0004268  (DSYS= 0.00147271   );
+ 249.4; 0.07842 +- 0.0004141  (DSYS= 0.00143513   );
+ 229.4; 0.07721 +- 0.0004244  (DSYS= 0.00141301   );
+ 201.6; 0.0755 +- 0.0004656  (DSYS=  0.00144202  );
+ 166.5; 0.0725 +- 0.0005961  (DSYS=  0.00137026  );
+ 134.1; 0.06946 +- 0.0006354  (DSYS= 0.00126413   );
+ 109.3; 0.06543 +- 0.001312  (DSYS=  0.00153764  );
+ 89.2; 0.06504 +- 0.00159  (DSYS=   0.000930052);
+ 69.1; 0.0638 +- 0.002633  (DSYS=   0.00365569 );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{\text{LYZ}\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in PbPb collisions
+*reackey: Pb Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 2.76
+*yheader: $v_2\{\text{LYZ}\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 334.3; 0.08308 +- 0.0001705 (DSYS= 0.000170   );
+ 309.4; 0.08223 +- 0.0002184 (DSYS= 0.000218   );
+ 289.4; 0.08152 +- 0.0002247 (DSYS= 0.000224   );
+ 269.4; 0.08003 +- 0.0002437 (DSYS= 0.000243   );
+ 249.4; 0.07934 +- 0.0002485 (DSYS= 0.000248   );
+ 229.4; 0.07807 +- 0.0002743 (DSYS= 0.000274   );
+ 201.6; 0.07545 +- 0.0002496 (DSYS= 0.000249   );
+ 166.5; 0.07185 +- 0.0003518 (DSYS= 0.000351   );
+ 134.1; 0.06906 +- 0.0005589 (DSYS= 0.000558   );
+ 109.3; 0.06674 +- 0.001091 (DSYS=  0.001091  );
+ 89.2; 0.06137 +- 0.003692 (DSYS=   0.003692 );
+ 69.1; 0.06138 +- 0.007517 (DSYS=   0.007517 );
+ 54.4; 0.06413 +- 0.01418 (DSYS=    0.01418 );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{2, |\Delta\eta|>2\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in pPb collisions
+*reackey: p Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 5.02
+*yheader: $v_2\{2, |\Delta\eta|>2\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 6.917; 0.05367 +- 0.001655   (DSYS=  0.00209 );
+ 14.37; 0.05428 +- 0.0006222   (DSYS= 0.00211  );
+ 24.41; 0.05379 +- 0.0003994   (DSYS= 0.00209  );
+ 34.39; 0.05501 +- 0.0002977   (DSYS= 0.00214  );
+ 44.36; 0.05651 +- 0.0002436   (DSYS= 0.00220  );
+ 54.33; 0.05814 +- 0.0002135   (DSYS= 0.00226  );
+ 68.63; 0.06038 +- 0.0001381   (DSYS= 0.00235  );
+ 88.39; 0.0629 +- 0.0001397   (DSYS=  0.00245 );
+ 108.2; 0.06421 +- 0.0001624   (DSYS= 0.00250  );
+ 131.3; 0.06633 +- 4.268e-05   (DSYS= 0.00258  );
+ 162.1; 0.06777 +- 3.212e-05   (DSYS= 0.00264  );
+ 196.6; 0.06887 +- 2.831e-05   (DSYS= 0.00268  );
+ 227.5; 0.06927 +- 4.645e-05   (DSYS= 0.00381  );
+ 247.2; 0.0697 +- 8.416e-05   (DSYS=  0.00383 );
+ 267.1; 0.06977 +- 0.0001636   (DSYS= 0.00516  );
+ 287; 0.06896 +- 0.0003366   (DSYS=   0.00510);
+ 306.8; 0.06706 +- 0.000741   (DSYS=  0.00496 );
+ 328.6; 0.06621 +- 0.00147   (DSYS=   0.0049 );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{4\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in pPb collisions
+*reackey: p Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 5.02
+*yheader: $v_2\{4\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 44.36; 0.02965 +- 0.005967   (DSYS=  0.003173  );
+ 54.33; 0.03913 +- 0.004262   (DSYS=  0.004187  );
+ 68.63; 0.04832 +- 0.001496   (DSYS=  0.003093  );
+ 88.39; 0.04941 +- 0.001351   (DSYS=  0.003162  );
+ 108.2; 0.04822 +- 0.001599   (DSYS=  0.001977  );
+ 131.3; 0.04955 +- 0.0003922   (DSYS= 0.002032   );
+ 162.1; 0.049 +- 0.0003065   (DSYS=   0.002009 );
+ 196.6; 0.04805 +- 0.0002939   (DSYS= 0.00197    );
+ 227.5; 0.04709 +- 0.0004568   (DSYS= 0.002637   );
+ 247.2; 0.04665 +- 0.0008684   (DSYS= 0.002612   );
+ 269.2; 0.04772 +- 0.001471   (DSYS=  0.003579  );
+ 301.2; 0.04797 +- 0.004329   (DSYS=  0.003598  );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{6\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in pPb collisions
+*reackey: p Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 5.02
+*yheader: $v_2\{6\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 270.5; 0.0485 +- 0.00395   (DSYS=    0.00242521 );
+ 247.2; 0.04013 +- 0.003076   (DSYS=  0.00200673   );
+ 227.5; 0.04462 +- 0.0009606   (DSYS= 0.00223081    );
+ 196.7; 0.04495 +- 0.0005919   (DSYS= 0.00224752    );
+ 162.1; 0.04491 +- 0.0006828   (DSYS= 0.00224543    );
+ 131.3; 0.04695 +- 0.001146   (DSYS=  0.0023473    );
+ 108.2; 0.04862 +- 0.004031   (DSYS=  0.00243124   );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{8\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in pPb collisions
+*reackey: p Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 5.02
+*yheader: $v_2\{8\}$
+*xheader: $N_{trk}^{offline}$
+*data: x : y
+ 196.7; 0.04282 +- 0.002266 (DSYS= 0.0025693  );
+ 162.1; 0.04504 +- 0.002031 (DSYS= 0.00270246 );
+ 131.3; 0.04619 +- 0.002269 (DSYS= 0.00277117 );
+ 108.2; 0.05654 +- 0.002478 (DSYS= 0.00339254 );
+*dataend:
+
+
+*dataset:
+*location: Figure 2
+*dscomment: The elliptic flow $v_2\{\text{LYZ}\}$ extracted for all charged particles with $0.3 < p_% < 3.0$ GeV/c as a function of $N_{trk}^{offline}$ in pPb collisions
+*reackey: p Pb --> Charged X
+*obskey: CORR
+*qual: SQRT(S)/NUCLEON IN TEV : 5.02
+*yheader: $v_2\{\text{LYZ}\}$
+*xheader: $N_{trk}^{offline}$
+**data: x : y
+ 271; 0.04753 +- 0.004504    (DSYS= 0.004504   );
+ 232; 0.04501 +- 0.004173   (DSYS=  0.004173  );
+ 196.6; 0.04572 +- 0.001581 (DSYS=  0.001581  );
+ 162.1; 0.04764 +- 0.002813 (DSYS=  0.002813  );
+ 131.3; 0.04918 +- 0.004265 (DSYS=  0.004265  );
+*dataend:
+
+
+*dataset:
+*location: Figure GIVE FIGURE NUMBER
+*dscomment: Graph
+*reackey: P P --> GIVE THE PRODUCTION PROCESSES
+*obskey: GIVE KEY FOR Y-AXIS VARIABLE
+*qual: . : GIVE COLUMN EXPLANATIONS, IF YOU USED OVERLAYS
+*qual: RE : P P --> GIVE THE PRODUCTION PROCESSES + DECAYS (IF RELEVANT)
+*qual: SQRT(S) IN GEV : 8000.0
+*yheader: 
+*xheader: 
+*data: x : y
+ 334.3; 1.261e-06 +- 2.869e-08;
+ 309.4; 1.171e-06 +- 2.519e-08;
+ 289.4; 1.128e-06 +- 2.961e-08;
+ 269.4; 1.007e-06 +- 2.766e-08;
+ 249.4; 9.575e-07 +- 2.289e-08;
+ 229.4; 8.653e-07 +- 2.369e-08;
+ 201.6; 7.554e-07 +- 2.182e-08;
+ 166.5; 6.022e-07 +- 2.07e-08;
+ 134.1; 4.664e-07 +- 1.857e-08;
+ 109.3; 3.131e-07 +- 2.483e-08;
+ 89.2; 2.969e-07 +- 3.081e-08;
+ 69.12; 1.839e-07 +- 4.169e-08;
+ 54.38; 2.025e-07 +- 8.524e-08;
+*dataend:
+
+
+*dataset:
+*location: Figure GIVE FIGURE NUMBER
+*dscomment: Graph
+*reackey: P P --> GIVE THE PRODUCTION PROCESSES
+*obskey: GIVE KEY FOR Y-AXIS VARIABLE
+*qual: . : GIVE COLUMN EXPLANATIONS, IF YOU USED OVERLAYS
+*qual: RE : P P --> GIVE THE PRODUCTION PROCESSES + DECAYS (IF RELEVANT)
+*qual: SQRT(S) IN GEV : 8000.0
+*yheader: 
+*xheader: 
+*data: x : y
+ 334.3; 6.964e-08 +- 2.361e-09;
+ 309.4; 6.309e-08 +- 2.118e-09;
+ 289.4; 5.9e-08 +- 2.564e-09;
+ 269.4; 5.097e-08 +- 2.198e-09;
+ 249.4; 4.721e-08 +- 1.994e-09;
+ 229.4; 4.169e-08 +- 1.833e-09;
+ 201.6; 3.483e-08 +- 1.719e-09;
+ 166.5; 2.519e-08 +- 1.657e-09;
+ 134.1; 1.788e-08 +- 1.308e-09;
+ 109.3; 1.109e-08 +- 1.779e-09;
+ 89.2; 1.057e-08 +- 2.066e-09;
+ 69.12; 9.058e-09 +- 2.991e-09;
+*dataend:
+
+
+*dataset:
+*location: Figure GIVE FIGURE NUMBER
+*dscomment: Graph
+*reackey: P P --> GIVE THE PRODUCTION PROCESSES
+*obskey: GIVE KEY FOR Y-AXIS VARIABLE
+*qual: . : GIVE COLUMN EXPLANATIONS, IF YOU USED OVERLAYS
+*qual: RE : P P --> GIVE THE PRODUCTION PROCESSES + DECAYS (IF RELEVANT)
+*qual: SQRT(S) IN GEV : 8000.0
+*yheader: 
+*xheader: 
+*data: x : y
+ 270.5; 5.209e-08 +- 2.545e-08;
+ 247.2; 1.672e-08 +- 7.687e-09;
+ 227.5; 3.155e-08 +- 4.076e-09;
+ 196.7; 3.3e-08 +- 2.607e-09;
+ 162.1; 3.281e-08 +- 2.993e-09;
+ 131.3; 4.282e-08 +- 6.273e-09;
+ 108.2; 5.287e-08 +- 2.63e-08;
+*dataend:
+
+
+*dataset:
+*location: Figure GIVE FIGURE NUMBER
+*dscomment: Graph
+*reackey: P P --> GIVE THE PRODUCTION PROCESSES
+*obskey: GIVE KEY FOR Y-AXIS VARIABLE
+*qual: . : GIVE COLUMN EXPLANATIONS, IF YOU USED OVERLAYS
+*qual: RE : P P --> GIVE THE PRODUCTION PROCESSES + DECAYS (IF RELEVANT)
+*qual: SQRT(S) IN GEV : 8000.0
+*yheader: 
+*xheader: 
+*data: x : y
+ 196.7; 3.731e-10 +- 1.58e-10;
+ 162.1; 5.59e-10 +- 2.016e-10;
+ 131.3; 6.833e-10 +- 2.686e-10;
+ 108.2; 3.447e-09 +- 1.209e-09;
+*dataend:
+*E
